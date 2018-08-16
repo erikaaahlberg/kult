@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import BookingForm from "../BookingForm";
 
-export default class Book extends Component{
 
+export default class Book extends Component{
   state = {
     existingBookings: [],
   }
@@ -51,9 +51,8 @@ export default class Book extends Component{
     return(
       <div>
         <h1>Boka bord</h1>
-
+        <p>Det här är komponenten för bokningssidan – jag finns i components/routes/Book.</p>
         <BookingForm />
-
         <h2>Nuvarande bokningar i databasen:</h2>
         {this.state.existingBookings.length < 1 &&
           <p>Inga bokningar just nu.</p>
