@@ -67,6 +67,32 @@ app.get('/api/bookings/:id', (req, res) => {
   })
 })
 
+app.get('/api/bookings/date/:date', (req, res) => {
+  const queryString = "SELECT * FROM bookings WHERE date = ?";
+  const date = req.params.date;
+
+  connection.query(queryString, [date], (err, rows, fields) => {
+    if (err) {
+      console.log('Failed to query for booking: ' + err);
+      res.sendStatus(500) // Show user internal server error
+      res.end();
+      return;
+    }
+
+    const bookings = rows.map((row) => {
+      return {
+        id: row.id,
+        guests: row.guests,
+        date: row.date,
+        session: row.session,
+        name: row.name,
+        email: row.email,
+        phone: row.phone,
+      }
+    })
+    res.json(bookings)
+  })
+})
 
 app.get('/api/bookings', (req, res) => {
   const queryString = "SELECT * FROM bookings";
