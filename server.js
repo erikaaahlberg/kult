@@ -24,7 +24,10 @@ app.post('/api/create_booking', (req, res) => {
   const email = req.body.create_email;
   const phone = req.body.create_phone;
 
-  const queryString = "INSERT INTO bookings (id, guests, date, session, name, email, phone) VALUES ('', ?, ?, ?, ?, ? ,?)";
+  const queryString =
+    `INSERT INTO bookings
+    (id, guests, date, session, name, email, phone)
+    VALUES ('', ?, ?, ?, ?, ? ,?)`;
 
   connection.query(queryString, [guests, date, session, name, email, phone], (err, results, fields) => {
     if(err){
@@ -41,7 +44,7 @@ app.post('/api/create_booking', (req, res) => {
 
 
 app.get('/api/bookings/:id', (req, res) => {
-  const queryString = "SELECT * FROM bookings WHERE id = ?"
+  const queryString = "SELECT * FROM bookings WHERE id = ?";
   const bookingId = req.params.id;
 
   connection.query(queryString, [bookingId], (err, rows, fields) => {
