@@ -22,37 +22,42 @@ export default class BookingForm extends Component{
   render(){
     return(
       <form action="/api/create_booking/" method="POST">
-        <label htmlFor="create_guest">Antal gäster</label>
-        <br/>
-        <input placeholder="Max 4" name="create_guests"/>
-        <br/>
+        <label htmlFor="create_guests">Antal gäster</label>
+        <br />
+        <select name="create_guests">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+        <br />
         <label htmlFor="create_session">Sittning</label>
         <br/>
         <select name="create_session">
           <option value="18:00">18:00</option>
           <option value="21:00">21:00</option>
         </select>
-        <br/>
+        <br />
         <label htmlFor="create_date">Välj datum</label>
-        <br/>
+        <br />
         <DatePicker
           selected={this.state.startDate}
           onChange={this.handleChange} 
           name="create_date"
         />
-        <br/>
+        <br />
         <label htmlFor="create_date">Namn</label>
-        <br/>
+        <br />
         <input placeholder="Kult Svensson" name="create_name"/>
-        <br/>
+        <br />
         <label htmlFor="create_date">E-mail</label>
-        <br/>
+        <br />
         <input placeholder="kult@gmail.com" name="create_email"/>
-        <br/>
+        <br />
         <label htmlFor="create_date">Phone</label>
-        <br/>
+        <br />
         <input placeholder="+46 761234567" name="create_phone" required/>
-        <br/>
+        <br />
         <button>Boka</button>
       </form>
     )
