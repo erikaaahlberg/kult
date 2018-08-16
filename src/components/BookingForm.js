@@ -28,16 +28,18 @@ export default class BookingForm extends Component{
         <br/>
         <label htmlFor="create_session">Sittning</label>
         <br/>
-        <input placeholder="18:00 eller 21:00" name="create_session"/>
+        <select name="create_session">
+          <option value="18:00">18:00</option>
+          <option value="21:00">21:00</option>
+        </select>
+        <br/>
+        <label htmlFor="create_date">Välj datum</label>
         <br/>
         <DatePicker
           selected={this.state.startDate}
           onChange={this.handleChange} 
           name="create_date"
         />
-        {/* <label htmlFor="create_date">Välj datum:</label>
-        <br />
-        <input type="date" name="create_date" /> */}
         <br/>
         <label htmlFor="create_date">Namn</label>
         <br/>
