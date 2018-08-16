@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Home from './components/routes/Home';
 import Contact from './components/routes/Contact';
 import Book from './components/routes/Book';
+import DatePicker from './components/input/DatePicker';
 import Admin from './components/routes/Admin';
 
 export default class App extends Component {
@@ -16,6 +17,7 @@ export default class App extends Component {
           <Route exact path="/" component={Home} />
           <Route path="/contact" component={Contact} />
           <Route path="/book" component={Book} />
+          <DatePicker/>
           <Route path="/admin" component={Admin} />
         </React.Fragment>
     </Router>
