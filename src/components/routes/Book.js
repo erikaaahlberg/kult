@@ -1,25 +1,10 @@
 import React, {Component} from "react";
-import DatePicker from 'react-datepicker';
-import moment from 'moment';
-import 'react-datepicker/dist/react-datepicker.css';
+import BookingForm from "../BookingForm";
+
 
 export default class Book extends Component{
-
   state = {
     existingBookings: [],
-    startDate: moment(),
-  }
-
-  constructor (props) {
-    super(props);
-    this.handleChange = this.handleChange.bind(this);
-  }
- 
-  handleChange(date) {
-    this.setState({
-      startDate: date,
-    });
-    console.log(date._d);
   }
 
   fetchBookings = () => {
@@ -49,6 +34,9 @@ export default class Book extends Component{
             <li>Datum: {booking.date}</li>
             <li>Antal personer: {booking.guests}</li>
             <li>Sittning: {booking.session}</li>
+            <li>Bokat av: {booking.name}</li>
+            <li>E-mail: {booking.email}</li>
+            <li>Telefon: {booking.phone}</li>
           </ul>
         )
       }
@@ -63,14 +51,10 @@ export default class Book extends Component{
     return(
       <div>
         <h1>Boka bord</h1>
-        <DatePicker
-          inline
-          selected={this.state.startDate}
-          onChange={this.handleChange} 
-        />
         <p>Det här är komponenten för bokningssidan – jag finns i components/routes/Book.</p>
+        <BookingForm />
         <h2>Nuvarande bokningar i databasen:</h2>
-        {!this.state.existingBookings &&
+        {this.state.existingBookings.length < 1 &&
           <p>Inga bokningar just nu.</p>
         }
         {this.renderExistingBookings()}
