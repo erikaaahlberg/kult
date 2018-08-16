@@ -33,7 +33,11 @@ export default class BookingForm extends Component{
         <DatePicker
           selected={this.state.startDate}
           onChange={this.handleChange} 
+          name="create_date"
         />
+        {/* <label htmlFor="create_date">Välj datum:</label>
+        <br />
+        <input type="date" name="create_date" /> */}
         <br/>
         <label htmlFor="create_date">Namn</label>
         <br/>
