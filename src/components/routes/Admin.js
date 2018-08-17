@@ -58,7 +58,7 @@ export default class Admin extends Component{
   }
 
   checkForBookingsCurrentDate = () => {
-    let formattedDateString = moment().format('DD/MM/YYYY');
+    let formattedDateString = moment().format('YYYY/MM/DD');
     let encodedDate = encodeURIComponent(formattedDateString);
     this.fetchSelectedDate(encodedDate);
   }

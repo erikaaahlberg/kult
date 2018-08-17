@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
+import 'moment/locale/sv';
 import 'react-datepicker/dist/react-datepicker.css';
 
 export default class Calendar extends Component{
@@ -20,22 +21,34 @@ export default class Calendar extends Component{
     if(!fetchSelectedDate){
       return;
     } else {
-      let formattedDateString = moment(date).format('DD/MM/YYYY');
+      let formattedDateString = moment(date).format('YYYY/MM/DD');
       // Replace "/" in path so url will send correct date-format to route
       let encodedDate = encodeURIComponent(formattedDateString);
       fetchSelectedDate(encodedDate);
     }
   }
 
+  showDateInInput = () => {
+    const date = new Date(this.state.startDate);
+    return date.toLocaleDateString().split('-').join("/");
+  }
+
+
   renderRegularDatePicker = () => {
     return(
-      <DatePicker
-        dateFormat={'DD/MM/YYYY'}
-        minDate={moment()}
-        selected={this.state.startDate}
-        onChange={this.handleChange}
-        name="create_date"
-      />
+      <React.Fragment>
+        <DatePicker
+          inline
+          locale="sv"
+          minDate={moment()}
+          dateFormat={'YYYY/MM/DD'}
+          selected={this.state.startDate}
+          onChange={this.handleChange}
+          name="create_date"
+        />
+        <br />
+        <input hidden type="text" name="create_date" value={this.showDateInInput()} />
+      </React.Fragment>
     )
   }
 
@@ -44,11 +57,16 @@ export default class Calendar extends Component{
   */
   renderAdminDatePicker = () => {
     return(
-      <DatePicker
-        dateFormat={'DD/MM/YYYY'}
-        selected={this.state.startDate}
-        onChange={this.handleChange}
-      />
+      <React.Fragment>
+        <DatePicker
+          inline
+          dateFormat={'YYYY/MM/DD'}
+          selected={this.state.startDate}
+          onChange={this.handleChange}
+        />
+        <br />
+        <input type="text" name="create_date" value={this.showDateInInput()} />
+      </React.Fragment>
     )
   }
 
