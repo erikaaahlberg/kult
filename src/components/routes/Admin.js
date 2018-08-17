@@ -57,6 +57,15 @@ export default class Admin extends Component{
     });
   }
 
+  checkForBookingsCurrentDate = () => {
+    let formattedDateString = moment().format('DD/MM/YYYY');
+    let encodedDate = encodeURIComponent(formattedDateString);
+    this.fetchSelectedDate(encodedDate);
+  }
+
+  componentDidMount(){
+    this.checkForBookingsCurrentDate();
+  }
 
   render(){
     return(
