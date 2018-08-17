@@ -27,18 +27,64 @@ export default class Calendar extends Component{
     }
   }
 
+  showDateInInput = () => {
+    const date = new Date(this.state.startDate);
+    return date.toLocaleDateString().split('-').join("/");
+  }
+  
+
+  renderRegularDatePicker = () => {
+    return(
+      <React.Fragment>
+        <DatePicker
+          inline
+          minDate={moment()}
+          selected={this.state.startDate}
+          onChange={this.handleChange}
+        />
+        <br />
+        <input hidden type="text" name="create_date" value={this.showDateInInput()} />
+      </React.Fragment>
+    )
+  }
+
+  /** Admin datepicker does not have a minDate, since admin
+   * should be able to select bookings from past dates.
+  */
+  renderAdminDatePicker = () => {
+    return(
+      <React.Fragment>
+        <DatePicker
+          inline
+          selected={this.state.startDate}
+          onChange={this.handleChange}
+          name="create_date"
+        />
+        <br />
+        <input type="text" name="create_date" value={this.showDateInInput()} />
+      </React.Fragment>
+    )
+  }
+
   /** TODO:
    * Make comp accept array of excluded/highlighted dates (send in as props)
    * Make dates before today unselectable (min date range or something/use monment, see docs)
   */
   render(){
+    const { showAdminCalendar } = this.props;
     return(
-      <DatePicker
-        dateFormat={'DD/MM/YYYY'}
-        selected={this.state.startDate}
-        onChange={this.handleChange}
-        name="create_date"
-      />
+      <React.Fragment>
+       {!showAdminCalendar &&
+        <React.Fragment>
+        {this.renderRegularDatePicker()}
+        </React.Fragment>
+       }
+       {showAdminCalendar &&
+        <React.Fragment>
+        {this.renderAdminDatePicker()}
+        </React.Fragment>
+       }
+      </React.Fragment>
     )
   }
 };
