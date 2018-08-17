@@ -48,7 +48,6 @@ export default class Calendar extends Component{
         dateFormat={'DD/MM/YYYY'}
         selected={this.state.startDate}
         onChange={this.handleChange}
-        name="create_date"
       />
     )
   }
