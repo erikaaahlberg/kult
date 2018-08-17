@@ -24,7 +24,10 @@ app.post('/api/create_booking', (req, res) => {
   const email = req.body.create_email;
   const phone = req.body.create_phone;
 
-  const queryString = "INSERT INTO bookings (id, guests, date, session, name, email, phone) VALUES ('', ?, ?, ?, ?, ? ,?)";
+  const queryString =
+    `INSERT INTO bookings
+    (id, guests, date, session, name, email, phone)
+    VALUES ('', ?, ?, ?, ?, ? ,?)`;
 
   connection.query(queryString, [guests, date, session, name, email, phone], (err, results, fields) => {
     if(err){
@@ -41,7 +44,7 @@ app.post('/api/create_booking', (req, res) => {
 
 
 app.get('/api/bookings/:id', (req, res) => {
-  const queryString = "SELECT * FROM bookings WHERE id = ?"
+  const queryString = "SELECT * FROM bookings WHERE id = ?";
   const bookingId = req.params.id;
 
   connection.query(queryString, [bookingId], (err, rows, fields) => {
@@ -67,6 +70,32 @@ app.get('/api/bookings/:id', (req, res) => {
   })
 })
 
+app.get('/api/bookings/date/:date', (req, res) => {
+  const queryString = "SELECT * FROM bookings WHERE date = ?";
+  const date = req.params.date;
+
+  connection.query(queryString, [date], (err, rows, fields) => {
+    if (err) {
+      console.log('Failed to query for booking: ' + err);
+      res.sendStatus(500) // Show user internal server error
+      res.end();
+      return;
+    }
+
+    const bookings = rows.map((row) => {
+      return {
+        id: row.id,
+        guests: row.guests,
+        date: row.date,
+        session: row.session,
+        name: row.name,
+        email: row.email,
+        phone: row.phone,
+      }
+    })
+    res.json(bookings)
+  })
+})
 
 app.get('/api/bookings', (req, res) => {
   const queryString = "SELECT * FROM bookings";
