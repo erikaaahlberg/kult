@@ -96,7 +96,7 @@ app.get('/api/bookings/date/:date', (req, res) => {
     res.json(bookings)
   })
 })
-
+/*
 app.get('/api/bookings', (req, res) => {
   const queryString = "SELECT * FROM bookings";
 
@@ -120,5 +120,28 @@ app.get('/api/bookings', (req, res) => {
       }
     })
     res.json(bookings)
+  })
+})*/
+
+
+app.get('/api/sessions', (req, res) => {
+  const queryString = "SELECT date, session, COUNT(*) as count FROM bookings GROUP BY date, session";
+
+  connection.query(queryString, (err, rows, fields) => {
+    if (err) {
+      console.log('Failed to get all bookings ' + err);
+      res.sendStatus(500) // Show user internal server error
+      res.end();
+      return;
+    }
+
+    const numberOfSessions = rows.map((row) => {
+      return {
+        date: row.date,
+        session: row.session,
+        count: row.count
+      }
+    })
+    res.json(rows)
   })
 })

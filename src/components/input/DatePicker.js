@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
-/*import * as components from './grid';*/
-
-import Container from '../grid/Container';
-import Row from '../grid/Row';
-import Div from '../grid/Div';
-
 
 class DatePicker extends Component {
     state = {
-        takenDates: []
+        availableSessions: []
     }
     componentDidMount(){
         this.fetchBookings();
@@ -16,11 +10,13 @@ class DatePicker extends Component {
     }
 
     fetchBookings = () => {
-        return fetch('api/bookings')
+        return fetch('api/sessions')
         .then((response) => response.json())
             .then((fetchedBookings) => {
                 //this.setState({ takenDates: fetchedBookings })
+                console.log(fetchedBookings);
                 return fetchedBookings;
+
             })
             .catch((error) => {
               // TODO: Handle error output to user, remove console.log
@@ -30,42 +26,50 @@ class DatePicker extends Component {
 
     countBookings = () => {
         let numberOfBookings = 0;
-        let fullyBooked = [];
+        let availableSessions = [];
         this.fetchBookings()
             .then((fetchedBookings) => {
-                let p = 1;
                 for (let i = 0; i < fetchedBookings.length; i++) {
-                    if (fetchedBookings[i].date === fetchedBookings[p].date && fetchedBookings[i].session === fetchedBookings[p].session) {
-                        numberOfBookings += 1;
-<<<<<<< HEAD
-                        if (numberOfBookings === 10){
-=======
-                        if (numberOfBookings === 10) {
->>>>>>> master
-                            fullyBooked.push({
-                                date: fetchedBookings[i].date,
-                                session: fetchedBookings[i].session
-                            });
-                        }
-                        if(p < fetchedBookings.length) {
-                            p += 1;
-                        }
+                    console.log(fetchedBookings[i].count);
+                    if (fetchedBookings[i].count < 10) {
+                        let numberOfBookings = fetchedBookings[i].count;
+                        const tablesLeft = 10 - numberOfBookings;
+
+                        availableSessions.push({
+                            date: fetchedBookings[i].date,
+                            session: fetchedBookings[i].session,
+                            tablesLeft: tablesLeft
+                        });
                     }
-                    console.log(numberOfBookings);
-                    console.log(fetchedBookings[i]);
                 }
-                /*
-                const keys = Object.keys(fetchedBookings);
-                for (let key of keys) {
-                    console.log(fetchedBookings[key]); /*
-                    if(fetchedBookings[key].date === bookings.date && fetchedBookings.session === bookings.session) {
-                        console.log('hej');
-                    } 
-                }*/
-            })
+
+                if (availableSessions.length > 0) {
+                    console.log(availableSessions);
+                    this.setState({ availableSessions: availableSessions });
+                }
+            });
     }
     
-   
+    countFullyBooked = () => {
+        let fullyBookedDates = [];
+        let firstSession = 0;
+        let secondSession = 0;
+        for (let i = 0; i < this.state.fullyBookedSessions.length; i++) {
+            if (this.state.fullyBookedSessions[i].session === 18.00){
+                firstSession += 1;
+            }
+            else if (this.state.fullyBookedSessions[i].session === 21.00) {
+                secondSession += 1;
+            }
+            if (firstSession === 10 && secondSession === 10) {
+                fullyBookedDates.push(this.state.fullyBookedSessions[i].date);
+            }
+        }
+        this.setState({ fullyBookedDates : fullyBookedDates });
+        console.log(this.state.fullyBookedSessions);
+        console.log(this.state.fullyBookedDates);
+    }
+
     render () {
         return (
             <input type = "date"/>
@@ -75,4 +79,50 @@ class DatePicker extends Component {
 }
 
 export default DatePicker;
-/*id = { props.id } className = { props.styleClass } onClick = { props.event } */
+
+/*
+    countBookings = () => {
+        let numberOfBookings = 0;
+        let fullyBookedSessions = [];
+        this.fetchBookings()
+            .then((fetchedBookings) => {
+                let p = 1;
+                for (let i = 0; i < fetchedBookings.length; i++) {
+                        if (fetchedBookings[i].date === fetchedBookings[p].date && fetchedBookings[i].session === fetchedBookings[p].session) {
+                            numberOfBookings += 1;
+                            if (numberOfBookings === 10) {
+                                fullyBookedSessions.push({
+                                    date: fetchedBookings[i].date,
+                                    session: fetchedBookings[i].session
+                                });
+                            }
+                        }
+                    
+                    this.setState({ fullyBookedSessions: fullyBookedSessions });
+                    console.log(numberOfBookings);
+                    console.log(fetchedBookings[i]);
+                    p += 1;
+                }
+            })
+    }
+    
+    countFullyBooked = () => {
+        let fullyBookedDates = [];
+        let firstSession = 0;
+        let secondSession = 0;
+        for (let i = 0; i < this.state.fullyBookedSessions.length; i++) {
+            if (this.state.fullyBookedSessions[i].session === 18.00){
+                firstSession += 1;
+            }
+            else if (this.state.fullyBookedSessions[i].session === 21.00) {
+                secondSession += 1;
+            }
+            if (firstSession === 10 && secondSession === 10) {
+                fullyBookedDates.push(this.state.fullyBookedSessions[i].date);
+            }
+        }
+        this.setState({ fullyBookedDates : fullyBookedDates });
+        console.log(this.state.fullyBookedSessions);
+        console.log(this.state.fullyBookedDates);
+    }
+    */
