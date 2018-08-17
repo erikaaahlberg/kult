@@ -25,19 +25,19 @@ export default function BookingForm(){
       <br />
       <Calendar/>
       <br/>
-      <label htmlFor="create_date">Namn</label>
+      <label htmlFor="create_name">Namn</label>
       <br/>
-      <input placeholder="Kult Svensson" name="create_name"/>
+      <input placeholder="Kult Svensson" name="create_name" id="create_name"/>
       <br/>
-      <label htmlFor="create_date">E-mail</label>
+      <label htmlFor="create_email">E-mail</label>
       <br/>
-      <input placeholder="kult@gmail.com" name="create_email"/>
+      <input placeholder="kult@gmail.com" name="create_email" id="create_email"/>
       <br/>
-      <label htmlFor="create_date">Phone</label>
+      <label htmlFor="create_phone">Phone</label>
       <br/>
-      <input placeholder="+46 761234567" name="create_phone" required/>
+      <input placeholder="+46 761234567" name="create_phone" id="create_phone" required/>
       <br/>
-      <button>Boka</button>
+      <button type="submit">Boka</button>
     </form>
   )
 }
