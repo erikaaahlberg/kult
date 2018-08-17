@@ -27,11 +27,22 @@ export default class Calendar extends Component{
     }
   }
 
-  /** TODO:
-   * Make comp accept array of excluded/highlighted dates (send in as props)
-   * Make dates before today unselectable (min date range or something/use monment, see docs)
+  renderRegularDatePicker = () => {
+    return(
+      <DatePicker
+        dateFormat={'DD/MM/YYYY'}
+        minDate={moment()}
+        selected={this.state.startDate}
+        onChange={this.handleChange}
+        name="create_date"
+      />
+    )
+  }
+
+  /** Admin datepicker does not have a minDate, since admin
+   * should be able to select bookings from past dates.
   */
-  render(){
+  renderAdminDatePicker = () => {
     return(
       <DatePicker
         dateFormat={'DD/MM/YYYY'}
@@ -39,6 +50,28 @@ export default class Calendar extends Component{
         onChange={this.handleChange}
         name="create_date"
       />
+    )
+  }
+
+  /** TODO:
+   * Make comp accept array of excluded/highlighted dates (send in as props)
+   * Make dates before today unselectable (min date range or something/use monment, see docs)
+  */
+  render(){
+    const { showAdminCalendar } = this.props;
+    return(
+      <React.Fragment>
+       {!showAdminCalendar &&
+        <React.Fragment>
+        {this.renderRegularDatePicker()}
+        </React.Fragment>
+       }
+       {showAdminCalendar &&
+        <React.Fragment>
+        {this.renderAdminDatePicker()}
+        </React.Fragment>
+       }
+      </React.Fragment>
     )
   }
 };
