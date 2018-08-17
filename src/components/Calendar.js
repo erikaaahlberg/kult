@@ -21,7 +21,7 @@ export default class Calendar extends Component{
     if(!fetchSelectedDate){
       return;
     } else {
-      let formattedDateString = moment(date).format('DD/MM/YYYY');
+      let formattedDateString = moment(date).format('YYYY/MM/DD');
       // Replace "/" in path so url will send correct date-format to route
       let encodedDate = encodeURIComponent(formattedDateString);
       fetchSelectedDate(encodedDate);
@@ -41,8 +41,10 @@ export default class Calendar extends Component{
           inline
           locale="sv"
           minDate={moment()}
+          dateFormat={'YYYY/MM/DD'}
           selected={this.state.startDate}
           onChange={this.handleChange}
+          name="create_date"
         />
         <br />
         <input hidden type="text" name="create_date" value={this.showDateInInput()} />
@@ -58,6 +60,7 @@ export default class Calendar extends Component{
       <React.Fragment>
         <DatePicker
           inline
+          dateFormat={'YYYY/MM/DD'}
           selected={this.state.startDate}
           onChange={this.handleChange}
           name="create_date"
