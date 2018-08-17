@@ -69,7 +69,7 @@ export default class Admin extends Component{
           <p>Det finns inga bokningar det valda datumet.</p>
         }
 
-        {this.renderExistingBookings()}
+        {this.renderBookings()}
 
       </div>
     )
