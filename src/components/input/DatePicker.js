@@ -37,7 +37,11 @@ class DatePicker extends Component {
                 for (let i = 0; i < fetchedBookings.length; i++) {
                     if (fetchedBookings[i].date === fetchedBookings[p].date && fetchedBookings[i].session === fetchedBookings[p].session) {
                         numberOfBookings += 1;
+<<<<<<< HEAD
                         if (numberOfBookings === 10){
+=======
+                        if (numberOfBookings === 10) {
+>>>>>>> master
                             fullyBooked.push({
                                 date: fetchedBookings[i].date,
                                 session: fetchedBookings[i].session
