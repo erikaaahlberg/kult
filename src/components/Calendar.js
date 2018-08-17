@@ -27,15 +27,24 @@ export default class Calendar extends Component{
     }
   }
 
+  showDateInInput = () => {
+    const date = new Date(this.state.startDate);
+    return date.toLocaleDateString().split('-').join("/");
+  }
+  
+
   renderRegularDatePicker = () => {
     return(
-      <DatePicker
-        dateFormat={'DD/MM/YYYY'}
-        minDate={moment()}
-        selected={this.state.startDate}
-        onChange={this.handleChange}
-        name="create_date"
-      />
+      <React.Fragment>
+        <DatePicker
+          inline
+          minDate={moment()}
+          selected={this.state.startDate}
+          onChange={this.handleChange}
+        />
+        <br />
+        <input hidden type="text" name="create_date" value={this.showDateInInput()} />
+      </React.Fragment>
     )
   }
 
@@ -44,12 +53,16 @@ export default class Calendar extends Component{
   */
   renderAdminDatePicker = () => {
     return(
-      <DatePicker
-        dateFormat={'DD/MM/YYYY'}
-        selected={this.state.startDate}
-        onChange={this.handleChange}
-        name="create_date"
-      />
+      <React.Fragment>
+        <DatePicker
+          inline
+          selected={this.state.startDate}
+          onChange={this.handleChange}
+          name="create_date"
+        />
+        <br />
+        <input type="text" name="create_date" value={this.showDateInInput()} />
+      </React.Fragment>
     )
   }
 
