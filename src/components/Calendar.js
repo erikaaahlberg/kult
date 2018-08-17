@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
+import 'moment/locale/sv';
 import 'react-datepicker/dist/react-datepicker.css';
 
 export default class Calendar extends Component{
@@ -38,6 +39,7 @@ export default class Calendar extends Component{
       <React.Fragment>
         <DatePicker
           inline
+          locale="sv"
           minDate={moment()}
           selected={this.state.startDate}
           onChange={this.handleChange}
