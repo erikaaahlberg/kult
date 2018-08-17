@@ -12,7 +12,7 @@ class DatePicker extends Component {
     }
     componentDidMount(){
         this.fetchBookings();
-        this.sortBookings();
+        this.countBookings();
     }
 
     fetchBookings = () => {
@@ -28,11 +28,26 @@ class DatePicker extends Component {
             });
     }
 
-    sortBookings = () => {
+    countBookings = () => {
         let numberOfBookings = 0;
+        let fullyBooked = [];
         this.fetchBookings()
             .then((fetchedBookings) => {
+                let p = 1;
                 for (let i = 0; i < fetchedBookings.length; i++) {
+                    if (fetchedBookings[i].date === fetchedBookings[p].date && fetchedBookings[i].session === fetchedBookings[p].session) {
+                        numberOfBookings += 1;
+                        if (numberOfBookings === 10){
+                            fullyBooked.push({
+                                date: fetchedBookings[i].date,
+                                session: fetchedBookings[i].session
+                            });
+                        }
+                        if(p < fetchedBookings.length) {
+                            p += 1;
+                        }
+                    }
+                    console.log(numberOfBookings);
                     console.log(fetchedBookings[i]);
                 }
                 /*
