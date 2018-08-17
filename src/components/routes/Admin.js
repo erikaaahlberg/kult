@@ -1,17 +1,34 @@
 import React, {Component} from "react";
+import moment from 'moment';
 import Calendar from "../Calendar";
 
 export default class Admin extends Component{
 
   state = {
     bookingsOnSelectedDate: [],
+    selectedIdToEdit: null,
   }
 
-  renderExistingBookings = () => {
+  renderBookings = () => {
     if(!this.state.bookingsOnSelectedDate){
       return;
-    } else {
+    }
+     else {
       return this.state.bookingsOnSelectedDate.map((booking) => {
+        if(this.state.selectedIdToEdit === booking.id){
+          return (
+            <ul key={booking.id}>
+            <h3>REDIGERAR: </h3>
+            <li>Datum: {booking.date}</li>
+            <li>Antal personer: {booking.guests}</li>
+            <li>Sittning: {booking.session}</li>
+            <li>Bokat av: {booking.name}</li>
+            <li>E-mail: {booking.email}</li>
+            <li>Telefon: {booking.phone}</li>
+            <button onClick={() => {this.setState({selectedIdToEdit: null})}}>Klar</button>
+          </ul>
+          )
+        }
         return (
           <ul key={booking.id}>
             <h3>Bokning: </h3>
@@ -21,6 +38,7 @@ export default class Admin extends Component{
             <li>Bokat av: {booking.name}</li>
             <li>E-mail: {booking.email}</li>
             <li>Telefon: {booking.phone}</li>
+            <button onClick={() => {this.setState({selectedIdToEdit: booking.id})}}>Redigera</button>
           </ul>
         )
       }
@@ -39,6 +57,15 @@ export default class Admin extends Component{
     });
   }
 
+  checkForBookingsCurrentDate = () => {
+    let formattedDateString = moment().format('YYYY/MM/DD');
+    let encodedDate = encodeURIComponent(formattedDateString);
+    this.fetchSelectedDate(encodedDate);
+  }
+
+  componentDidMount(){
+    this.checkForBookingsCurrentDate();
+  }
 
   render(){
     return(
@@ -51,7 +78,7 @@ export default class Admin extends Component{
           <p>Det finns inga bokningar det valda datumet.</p>
         }
 
-        {this.renderExistingBookings()}
+        {this.renderBookings()}
 
       </div>
     )

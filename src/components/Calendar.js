@@ -32,7 +32,7 @@ export default class Calendar extends Component{
     const date = new Date(this.state.startDate);
     return date.toLocaleDateString().split('-').join("/");
   }
-  
+
 
   renderRegularDatePicker = () => {
     return(
@@ -63,7 +63,6 @@ export default class Calendar extends Component{
           dateFormat={'YYYY/MM/DD'}
           selected={this.state.startDate}
           onChange={this.handleChange}
-          name="create_date"
         />
         <br />
         <input type="text" name="create_date" value={this.showDateInInput()} />
