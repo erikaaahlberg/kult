@@ -45,7 +45,7 @@ export default class Admin extends Component{
       <div>
         <h1>Administratör</h1>
 
-        <Calendar fetchSelectedDate={this.fetchSelectedDate}/>
+        <Calendar showAdminCalendar={true} fetchSelectedDate={this.fetchSelectedDate}/>
 
         {this.state.bookingsOnSelectedDate.length < 1 &&
           <p>Det finns inga bokningar det valda datumet.</p>
