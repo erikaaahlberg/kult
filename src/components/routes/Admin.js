@@ -52,11 +52,6 @@ export default class Admin extends Component{
       },
       selectedId: booking.id
     })
-
-    // This was used before to set the booking id to null and return it to being rendered as not editing-mode
-    // this.setState({
-    //   selectedIdToEdit: null
-    // })
   }
 
   updateSelectedBookingInState = (event) => {
@@ -117,9 +112,18 @@ export default class Admin extends Component{
 
   }
 
-  /** TODO:
-   * Fix PATCH-functionality, send api call,
-  */
+  sendUpdatedBookingToDatabase = (event) => {
+    event.preventDefault();
+    // TODO: Patch magic
+
+    /** A single booking is no longer being edited,
+     * setting id to null will render all bookings as editable again.
+     */
+    this.setState({
+      selectedId: null
+    })
+  }
+
   renderBookings = () => {
     const { bookingsOnSelectedDate, selectedBooking, selectedId } = this.state;
     if(!bookingsOnSelectedDate){
@@ -159,7 +163,7 @@ export default class Admin extends Component{
                   <label>Telefon:</label>
                   <input value={selectedBooking.phone} name="update_phone" onChange={this.updateSelectedBookingInState} />
                 </p>
-                <div onClick={() => {console.log('Klick på klar-knappen, inge mer')}}>Klar</div>
+                <button onClick={this.sendUpdatedBookingToDatabase}>Klar</button>
               </form>
             </div>
           )
