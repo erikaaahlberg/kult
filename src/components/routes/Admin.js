@@ -117,6 +117,7 @@ export default class Admin extends Component{
   sendUpdatedBookingToDatabase = (event) => {
     event.preventDefault();
     // TODO: Patch magic
+    console.log('TODO: Path magic, update db with: ', this.state.selectedBooking)
 
     /** A single booking is no longer being edited,
      * setting id to null will render all bookings as editable again.
@@ -154,7 +155,6 @@ export default class Admin extends Component{
   }
 
   render(){
-    console.log(this.state.selectedBooking)
     return(
       <div>
         <h1>Administratör</h1>
