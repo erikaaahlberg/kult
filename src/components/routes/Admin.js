@@ -6,7 +6,15 @@ export default class Admin extends Component{
 
   state = {
     bookingsOnSelectedDate: [],
-    selectedIdToEdit: null,
+    selectedId: null,
+    selectedBooking: {
+      date: null,
+      guests: null,
+      session: null,
+      name: null,
+      email: null,
+      phone: null
+    }
   }
 
   fetchSelectedDate = (date) => {
@@ -31,73 +39,146 @@ export default class Admin extends Component{
     this.checkForBookingsCurrentDate();
   }
 
+  selectBookingToEdit = (booking) => {
+    this.setState({
+      selectedBooking: {
+        id: booking.id,
+        date: booking.date,
+        guests: booking.guests,
+        session: booking.session,
+        name: booking.name,
+        email: booking.email,
+        phone: booking.phone
+      },
+      selectedId: booking.id
+    })
+
+    // This was used before to set the booking id to null and return it to being rendered as not editing-mode
+    // this.setState({
+    //   selectedIdToEdit: null
+    // })
+  }
+
+  updateSelectedBookingInState = (event) => {
+    let newValue = event.target.value;
+
+    switch(event.target.name){
+      case 'update_date':
+        this.setState({
+          selectedBooking: {
+              ...this.state.selectedBooking,
+              date: newValue,
+          }
+        })
+        return;
+      case 'update_guests':
+        this.setState({
+          selectedBooking: {
+              ...this.state.selectedBooking,
+              guests: newValue,
+          }
+        })
+        return;
+      case 'update_session':
+        this.setState({
+          selectedBooking: {
+              ...this.state.selectedBooking,
+              session: newValue,
+          }
+        })
+        return;
+      case 'update_name':
+        this.setState({
+          selectedBooking: {
+              ...this.state.selectedBooking,
+              name: newValue,
+          }
+        })
+        return;
+      case 'update_email':
+        this.setState({
+          selectedBooking: {
+              ...this.state.selectedBooking,
+              email: newValue,
+          }
+        })
+        return;
+      case 'update_phone':
+        this.setState({
+          selectedBooking: {
+              ...this.state.selectedBooking,
+              phone: newValue,
+          }
+        })
+        return;
+      default:
+        break;
+    }
+
+  }
+
   /** TODO:
    * Fix PATCH-functionality, send api call,
-   * Fix rror with key prop (?) and maybe seperate this to it's own component?
   */
   renderBookings = () => {
-    if(!this.state.bookingsOnSelectedDate){
+    const { bookingsOnSelectedDate, selectedBooking, selectedId } = this.state;
+    if(!bookingsOnSelectedDate){
       return;
     }
      else {
-      return this.state.bookingsOnSelectedDate.map((booking) => {
-        if(this.state.selectedIdToEdit === booking.id){
+      return bookingsOnSelectedDate.map((booking) => {
+        if(selectedId === booking.id){
           return (
-            <React.Fragment>
+            <div key={booking.id}>
               <form>
-              <ul key={booking.id}>
-              <h3>Bokning:</h3>
-                <li>
+              <h2>Bokning:</h2>
+                <p>
                   <label>Datum:</label>
-                  <input placeholder={booking.date} />
-                </li>
-
-                <li>
+                  <input value={selectedBooking.date} name="update_date" onChange={this.updateSelectedBookingInState} />
+                </p>
+                <p>
                   <label>Antal gäster:</label>
-                  <input placeholder={booking.guests} />
-                </li>
-
-                <li>
+                  <input type="number" max="4" value={selectedBooking.guests} name="update_guests" onChange={this.updateSelectedBookingInState} />
+                </p>
+                <p>
                   <label>Sittning:</label>
-                  <input placeholder={booking.session} />
-                </li>
-
-                <li>
+                  <select value={selectedBooking.session} name="update_session" onChange={this.updateSelectedBookingInState}>
+                    <option value="18:00">18:00</option>
+                    <option value="21:00">21:00</option>
+                  </select>
+                </p>
+                <p>
                   <label>Bokat av:</label>
-                  <input placeholder={booking.name} />
-                </li>
-
-                <li>
+                  <input value={selectedBooking.name} name="update_name" onChange={this.updateSelectedBookingInState} />
+                </p>
+                <p>
                   <label>E-mail:</label>
-                  <input placeholder={booking.email} />
-                </li>
-
-                <li>
+                  <input value={selectedBooking.email} name="update_email" onChange={this.updateSelectedBookingInState} />
+                </p>
+                <p>
                   <label>Telefon:</label>
-                  <input placeholder={booking.phone} />
-                </li>
-
-                <button onClick={() => {this.setState({selectedIdToEdit: null})}}>Klar</button>
-                </ul>
+                  <input value={selectedBooking.phone} name="update_phone" onChange={this.updateSelectedBookingInState} />
+                </p>
+                <div onClick={() => {console.log('Klick på klar-knappen, inge mer')}}>Klar</div>
               </form>
-            </React.Fragment>
+            </div>
           )
         }
 
         return (
-          <ul key={booking.id}>
+          <div key={booking.id}>
             <h3>Bokning: </h3>
-            <li>Datum: {booking.date}</li>
-            <li>Antal personer: {booking.guests}</li>
-            <li>Sittning: {booking.session}</li>
-            <li>Bokat av: {booking.name}</li>
-            <li>E-mail: {booking.email}</li>
-            <li>Telefon: {booking.phone}</li>
-            <button onClick={() => {this.setState({selectedIdToEdit: booking.id})}}>Redigera</button>
-          </ul>
+            <p>Datum: {booking.date}</p>
+            <p>Antal personer: {booking.guests}</p>
+            <p>Sittning: {booking.session}</p>
+            <p>Bokat av: {booking.name}</p>
+            <p>E-mail: {booking.email}</p>
+            <p>Telefon: {booking.phone}</p>
+            <button onClick={() => {this.selectBookingToEdit(booking)}}>Redigera</button>
+          </div>
         )
-      }
-    )}
+      })
+    }
   }
 
   render(){
