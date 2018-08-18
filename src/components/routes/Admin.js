@@ -1,6 +1,8 @@
 import React, {Component} from "react";
-import moment from 'moment';
+import moment from "moment";
 import Calendar from "../Calendar";
+import SingleBooking from '../SingleBooking';
+import SingleEditableBooking from '../SingleEditableBooking';
 
 export default class Admin extends Component{
 
@@ -132,60 +134,27 @@ export default class Admin extends Component{
      else {
       return bookingsOnSelectedDate.map((booking) => {
         if(selectedId === booking.id){
-          return (
-            <div key={booking.id}>
-              <form>
-              <h2>Bokning:</h2>
-                <p>
-                  <label>Datum:</label>
-                  <input value={selectedBooking.date} name="update_date" onChange={this.updateSelectedBookingInState} />
-                </p>
-                <p>
-                  <label>Antal gäster:</label>
-                  <input type="number" max="4" value={selectedBooking.guests} name="update_guests" onChange={this.updateSelectedBookingInState} />
-                </p>
-                <p>
-                  <label>Sittning:</label>
-                  <select value={selectedBooking.session} name="update_session" onChange={this.updateSelectedBookingInState}>
-                    <option value="18:00">18:00</option>
-                    <option value="21:00">21:00</option>
-                  </select>
-                </p>
-                <p>
-                  <label>Bokat av:</label>
-                  <input value={selectedBooking.name} name="update_name" onChange={this.updateSelectedBookingInState} />
-                </p>
-                <p>
-                  <label>E-mail:</label>
-                  <input value={selectedBooking.email} name="update_email" onChange={this.updateSelectedBookingInState} />
-                </p>
-                <p>
-                  <label>Telefon:</label>
-                  <input value={selectedBooking.phone} name="update_phone" onChange={this.updateSelectedBookingInState} />
-                </p>
-                <button onClick={this.sendUpdatedBookingToDatabase}>Klar</button>
-              </form>
-            </div>
+          return(
+            <SingleEditableBooking
+              key={selectedBooking.id}
+              selectedBooking={selectedBooking}
+              updateSelectedBookingInState={this.updateSelectedBookingInState}
+              sendUpdatedBookingToDatabase={this.sendUpdatedBookingToDatabase}
+            />
           )
         }
-
         return (
-          <div key={booking.id}>
-            <h3>Bokning: </h3>
-            <p>Datum: {booking.date}</p>
-            <p>Antal personer: {booking.guests}</p>
-            <p>Sittning: {booking.session}</p>
-            <p>Bokat av: {booking.name}</p>
-            <p>E-mail: {booking.email}</p>
-            <p>Telefon: {booking.phone}</p>
-            <button onClick={() => {this.selectBookingToEdit(booking)}}>Redigera</button>
-          </div>
+          <SingleBooking
+            selectBookingToEdit={this.selectBookingToEdit}
+            booking={booking}
+          />
         )
       })
     }
   }
 
   render(){
+    console.log(this.state.selectedBooking)
     return(
       <div>
         <h1>Administratör</h1>
