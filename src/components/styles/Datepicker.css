@@ -1,0 +1,96 @@
+div.react-datepicker__header {
+  width: 228px;
+  background-color: #e32426;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom: 0;
+}
+
+div.react-datepicker,
+form.react-datepicker {
+  font-family: 'Circular Std', sans-serif;
+  border: 0;
+  border-radius: 0;
+}
+
+button.react-datepicker__navigation.react-datepicker__navigation--previous {
+  border: 0.33rem solid transparent;
+  border-right-color: #fff;
+  left: 13px;
+}
+
+button.react-datepicker__navigation.react-datepicker__navigation--next {
+  border: 0.33rem solid transparent;
+  border-left-color: #fff;
+  right: 13px;
+}
+
+div.react-datepicker__day-names > div {
+  color: #fff;
+}
+
+div.react-datepicker__day-name {
+  margin-bottom: 0;
+  padding-bottom: .8rem;
+  font-family: 'Apercu';
+  font-size: 0.6rem;
+  line-height: 0;
+  letter-spacing: .05rem;
+  text-transform: uppercase;
+}
+
+div.react-datepicker__current-month {
+  text-transform: uppercase;
+  letter-spacing: .05rem;
+  color: #fff;
+}
+
+button.react-datepicker__navigation {
+  border: 0.35rem solid transparent;
+}
+
+div.react-datepicker__month {
+  margin: 0;
+}
+
+div.react-datepicker__day.react-datepicker__day:hover {
+  margin: 0;
+  padding: 0.166rem;
+  background-color: #e32426;
+  border-radius: 0;
+}
+
+div.react-datepicker__day--selected {
+  margin: 0;
+  padding: 0.166rem;
+  background-color: #000;
+  border-radius: 0;
+}
+
+div.react-datepicker__day.react-datepicker__day--sat.react-datepicker__day--selected,
+div.react-datepicker__day.react-datepicker__day--sun.react-datepicker__day--selected {
+  background-color: #000;
+  border-radius: 0;
+}
+
+div.react-datepicker__day--sat,
+div.react-datepicker__day--sun {
+  margin: 0;
+  padding: 0.166rem;
+  background-color: #f0f0f0;
+}
+
+div.react-datepicker__day--mon.react-datepicker__day--disabled:hover,
+div.react-datepicker__day--tue.react-datepicker__day--disabled:hover,
+div.react-datepicker__day--wed.react-datepicker__day--disabled:hover,
+div.react-datepicker__day--thu.react-datepicker__day--disabled:hover,
+div.react-datepicker__day--fri.react-datepicker__day--disabled:hover {
+  background-color: #fff;
+  border-radius: 0;
+} 
+
+div.react-datepicker__day--sat.react-datepicker__day--disabled:hover,
+div.react-datepicker__day--sun.react-datepicker__day--disabled:hover {
+  background-color: #f0f0f0;
+  border-radius: 0;
+}
