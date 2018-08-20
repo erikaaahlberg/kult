@@ -1,1 +1,7 @@
 /* Do styling stuffs */
+h1 {
+  margin: 0;
+  font-family: 'Circular-Bold', sans-serif;
+  font-size: 20vw;
+  text-align: center;
+}
