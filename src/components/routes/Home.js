@@ -1,24 +1,10 @@
 import React, {Component} from "react";
-import "../styles/Navbar.css";
 import "../styles/Keyframes.css";
 import CloseIcon from '../images/close.svg';
 
 export default class Home extends Component {
   state = {
-    toggle: "",
     gdpr: "gdprVisible",
-  }
-
-  toggleMenu = () => {
-    this.setState({
-      toggle: "open",
-    })
-
-    if(this.state.toggle === "open") {
-      this.setState({
-        toggle: "",
-      })
-    }
   }
 
   removeGDPR = () => {
@@ -31,11 +17,7 @@ export default class Home extends Component {
     return (
       <React.Fragment>
         <div className="wrapper">
-          <div id="navIcon" className={this.state.toggle} onClick={this.toggleMenu}>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
+
           <h1>KULT</h1>
           <p>Det här är komponenten för landingssidan – jag finns i components/routes/Home.</p>
         </div>
