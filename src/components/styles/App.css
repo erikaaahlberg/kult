@@ -1,7 +1,62 @@
-/* Do styling stuffs */
+
+
 h1 {
   margin: 0;
   font-family: 'Circular-Bold', sans-serif;
-  font-size: 20vw;
+  font-size: 14vw;
+  letter-spacing: .6rem;
   text-align: center;
+}
+
+p {
+  margin: 0;
+  font-family: 'Apercu-Mono', monospace;
+  font-size: .8rem;
+  letter-spacing: .05rem;
+}
+
+.navbar {
+  display: none;
+}
+
+.wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.gdpr {
+  color: #fff;
+  text-align: center;
+  background-color: #000;
+  width: 100vw;
+  height: 20vh;
+  position: fixed;
+  z-index: 1;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+          animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.gdpr > p {
+  width: 70vw;
+  line-height: 1.2rem;
+}
+
+.closeIcon {
+  top: 15px;
+  right: 20px;
+  position: fixed;
+  height: 25px;
+  -webkit-filter: invert(100%);
+        filter: invert(100%);
+}
+
+::selection {
+  background: #ffdd3e;
 }
