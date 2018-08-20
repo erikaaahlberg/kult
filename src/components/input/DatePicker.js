@@ -15,7 +15,6 @@ class DatePicker extends Component {
         return fetch('api/sessions')
         .then((response) => response.json())
             .then((fetchedBookings) => {
-                //this.setState({ takenDates: fetchedBookings })
                 console.log(fetchedBookings);
                 return fetchedBookings;
 
@@ -53,7 +52,6 @@ class DatePicker extends Component {
                         });
                     }
                 }
-
                 if (availableSessions.length > 0) {
                     console.log(availableSessions);
                     this.setState({ availableSessions: availableSessions });
@@ -61,19 +59,16 @@ class DatePicker extends Component {
                 if (fullyBookedSessions.length > 0) {
                     console.log(fullyBookedSessions);
                     this.setState({ fullyBookedSessions: fullyBookedSessions });
+                    this.sortByDates();
                 }
-                
-        this.countFullyBookedDates();
             });
     }
     
-    countFullyBookedDates = () => {
+    sortByDates = () => {
         let fullyBookedSessions = this.state.fullyBookedSessions;
         let fullyBookedDates = [];
         const lastIndex = fullyBookedSessions.length -1;
         console.log(fullyBookedSessions);
-        /*let firstSession = 0;
-        let secondSession = 0;*/
         
         for (let i = 0; i < fullyBookedSessions.length; i++) {
             if (i != lastIndex) {
