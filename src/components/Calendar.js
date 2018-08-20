@@ -3,6 +3,7 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'moment/locale/sv';
 import 'react-datepicker/dist/react-datepicker.css';
+import './styles/Datepicker.css';
 
 export default class Calendar extends Component{
   state = {
@@ -28,9 +29,9 @@ export default class Calendar extends Component{
     }
   }
 
-  showDateInInput = () => {
+  displayDate = () => {
     const date = new Date(this.state.startDate);
-    return date.toLocaleDateString().split('-').join("/");
+    return date.toLocaleDateString().split('-').join('/');
   }
 
 
@@ -47,7 +48,7 @@ export default class Calendar extends Component{
           name="create_date"
         />
         <br />
-        <input hidden type="text" name="create_date" value={this.showDateInInput()} />
+        <input hidden type="text" name="create_date" value={this.displayDate()} />
       </React.Fragment>
     )
   }
@@ -65,7 +66,7 @@ export default class Calendar extends Component{
           onChange={this.handleChange}
         />
         <br />
-        <input type="text" name="create_date" value={this.showDateInInput()} />
+        <input type="text" name="create_date" value={this.displayDate()} />
       </React.Fragment>
     )
   }
