@@ -6,6 +6,7 @@ import CloseIcon from '../images/close.svg';
 export default class Home extends Component {
   state = {
     toggle: "",
+    gdpr: "gdprVisible",
   }
 
   toggleMenu = () => {
@@ -18,6 +19,12 @@ export default class Home extends Component {
         toggle: "",
       })
     }
+  }
+
+  removeGDPR = () => {
+    this.setState({
+      gdpr: "gdprHidden",
+    })
   }
   
   render(){
@@ -32,8 +39,8 @@ export default class Home extends Component {
           <h1>KULT</h1>
           <p>Det här är komponenten för landingssidan – jag finns i components/routes/Home.</p>
         </div>
-        <div className="gdpr">
-          <img className="closeIcon" src={CloseIcon} alt="Close GDPR" />
+        <div className={this.state.gdpr}>
+          <img className="closeIcon" src={CloseIcon} alt="Close GDPR" onClick={this.removeGDPR} />
           <p>
             Casper nose grab aerial 1080 Danny Way. Nosegrind pogo boned out indy grab. Air
             rail Stacy Peralta hand rail hardware. Kevin Harris drop in lip fastplant. Craig

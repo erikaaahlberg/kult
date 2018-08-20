@@ -4,7 +4,7 @@ h1 {
   margin: 0;
   font-family: 'Circular-Bold', sans-serif;
   font-size: 14vw;
-  letter-spacing: .6rem;
+  letter-spacing: .5rem;
   text-align: center;
 }
 
@@ -27,7 +27,7 @@ p {
   flex-direction: column;
 }
 
-.gdpr {
+.gdprVisible {
   color: #fff;
   text-align: center;
   background-color: #000;
@@ -43,9 +43,13 @@ p {
           animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
-.gdpr > p {
+.gdprVisible > p {
   width: 70vw;
   line-height: 1.2rem;
+}
+
+.gdprHidden {
+  display: none;
 }
 
 .closeIcon {
@@ -55,6 +59,7 @@ p {
   height: 25px;
   -webkit-filter: invert(100%);
         filter: invert(100%);
+  cursor: pointer;
 }
 
 ::selection {
