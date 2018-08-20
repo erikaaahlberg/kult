@@ -129,8 +129,10 @@ export default class Admin extends Component{
 
   renderBookings = () => {
     const { bookingsOnSelectedDate, selectedBooking, selectedId } = this.state;
-    if(!bookingsOnSelectedDate){
-      return;
+    if(bookingsOnSelectedDate < 1){
+      return(
+        <p>Det finns inga bokningar det valda datumet.</p>
+      )
     }
      else {
       return bookingsOnSelectedDate.map((booking) => {
@@ -158,15 +160,8 @@ export default class Admin extends Component{
     return(
       <div>
         <h1>Administratör</h1>
-
         <Calendar showAdminCalendar={true} fetchSelectedDate={this.fetchSelectedDate}/>
-
-        {this.state.bookingsOnSelectedDate.length < 1 &&
-          <p>Det finns inga bokningar det valda datumet.</p>
-        }
-
         {this.renderBookings()}
-
       </div>
     )
   }
