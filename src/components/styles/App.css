@@ -37,8 +37,19 @@ li > a {
 }
 
 li > a:hover {
-  color: blue;
-  text-decoration: underline;
+  color: #0000ff;
+}
+
+li > a:after {
+  display: block;
+  content: '';
+  border-bottom: 4px #0000ff solid;  
+  transform: scaleX(0);  
+  transition: transform 250ms ease-in-out;
+}
+
+li > a:hover:after {
+  transform: scaleX(1);
 }
 
 .navbarHidden {
@@ -49,7 +60,7 @@ li > a:hover {
   width: 30vw;
   height: 100vh;
   background-color: #ebebf1;
-  position: absolute;
+  position: fixed;
   z-index: 2;
   top: 0;
   right: 0;

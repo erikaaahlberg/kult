@@ -40,15 +40,15 @@ export default class Navbar extends Component {
           <Listitem className="navigation">
             <Link to="/" onClick={ toggleMenu }>Hem</Link>
           </Listitem>
-          <li className="navigation">
+          <Listitem className="navigation">
             <Link to="/book" onClick={ toggleMenu }>Boka</Link>
-          </li>
-          <li className="navigation">
+          </Listitem>
+          <Listitem className="navigation">
             <Link to="/contact" onClick={ toggleMenu }>Kontakt</Link>
-          </li>
-          <li className="navigation">
+          </Listitem>
+          <Listitem className="navigation">
             <Link to="/admin" onClick={ toggleMenu }>Admin</Link>
-          </li>
+          </Listitem>
         </ul>
       </React.Fragment>
     )
