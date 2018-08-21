@@ -42,8 +42,38 @@ app.post('/api/create_booking', (req, res) => {
   })
 });
 
+// TODO: Currently only getting here with app.all but should be able to use app.put()?
+app.all('/api/update_booking', (req, res) => {
+  const id = req.body.id;
+  const date = req.body.update_date;
+  const guests = req.body.update_guests;
+  const session = req.body.update_session;
+  const name = req.body.update_name;
+  const email = req.body.update_email;
+  const phone = req.body.update_phone;
 
-app.get('/api/bookings/:id', (req, res) => {
+  const queryString =
+    `UPDATE bookings
+    SET guests= ?, date= ?, session=?, name=?, email=?, phone= ?
+    WHERE id = ?`
+
+  connection.query(queryString, [guests, date, session, name, email, phone, id], (err, results, fields) => {
+    if(err){
+      console.log('Failed to add booking: ' + err);
+      res.sendStatus(500) // Show user internal server error
+      res.end();
+      return;
+    }
+    /** TODO:
+     * Redirecting will unmount and mount admin comp again,
+     * which renders current date. So if you edited another date,
+     * you have to use the datepicker to see your updates. How to fix?
+     */
+    res.redirect('/admin');
+  })
+});
+
+app.get('/api/bookings', (req, res) => {
   const queryString = "SELECT * FROM bookings WHERE id = ?";
   const bookingId = req.params.id;
 

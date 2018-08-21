@@ -7,9 +7,11 @@ import SingleEditableBooking from '../SingleEditableBooking';
 export default class Admin extends Component{
 
   state = {
+    selectedDate: moment(),
     bookingsOnSelectedDate: [],
     selectedId: null,
     selectedBooking: {
+      id: null,
       date: null,
       guests: null,
       session: null,
@@ -20,6 +22,7 @@ export default class Admin extends Component{
   }
 
   fetchSelectedDate = (date) => {
+    this.setState({selectedDate: date})
     fetch(`/api/bookings/date/${date}`)
     .then(response => response.json())
     .then((bookingsOnSelectedDate) => {
@@ -31,14 +34,15 @@ export default class Admin extends Component{
     });
   }
 
-  checkForBookingsCurrentDate = () => {
-    let formattedDateString = moment().format('YYYY/MM/DD');
+  formatAndFetchDate = () => {
+    let formattedDateString = this.state.selectedDate.format('YYYY/MM/DD');
     let encodedDate = encodeURIComponent(formattedDateString);
     this.fetchSelectedDate(encodedDate);
   }
 
   componentDidMount(){
-    this.checkForBookingsCurrentDate();
+    localStorage.clear()
+    this.formatAndFetchDate();
   }
 
   selectBookingToEdit = (booking) => {
@@ -52,7 +56,8 @@ export default class Admin extends Component{
         email: booking.email,
         phone: booking.phone
       },
-      selectedId: booking.id
+      selectedId: booking.id,
+      selectedDate: booking.date,
     })
   }
 
@@ -111,28 +116,16 @@ export default class Admin extends Component{
       default:
         break;
     }
-
-  }
-
-  sendUpdatedBookingToDatabase = (event) => {
-    event.preventDefault();
-    // TODO: Patch magic
-    console.log('TODO: Path magic, update db with: ', this.state.selectedBooking)
-
-    /** A single booking is no longer being edited,
-     * setting id to null will render all bookings as editable again.
-     */
-    this.setState({
-      selectedId: null
-    })
   }
 
   renderBookings = () => {
     const { bookingsOnSelectedDate, selectedBooking, selectedId } = this.state;
-    if(!bookingsOnSelectedDate){
-      return;
+    if(bookingsOnSelectedDate < 1){
+      return(
+        <p>Det finns inga bokningar det valda datumet.</p>
+      )
     }
-     else {
+    else {
       return bookingsOnSelectedDate.map((booking) => {
         if(selectedId === booking.id){
           return(
@@ -140,12 +133,12 @@ export default class Admin extends Component{
               key={selectedBooking.id}
               selectedBooking={selectedBooking}
               updateSelectedBookingInState={this.updateSelectedBookingInState}
-              sendUpdatedBookingToDatabase={this.sendUpdatedBookingToDatabase}
             />
           )
         }
         return (
           <SingleBooking
+            key={booking.id}
             selectBookingToEdit={this.selectBookingToEdit}
             booking={booking}
           />
@@ -158,15 +151,8 @@ export default class Admin extends Component{
     return(
       <div>
         <h1>Administratör</h1>
-
         <Calendar showAdminCalendar={true} fetchSelectedDate={this.fetchSelectedDate}/>
-
-        {this.state.bookingsOnSelectedDate.length < 1 &&
-          <p>Det finns inga bokningar det valda datumet.</p>
-        }
-
         {this.renderBookings()}
-
       </div>
     )
   }
