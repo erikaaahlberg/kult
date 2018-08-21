@@ -1,4 +1,4 @@
-h1.header {
+#homeHeader {
   margin: 0;
   font-family: 'Circular-Black', sans-serif;
   font-size: 14vw;
@@ -6,8 +6,7 @@ h1.header {
   letter-spacing: .5rem;
   text-align: center;
   background: url(../images/stroke-zigzag-black.svg) bottom repeat-x;
-  background-size: auto 1rem;
-  z-index: 1;
+  background-size: auto .5rem;
 }
 
 p {
@@ -15,61 +14,6 @@ p {
   font-size: .8rem;
   color: #25252f;
   letter-spacing: .05rem;
-}
-
-ul {
-  margin: 0;
-  padding-top: 100px;
-}
-
-li.navigation {
-  margin: 10px;
-  padding: 10px 20px;
-  list-style: none;
-  text-align: right;
-}
-
-li > a {
-  font-family: 'Circular-Black', sans-serif;
-  font-size: 3rem;
-  color: #25252f;
-  text-decoration: none;
-}
-
-li > a:hover {
-  color: #0000ff;
-}
-
-li > a:after {
-  display: block;
-  content: '';
-  border-bottom: 4px #0000ff solid;  
-  transform: scaleX(0);  
-  transition: transform 250ms ease-in-out;
-}
-
-li > a:hover:after {
-  transform: scaleX(1);
-}
-
-.navbarHidden {
-  display: none;
-}
-
-.navbarVisible {
-  width: 30vw;
-  height: 100vh;
-  background-color: #ebebf1;
-  position: fixed;
-  z-index: 2;
-  top: 0;
-  right: 0;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-end;
-  flex-direction: column;
-	-webkit-animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-          animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 .wrapper {
@@ -81,54 +25,13 @@ li > a:hover:after {
   background-color: #fff;
 }
 
-.circle {
-  position: absolute;
-  width: 45%;
-}
-
-.gdprVisible {
-  color: #fff;
-  text-align: center;
-  background-color: #25252f;
-  width: 100vw;
-  height: 20vh;
-  position: fixed;
-  z-index: 1;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  -webkit-animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-          animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-}
-
-.gdprVisible > p {
-  width: 70vw;
-  line-height: 1.2rem;
-  color: #fff;
-}
-
-.gdprHidden {
-  display: none;
-}
-
-.closeIcon {
-  top: 15px;
-  right: 20px;
-  position: fixed;
-  height: 25px;
-  -webkit-filter: invert(100%);
-        filter: invert(100%);
-  cursor: pointer;
-}
-
 ::selection {
   background: #ffdd3e;
 }
 
 /*form*/
 
-#bokah1{
+#bokah1 {
   margin: 0;
   font-family: 'Circular-Bold', sans-serif;
   font-size: 14vw;
@@ -145,13 +48,13 @@ li > a:hover:after {
   align-content: center;
   
 }
-.contact{
+.contact {
   text-align: center;
 }
 
-select { position: relative;
+select {
+  position: relative;
   border: 1px solid#3B4044;
-
  }
 /* select:before,
 select:after { content: ''; position: absolute; right: 16px; pointer-events: none; }
@@ -171,8 +74,8 @@ select:after { bottom: 7px; width: 0; height: 0; border-style: solid; border-wid
   color: #3B4044;
   font-weight: 700; 
   outline: 1px inset #3B4044;
- outline-offset: -1px;
- border: 0;
+  outline-offset: -1px;
+  border: 0;
 }
  /* select {
 	
@@ -196,7 +99,8 @@ div.react-datepicker-wrapper > div > input,
   color: #3B4044;
   font-weight: 700; 
 }
-input{
+
+input {
   width: 150px; 
   margin: 5px;
   padding: 0 16px; 
@@ -208,9 +112,10 @@ input{
   color: #3B4044;
   font-weight: 700; 
   outline: 1px inset #3B4044;
- outline-offset: -1px;
- border: 0;
+  outline-offset: -1px;
+  border: 0;
 }
+
 .contact{
   border: 1px solid red;
 }
@@ -223,15 +128,12 @@ input{
   width: 165px;
   margin: 0px;
   padding: 0px;
-  
-  
 }
 
 .findtable:hover {
   background: #3B4044;
   color: #fff;
 }
-
 
 .icons {
   height: 25px;
@@ -246,7 +148,8 @@ input{
 .box img {
   margin-left: 10px;
 }
-.bookbutton{
+
+.bookbutton {
   text-align: center;
 }
 

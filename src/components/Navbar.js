@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import { Link } from "react-router-dom";
 import Hamburger from "./Hamburger";
-import Listitem from "./Listitem";
-import "./styles/Hamburger.css";
+import "./styles/Navigation.css";
+import "./styles/Desktop.css";
 import "./styles/Keyframes.css";
 
 export default class Navbar extends Component {
@@ -37,18 +37,18 @@ export default class Navbar extends Component {
       <React.Fragment>
         <Hamburger className={ toggleHamburger } handleChange={ toggleMenu } />
         <ul className={ this.state.toggleMenu }>
-          <Listitem className="navigation">
+          <li>
             <Link to="/" onClick={ toggleMenu }>Hem</Link>
-          </Listitem>
-          <Listitem className="navigation">
+          </li>
+          <li>
             <Link to="/book" onClick={ toggleMenu }>Boka</Link>
-          </Listitem>
-          <Listitem className="navigation">
+          </li>
+          <li>
             <Link to="/contact" onClick={ toggleMenu }>Kontakt</Link>
-          </Listitem>
-          <Listitem className="navigation">
+          </li>
+          <li>
             <Link to="/admin" onClick={ toggleMenu }>Admin</Link>
-          </Listitem>
+          </li>
         </ul>
       </React.Fragment>
     )

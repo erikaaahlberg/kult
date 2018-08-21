@@ -1,0 +1,35 @@
+.gdprVisible {
+  color: #fff;
+  text-align: center;
+  background-color: #25252f;
+  width: 100vw;
+  height: 20vh;
+  position: fixed;
+  z-index: 1;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+          animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.gdprVisible > p {
+  width: 70vw;
+  line-height: 1.2rem;
+  color: #fff;
+}
+
+.gdprHidden {
+  display: none;
+}
+
+.closeIcon {
+  top: 15px;
+  right: 20px;
+  position: fixed;
+  height: 25px;
+  -webkit-filter: invert(100%);
+        filter: invert(100%);
+  cursor: pointer;
+}
