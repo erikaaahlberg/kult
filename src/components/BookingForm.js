@@ -39,27 +39,32 @@ export default function BookingForm(){
         <option value="3">3</option>
         <option value="4">4</option>
       </select>
-      <div className="bookbutton">
-      <button className="findtable" type="submit">HITTA ETT BORD</button>
       </div>
-     </div>
-      
 
-      {/* <div className="contact">
+      <div className="bookbutton">
+      <button className="findtable" type="submit">SÖK BOKNING</button>
+     </div>
+      <br />
+      <br />
+
+      <div className="contact">
+      <p>this mf suppose to come up when searching for tables if available tables on selected dates fill in your shit here</p>
       <br/>
-      <label htmlFor="create_name">Namn</label>
+      <p>Succesfull search<br/>
+      Please fill in your contact info</p>
+      <label htmlFor="create_name"><p>Namn</p></label>
       <br/>
       <input placeholder="Kult Svensson" name="create_name" id="create_name"/>
       <br/>
-      <label htmlFor="create_email">E-mail</label>
+      <label htmlFor="create_email"><p>E-mail</p></label>
       <br/>
       <input placeholder="kult@gmail.com" name="create_email" id="create_email"/>
       <br/>
-      <label htmlFor="create_phone">Phone</label>
+      <label htmlFor="create_phone"><p>Phone</p></label>
       <br/>
       <input placeholder="+46 761234567" name="create_phone" id="create_phone" required/>
       <br/>
-      </div> */}
+      </div>
     </form>
   )
 }
