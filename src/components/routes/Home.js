@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import "../styles/Desktop.css";
+// import "../styles/Desktop.css";
 import "../styles/Keyframes.css";
 import "../styles/Gdpr.css";
 import Image from "../Image";
