@@ -2,14 +2,18 @@ h1.header {
   margin: 0;
   font-family: 'Circular-Black', sans-serif;
   font-size: 14vw;
+  color: #25252f;
   letter-spacing: .5rem;
   text-align: center;
+  background: url(../images/stroke-zigzag-black.svg) bottom repeat-x;
+  background-size: auto 1rem;
+  z-index: 1;
 }
 
 p {
-  margin: 0;
   font-family: 'Apercu-Mono', monospace;
   font-size: .8rem;
+  color: #25252f;
   letter-spacing: .05rem;
 }
 
@@ -28,12 +32,13 @@ li.navigation {
 li > a {
   font-family: 'Circular-Black', sans-serif;
   font-size: 3rem;
-  color: #000;
+  color: #25252f;
   text-decoration: none;
 }
 
 li > a:hover {
   color: blue;
+  text-decoration: underline;
 }
 
 .navbarHidden {
@@ -43,7 +48,7 @@ li > a:hover {
 .navbarVisible {
   width: 30vw;
   height: 100vh;
-  background-color: #faeeb5;
+  background-color: #ebebf1;
   position: absolute;
   z-index: 2;
   top: 0;
@@ -62,12 +67,18 @@ li > a:hover {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-color: #fff;
+}
+
+.circle {
+  position: absolute;
+  width: 45%;
 }
 
 .gdprVisible {
   color: #fff;
   text-align: center;
-  background-color: #000;
+  background-color: #25252f;
   width: 100vw;
   height: 20vh;
   position: fixed;
@@ -83,6 +94,7 @@ li > a:hover {
 .gdprVisible > p {
   width: 70vw;
   line-height: 1.2rem;
+  color: #fff;
 }
 
 .gdprHidden {

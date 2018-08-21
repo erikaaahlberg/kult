@@ -19,6 +19,7 @@ export default class Home extends Component {
       <React.Fragment>
         <div className="wrapper">
           <h1 className="header">KULT</h1>
+          <p>Ha så kult på restaurangen!</p>
         </div>
         <div className={ this.state.gdpr }>
           <Image className="closeIcon" src={ CloseIcon } alt="Close GDPR" handleChange={ this.removeGDPR } />
