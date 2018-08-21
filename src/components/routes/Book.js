@@ -49,7 +49,7 @@ export default class Book extends Component{
   render(){
     return(
       <div>
-        <h1>BOKA ETT BORD</h1>
+        <h1 id="bokah1">BOKA</h1>
         <BookingForm />
         {/* <h2>Nuvarande bokningar i databasen:</h2>
         {this.state.existingBookings.length < 1 &&
