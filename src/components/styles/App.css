@@ -81,3 +81,10 @@ div.react-datepicker-wrapper > div > input{
   width: 30px;
 }
 
+.box{
+  display: flex;
+  align-items: center;
+}
+.box img{
+  margin-left: 10px;
+}

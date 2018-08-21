@@ -3,6 +3,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Calendar from "./Calendar";
 import clock from "./images/clock.png";
 import calendar from"./images/calendar.svg";
+import persons from"./images/person.png";
+
+
 
 
 export default function BookingForm(){
@@ -11,15 +14,23 @@ export default function BookingForm(){
     <form action="/api/create_booking/" method="POST">
     <div className="bookings">
     <label htmlFor="create_date"></label>
+    <div className="box">
     <img className="icons"src={calendar} alt="calendar"/>
+    </div>
     <Calendar/>
     <label htmlFor="create_session"></label>
+    <div className="box">
     <img className="icons"src={clock} alt="clock"/>
+    </div>
       <select name="create_session">
         <option value="18:00">18:00</option>
         <option value="21:00">21:00</option>
       </select>
-     <label htmlFor="create_guests">icon</label>
+     <label htmlFor="create_guests"></label>
+     <div className="box">
+     <img className="icons"src={persons} alt="persons"/>
+     </div>
+
       <br />
 
       <select name="create_guests">
