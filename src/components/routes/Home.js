@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import "../styles/Keyframes.css";
+import Image from "../Image";
 import CloseIcon from '../images/close.svg';
 
 export default class Home extends Component {
@@ -18,10 +19,9 @@ export default class Home extends Component {
       <React.Fragment>
         <div className="wrapper">
           <h1 className="header">KULT</h1>
-          <p>Det här är komponenten för landingssidan – jag finns i components/routes/Home.</p>
         </div>
-        <div className={this.state.gdpr}>
-          <img className="closeIcon" src={CloseIcon} alt="Close GDPR" onClick={this.removeGDPR} />
+        <div className={ this.state.gdpr }>
+          <Image className="closeIcon" src={ CloseIcon } alt="Close GDPR" handleChange={ this.removeGDPR } />
           <p>
             Casper nose grab aerial 1080 Danny Way. Nosegrind pogo boned out indy grab. Air
             rail Stacy Peralta hand rail hardware. Kevin Harris drop in lip fastplant. Craig
