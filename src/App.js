@@ -17,7 +17,6 @@ export default class App extends Component {
           <Route exact path="/" component={Home} />
           <Route path="/contact" component={Contact} />
           <Route path="/book" component={Book} />
-          <DatePicker/>
           <Route path="/admin" component={Admin} />
         </React.Fragment>
     </Router>

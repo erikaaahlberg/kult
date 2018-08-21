@@ -126,7 +126,7 @@ app.get('/api/bookings/date/:date', (req, res) => {
     res.json(bookings)
   })
 })
-/*
+
 app.get('/api/bookings', (req, res) => {
   const queryString = "SELECT * FROM bookings";
 
@@ -151,7 +151,7 @@ app.get('/api/bookings', (req, res) => {
     })
     res.json(bookings)
   })
-})*/
+})
 
 
 app.get('/api/count', (req, res) => {

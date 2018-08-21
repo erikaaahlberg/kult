@@ -14,7 +14,7 @@ export default class Book extends Component{
     fetch('/api/bookings')
     .then(response => response.json())
     .then((existingBookings) => {
-        this.setState({existingBookings})
+        this.setState({existingBookings: existingBookings})
     })
     .catch((error) => {
       // TODO: Handle error output to user, remove console.log
@@ -40,7 +40,7 @@ export default class Book extends Component{
     let availableSessions = [];
     let fullyBookedSessions = [];
 
-    this.fetchBookings()
+    this.fetchBookingsByCount()
       .then((fetchedBookings) => {
         for (let i = 0; i < fetchedBookings.length; i++) {
           let numberOfBookings = fetchedBookings[i].count;
@@ -71,30 +71,33 @@ export default class Book extends Component{
         if (fullyBookedSessions.length > 0) {
           console.log(fullyBookedSessions);
           this.setState({ fullyBookedSessions: fullyBookedSessions });
-          this.sortByDates();
+          this.sortByFullyBookedDates();
         }
       });
   }
 
-  sortByDates = () => {
+  sortByFullyBookedDates = () => {
     let fullyBookedSessions = this.state.fullyBookedSessions;
-    let fullyBookedDates = [];
-    const lastIndex = fullyBookedSessions.length -1;
+    let fullyBookedDates = this.findDuplicateDates(fullyBookedSessions);
     console.log(fullyBookedSessions);
-        
-    for (let i = 0; i < fullyBookedSessions.length; i++) {
-      if (i != lastIndex) {
-        for (let p = i + 1; p < fullyBookedSessions.length; p++) {
-          if (fullyBookedSessions[i].date === fullyBookedSessions[p].date) {
-            fullyBookedDates.push(fullyBookedSessions[i].date);
-          }
-        }
-      }
-    }
     if(fullyBookedDates.length > 0) {
       this.setState({ fullyBookedDates: fullyBookedDates });
       console.log(this.state.fullyBookedDates);
     }
+  }
+  findDuplicateDates = (array) => {
+    let duplicateDates = [];
+    const lastIndex = array.length -1;
+    for (let i = 0; i < array.length; i++) {
+      if (i != lastIndex) {
+        for (let p = i + 1; p < array.length; p++) {
+          if (array[i].date === array[p].date) {
+            duplicateDates.push(array[i].date);
+          }
+        }
+      }
+    }
+    return duplicateDates;
   }
   /** TODO:
    * This is a temporary (!) render to see what raw data comes out of db,
@@ -102,6 +105,7 @@ export default class Book extends Component{
    * */
   renderExistingBookings = () => {
     if(!this.state.existingBookings){
+      console.log(this.state.existingBookings);
       return;
     } else {
       return this.state.existingBookings.map((booking) => {
