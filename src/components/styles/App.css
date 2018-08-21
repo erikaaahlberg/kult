@@ -12,7 +12,7 @@
 #contactHeader {
   margin: 0;
   font-family: 'Circular-Black', sans-serif;
-  font-size: 5vw;
+  font-size: 4rem;
   color: #25252f;
   letter-spacing: .5rem;
   background: url(../images/stroke-zigzag-black.svg) bottom repeat-x;
