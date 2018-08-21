@@ -41,6 +41,9 @@ export default class Navbar extends Component {
             <Link to="/" onClick={ toggleMenu }>Hem</Link>
           </li>
           <li>
+            <Link to="/menu" onClick={ toggleMenu }>Meny</Link>
+          </li>
+          <li>
             <Link to="/book" onClick={ toggleMenu }>Boka</Link>
           </li>
           <li>
