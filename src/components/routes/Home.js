@@ -17,8 +17,7 @@ export default class Home extends Component {
     return (
       <React.Fragment>
         <div className="wrapper">
-
-          <h1>KULT</h1>
+          <h1 className="header">KULT</h1>
           <p>Det här är komponenten för landingssidan – jag finns i components/routes/Home.</p>
         </div>
         <div className={this.state.gdpr}>

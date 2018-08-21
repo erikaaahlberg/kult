@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import BookingForm from "../BookingForm";
 
-
 export default class Book extends Component{
   state = {
     existingBookings: [],

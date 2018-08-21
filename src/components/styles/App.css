@@ -1,6 +1,4 @@
-
-
-h1 {
+h1.header {
   margin: 0;
   font-family: 'Circular-Bold', sans-serif;
   font-size: 14vw;
@@ -15,19 +13,41 @@ p {
   letter-spacing: .05rem;
 }
 
+ul {
+  margin: 0;
+}
+
+li.navigation {
+  margin: 10px;
+  padding: 10px 20px;
+  color: #fff;
+  list-style: none;
+  background-color: #000;
+}
+
+li > a {
+  color: #fff;
+  text-decoration: none;
+}
+
 .navbarHidden {
   display: none;
 }
 
 .navbarVisible {
-  width: 100vw;
+  width: 30vw;
   height: 100vh;
-  background-color: #fff;
+  background-color: #ffdd3e;
   position: absolute;
   z-index: 2;
-  display: block;
-  -webkit-animation: slide-in-top 400ms cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	        animation: slide-in-top 400ms cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+	-webkit-animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 .wrapper {

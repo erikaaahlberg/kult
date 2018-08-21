@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import { Link } from "react-router-dom";
+import Hamburger from "./Hamburger";
 import "./styles/Navbar.css";
 import "./styles/Keyframes.css";
 
@@ -31,23 +32,19 @@ export default class Navbar extends Component {
   render(){
     return(
       <React.Fragment>
-        <div id="navIcon" className={this.state.toggleHamburger} onClick={this.toggleMenu}>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
+        <Hamburger className={this.state.toggleHamburger} handleChange={this.toggleMenu} />
         <ul className={this.state.toggleMenu}>
-          <li>
-            <Link to="/">Hem</Link>
+          <li className="navigation">
+            <Link to="/" onClick={this.toggleMenu}>Hem</Link>
           </li>
-          <li>
-            <Link to="/book">Boka</Link>
+          <li className="navigation">
+            <Link to="/book" onClick={this.toggleMenu}>Boka</Link>
           </li>
-          <li>
-            <Link to="/contact">Kontakt</Link>
+          <li className="navigation">
+            <Link to="/contact" onClick={this.toggleMenu}>Kontakt</Link>
           </li>
-          <li>
-            <Link to="/admin">Admin</Link>
+          <li className="navigation">
+            <Link to="/admin" onClick={this.toggleMenu}>Admin</Link>
           </li>
         </ul>
       </React.Fragment>
