@@ -52,11 +52,11 @@ export default class Book extends Component{
       <div>
         <h1>BOKA ETT BORD</h1>
         <BookingForm />
-        <h2>Nuvarande bokningar i databasen:</h2>
+        {/* <h2>Nuvarande bokningar i databasen:</h2>
         {this.state.existingBookings.length < 1 &&
           <p>Inga bokningar just nu.</p>
         }
-        {this.renderExistingBookings()}
+        {this.renderExistingBookings()} */}
       </div>
     )
   }

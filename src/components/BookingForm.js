@@ -45,7 +45,7 @@ export default function BookingForm(){
      </div>
       
 
-      <div className="contact">
+      {/* <div className="contact">
       <br/>
       <label htmlFor="create_name">Namn</label>
       <br/>
@@ -59,7 +59,7 @@ export default function BookingForm(){
       <br/>
       <input placeholder="+46 761234567" name="create_phone" id="create_phone" required/>
       <br/>
-      </div>
+      </div> */}
     </form>
   )
 }
