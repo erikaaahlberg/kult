@@ -48,7 +48,7 @@ export default class Calendar extends Component{
           name="create_date"
         />
         <br />
-        {/* <input hidden type="text" name="create_date" value={this.displayDate()} /> */}
+       {/* <input hidden type="text" name="create_date" value={this.displayDate()} /> */}
       </React.Fragment>
     )
   }
@@ -60,13 +60,13 @@ export default class Calendar extends Component{
     return(
       <React.Fragment>
         <DatePicker
-          inline
+          //inline
           dateFormat={'YYYY/MM/DD'}
           selected={this.state.startDate}
           onChange={this.handleChange}
         />
         <br />
-        <input type="text" name="create_date" value={this.displayDate()} />
+        {/* <input type="text" name="create_date" value={this.displayDate()} /> */}
       </React.Fragment>
     )
   }
