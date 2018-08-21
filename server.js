@@ -124,7 +124,7 @@ app.get('/api/bookings', (req, res) => {
 })*/
 
 
-app.get('/api/sessions', (req, res) => {
+app.get('/api/count', (req, res) => {
   const queryString = "SELECT date, session, COUNT(*) as count FROM bookings GROUP BY date, session";
 
   connection.query(queryString, (err, rows, fields) => {
