@@ -9,6 +9,16 @@
   background-size: auto .5rem;
 }
 
+#contactHeader {
+  margin: 0;
+  font-family: 'Circular-Black', sans-serif;
+  font-size: 5vw;
+  color: #25252f;
+  letter-spacing: .5rem;
+  background: url(../images/stroke-zigzag-black.svg) bottom repeat-x;
+  background-size: auto .5rem;
+}
+
 p {
   font-family: 'Apercu-Mono', monospace;
   font-size: .8rem;
