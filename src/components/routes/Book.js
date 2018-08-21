@@ -50,8 +50,7 @@ export default class Book extends Component{
   render(){
     return(
       <div>
-        <h1>Boka bord</h1>
-        <p>Det här är komponenten för bokningssidan – jag finns i components/routes/Book.</p>
+        <h1>BOKA ETT BORD</h1>
         <BookingForm />
         <h2>Nuvarande bokningar i databasen:</h2>
         {this.state.existingBookings.length < 1 &&
