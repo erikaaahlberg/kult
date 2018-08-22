@@ -3,7 +3,7 @@ const app = express();
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
 
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 const connection = mysql.createConnection({
   host: 'localhost',
@@ -17,12 +17,12 @@ app.listen(3001, () => {
 })
 
 app.post('/api/create_booking', (req, res) => {
-  const guests = req.body.create_guests;
-  const date = req.body.create_date;
-  const session = req.body.create_session;
-  const name = req.body.create_name;
-  const email = req.body.create_email;
-  const phone = req.body.create_phone;
+  const guests = req.body.guests;
+  const date = req.body.date;
+  const session = req.body.session;
+  const name = req.body.name;
+  const email = req.body.email;
+  const phone = req.body.phone;
 
   const queryString =
     `INSERT INTO bookings

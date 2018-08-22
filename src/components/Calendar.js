@@ -17,8 +17,13 @@ export default class Calendar extends Component{
       startDate: date,
     });
 
-    /** Component does not always recive this prop,
-    avoid errors by first checking if it exists. */
+    if(!setNewDateToState){
+      return;
+    } else {
+      // Sets the changed date to a parent-state that also needs it.
+      const newDate = this.formatDateString(date);
+      setNewDateToState(newDate);
+    }
     if(!fetchSelectedDate){
       return;
     } else {
