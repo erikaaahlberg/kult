@@ -4,10 +4,7 @@ import BookingForm from "../BookingForm";
 
 export default class Book extends Component{
   state = {
-    existingBookings: [],
-    availableSessions: [],
-    fullyBookedSessions: [],
-    fullyBookedDates: []
+    existingBookings: []
   }
 
   fetchAllBookings = () => {
@@ -22,83 +19,6 @@ export default class Book extends Component{
     });
   }
 
-  fetchBookingsByCount = () => {
-    return fetch('api/count')
-      .then((response) => response.json())
-        .then((fetchedBookings) => {
-          console.log(fetchedBookings);
-          return fetchedBookings;
-        })
-        .catch((error) => {
-          // TODO: Handle error output to user, remove console.log
-          console.log(error);
-        });
-  }
-
-  sortBySession = () => {
-    let numberOfBookings = 0;
-    let availableSessions = [];
-    let fullyBookedSessions = [];
-
-    this.fetchBookingsByCount()
-      .then((fetchedBookings) => {
-        for (let i = 0; i < fetchedBookings.length; i++) {
-          let numberOfBookings = fetchedBookings[i].count;
-          console.log(fetchedBookings[i].count);
-
-          if (numberOfBookings < 5) {
-            const tablesLeft = 5 - numberOfBookings;
-
-            availableSessions.push({
-              date: fetchedBookings[i].date,
-              session: fetchedBookings[i].session,
-              tablesLeft: tablesLeft
-            });
-          }
-          else if (numberOfBookings === 5) {
-            const tablesLeft = 5 - numberOfBookings;
-            fullyBookedSessions.push({
-              date: fetchedBookings[i].date,
-              session: fetchedBookings[i].session,
-              tablesLeft: tablesLeft
-            });
-          }
-        }
-        if (availableSessions.length > 0) {
-          console.log(availableSessions);
-          this.setState({ availableSessions: availableSessions });
-        }
-        if (fullyBookedSessions.length > 0) {
-          console.log(fullyBookedSessions);
-          this.setState({ fullyBookedSessions: fullyBookedSessions });
-          this.sortByFullyBookedDates();
-        }
-      });
-  }
-
-  sortByFullyBookedDates = () => {
-    let fullyBookedSessions = this.state.fullyBookedSessions;
-    let fullyBookedDates = this.findDuplicateDates(fullyBookedSessions);
-    console.log(fullyBookedSessions);
-    if(fullyBookedDates.length > 0) {
-      this.setState({ fullyBookedDates: fullyBookedDates });
-      console.log(this.state.fullyBookedDates);
-    }
-  }
-  findDuplicateDates = (array) => {
-    let duplicateDates = [];
-    const lastIndex = array.length -1;
-    for (let i = 0; i < array.length; i++) {
-      if (i != lastIndex) {
-        for (let p = i + 1; p < array.length; p++) {
-          if (array[i].date === array[p].date) {
-            duplicateDates.push(array[i].date);
-          }
-        }
-      }
-    }
-    return duplicateDates;
-  }
   /** TODO:
    * This is a temporary (!) render to see what raw data comes out of db,
    * this should not be shown here later. And maybe fetch elsewhere.
@@ -126,8 +46,6 @@ export default class Book extends Component{
 
   componentDidMount(){
     this.fetchAllBookings();
-    this.fetchBookingsByCount();
-    this.sortBySession();
   }
 
   render(){

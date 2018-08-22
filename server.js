@@ -72,7 +72,7 @@ app.all('/api/update_booking', (req, res) => {
     res.redirect('/admin');
   })
 });
-
+/*
 app.get('/api/bookings', (req, res) => {
   const queryString = "SELECT * FROM bookings WHERE id = ?";
   const bookingId = req.params.id;
@@ -99,7 +99,7 @@ app.get('/api/bookings', (req, res) => {
     res.json(bookings)
   })
 })
-
+*/
 app.get('/api/bookings/date/:date', (req, res) => {
   const queryString = "SELECT * FROM bookings WHERE date = ?";
   const date = req.params.date;
@@ -165,7 +165,7 @@ app.get('/api/count', (req, res) => {
       return;
     }
 
-    const numberOfSessions = rows.map((row) => {
+    const numberOfBookings = rows.map((row) => {
       return {
         date: row.date,
         session: row.session,

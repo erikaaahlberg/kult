@@ -5,7 +5,6 @@ import Navbar from "./components/Navbar";
 import Home from './components/routes/Home';
 import Contact from './components/routes/Contact';
 import Book from './components/routes/Book';
-import DatePicker from './components/input/DatePicker';
 import Admin from './components/routes/Admin';
 
 export default class App extends Component {
