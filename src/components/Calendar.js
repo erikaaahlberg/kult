@@ -9,6 +9,7 @@ import './styles/Datepicker.css';
 export default class Calendar extends Component{
   state = {
     startDate: moment(),
+    allBookings: [],
     availableSessions: [],
     fullyBookedSessions: [],
     fullyBookedDates: []
@@ -22,6 +23,9 @@ export default class Calendar extends Component{
       .then((response) => response.json())
         .then((fetchedBookings) => {
           console.log(fetchedBookings);
+          this.setState({
+            allBookings: fetchedBookings
+          });
           return fetchedBookings;
         })
         .catch((error) => {
@@ -41,27 +45,12 @@ export default class Calendar extends Component{
           let numberOfBookings = fetchedBookings[i].count;
           console.log(fetchedBookings[i].count);
 
-          if (numberOfBookings < 5) {
-            const tablesLeft = 5 - numberOfBookings;
-
-            availableSessions.push({
-              date: fetchedBookings[i].date,
-              session: fetchedBookings[i].session,
-              tablesLeft: tablesLeft
-            });
-          }
-          else if (numberOfBookings === 5) {
-            const tablesLeft = 5 - numberOfBookings;
+          if (numberOfBookings === 5) {
             fullyBookedSessions.push({
               date: fetchedBookings[i].date,
-              session: fetchedBookings[i].session,
-              tablesLeft: tablesLeft
+              session: fetchedBookings[i].session
             });
           }
-        }
-        if (availableSessions.length > 0) {
-          console.log(availableSessions);
-          this.setState({ availableSessions: availableSessions });
         }
         if (fullyBookedSessions.length > 0) {
           console.log(fullyBookedSessions);
@@ -94,15 +83,12 @@ export default class Calendar extends Component{
     return duplicateDates;
   }
 
-  findSessionForSelectedDate = () => {
-    console.log(this.reconstructDate());
-  }
-
   handleChange = (date) => {
     const { fetchSelectedDate } = this.props;
     this.setState({
       startDate: date
     });
+    this.findSessionForSelectedDate();
     /** Component does not always recive this prop,
     avoid errors by first checking if it exists. */
     if(!fetchSelectedDate){
@@ -122,6 +108,36 @@ export default class Calendar extends Component{
     return date.toLocaleDateString().split('-').join('/');
   }
 
+  removeFromArray = (array, value) => {
+    return array.filter(e => e !== value);
+  }
+
+  findSessionForSelectedDate = () => {
+    console.log(this.state.fullyBookedSessions);
+    let sessionsLeft = ['18.00', '21.00'];
+    const selectedDate = this.reconstructDate();for (let i = 0; i < this.state.fullyBookedSessions.length; i++) {
+      console.log(this.state.fullyBookedSessions[i].date);
+      console.log(selectedDate);
+      if (selectedDate === this.state.fullyBookedSessions[i].date) {
+        console.log('tjenare');
+        sessionsLeft = this.removeFromArray(sessionsLeft,  this.state.fullyBookedSessions[i].session);
+      }
+    }
+    console.log(sessionsLeft);
+    this.setState({
+      availableSessions: sessionsLeft
+    });
+    /*const allBookings = this.fetchBookingsByCount()
+    .then((fetchedBookings) => {
+      console.log(selectedDate);
+      
+      }
+    })
+    const found = this.state.allBookings.find(function(date) {
+      return date === selectedDate;
+    });
+    console.log(found);*/
+  }
 
   renderRegularDatePicker = () => {
     return(
