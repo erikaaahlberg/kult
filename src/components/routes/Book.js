@@ -50,7 +50,9 @@ export default class Book extends Component{
       body: JSON.stringify(newBooking)
     })
     .then((response) => {
-      console.log(response); // TODO: Tell the user thar booking is confirmed! Show this somehow.
+      if(response.ok){
+        console.log('Booking added!') // TODO: Tell the user thar booking is confirmed! Show this somehow.
+      }
     }).catch((error) => {
       console.log(error); // TODO: Handle error output to user, remove console.log
     });
