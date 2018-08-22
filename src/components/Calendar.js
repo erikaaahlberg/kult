@@ -35,29 +35,26 @@ export default class Calendar extends Component{
   }
 
   sortBySession = () => {
+    const allBookings = this.state.allBookings;
     let numberOfBookings = 0;
-    let availableSessions = [];
     let fullyBookedSessions = [];
 
-    this.fetchBookingsByCount()
-      .then((fetchedBookings) => {
-        for (let i = 0; i < fetchedBookings.length; i++) {
-          let numberOfBookings = fetchedBookings[i].count;
-          console.log(fetchedBookings[i].count);
+    for (let i = 0; i < allBookings.length; i++) {
+      let numberOfBookings = allBookings[i].count;
+      console.log(allBookings[i].count);
 
-          if (numberOfBookings === 5) {
-            fullyBookedSessions.push({
-              date: fetchedBookings[i].date,
-              session: fetchedBookings[i].session
-            });
-          }
-        }
-        if (fullyBookedSessions.length > 0) {
-          console.log(fullyBookedSessions);
-          this.setState({ fullyBookedSessions: fullyBookedSessions });
-          this.sortByFullyBookedDates();
-        }
-      });
+      if (numberOfBookings === 5) {
+        fullyBookedSessions.push({
+          date: allBookings[i].date,
+          session: allBookings[i].session
+        });
+      }
+    }
+    if (fullyBookedSessions.length > 0) {
+      console.log(fullyBookedSessions);
+      this.setState({ fullyBookedSessions: fullyBookedSessions });
+      this.sortByFullyBookedDates();
+    }
   }
 
   sortByFullyBookedDates = () => {
