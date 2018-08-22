@@ -11,11 +11,11 @@ export default class Calendar extends Component{
   }
 
   handleChange = (date) => {
-    const { fetchSelectedDate } = this.props;
-
     this.setState({
       startDate: date,
     });
+
+    const { fetchSelectedDate, setNewDateToState } = this.props;
 
     if(!setNewDateToState){
       return;
@@ -24,12 +24,13 @@ export default class Calendar extends Component{
       const newDate = this.formatDateString(date);
       setNewDateToState(newDate);
     }
+
     if(!fetchSelectedDate){
+      // This function has not been passed along as props.
       return;
     } else {
-      let formattedDateString = moment(date).format('YYYY/MM/DD');
-      // Replace "/" in path so url will send correct date-format to route
-      let encodedDate = encodeURIComponent(formattedDateString);
+      const formattedDateString = this.formatDateString(date);
+      const encodedDate = encodeURIComponent(formattedDateString);
       fetchSelectedDate(encodedDate);
     }
   }
