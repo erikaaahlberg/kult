@@ -32,17 +32,13 @@ app.post('/api/create_booking', (req, res) => {
   connection.query(queryString, [guests, date, session, name, email, phone], (err, results, fields) => {
     if(err){
       console.log('Failed to add booking: ' + err);
-      res.sendStatus(500) // Show user internal server error
+      res.sendStatus(500)
       res.end();
       return;
     }
-    /** Reload to book page, Book component (in routes-folder)
-     * will mount again and fetch the new booking */
-    res.redirect('/book');
   })
 });
 
-// TODO: Currently only getting here with app.all but should be able to use app.put()?
 app.all('/api/update_booking', (req, res) => {
   const id = req.body.id;
   const date = req.body.update_date;
