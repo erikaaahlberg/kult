@@ -10,6 +10,10 @@ export default class Calendar extends Component{
     startDate: moment(),
   }
 
+  formatDateString = (unformatted) => {
+    return moment(unformatted).format('YYYY/MM/DD');
+  }
+
   handleChange = (date) => {
     this.setState({
       startDate: date,
@@ -35,12 +39,6 @@ export default class Calendar extends Component{
     }
   }
 
-  displayDate = () => {
-    const date = new Date(this.state.startDate);
-    return date.toLocaleDateString().split('-').join('/');
-  }
-
-
   renderRegularDatePicker = () => {
     return(
       <React.Fragment>
@@ -54,7 +52,7 @@ export default class Calendar extends Component{
           name="create_date"
         />
         <br />
-        <input hidden type="text" name="create_date" value={this.displayDate()} />
+        <input hidden type="text" name="create_date" readOnly value={this.formatDateString(this.state.startDate)} />
       </React.Fragment>
     )
   }
@@ -72,7 +70,7 @@ export default class Calendar extends Component{
           onChange={this.handleChange}
         />
         <br />
-        <input type="text" name="create_date" value={this.displayDate()} />
+        <input type="text" name="update_date" readOnly value={this.formatDateString(this.state.startDate)} />
       </React.Fragment>
     )
   }
