@@ -39,14 +39,14 @@ app.post('/api/create_booking', (req, res) => {
   })
 });
 
-app.all('/api/update_booking', (req, res) => {
+app.put('/api/update_booking', (req, res) => {
+  const date = req.body.date;
+  const guests = req.body.guests;
+  const session = req.body.session;
+  const name = req.body.name;
+  const email = req.body.email;
+  const phone = req.body.phone;
   const id = req.body.id;
-  const date = req.body.update_date;
-  const guests = req.body.update_guests;
-  const session = req.body.update_session;
-  const name = req.body.update_name;
-  const email = req.body.update_email;
-  const phone = req.body.update_phone;
 
   const queryString =
     `UPDATE bookings
@@ -60,13 +60,9 @@ app.all('/api/update_booking', (req, res) => {
       res.end();
       return;
     }
-    /** TODO:
-     * Redirecting will unmount and mount admin comp again,
-     * which renders current date. So if you edited another date,
-     * you have to use the datepicker to see your updates. How to fix?
-     */
-    res.redirect('/admin');
   })
+
+  res.end();
 });
 
 app.get('/api/bookings', (req, res) => {

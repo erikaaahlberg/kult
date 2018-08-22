@@ -7,7 +7,7 @@ import SingleEditableBooking from '../SingleEditableBooking';
 export default class Admin extends Component{
 
   state = {
-    selectedDate: moment(),
+    selectedDate: moment().format('YYYY/MM/DD'),
     bookingsOnSelectedDate: [],
     selectedId: null,
     selectedBooking: {
@@ -22,7 +22,6 @@ export default class Admin extends Component{
   }
 
   fetchSelectedDate = (date) => {
-    this.setState({selectedDate: date})
     fetch(`/api/bookings/date/${date}`)
     .then(response => response.json())
     .then((bookingsOnSelectedDate) => {
@@ -34,15 +33,45 @@ export default class Admin extends Component{
     });
   }
 
-  formatAndFetchDate = () => {
-    let formattedDateString = this.state.selectedDate.format('YYYY/MM/DD');
-    let encodedDate = encodeURIComponent(formattedDateString);
-    this.fetchSelectedDate(encodedDate);
+  updateSelectedBooking = (event) => {
+    event.preventDefault();
+    const { selectedBooking } = this.state;
+
+    const requestBody = {
+      date: selectedBooking.date,
+      guests: selectedBooking.guests,
+      session: selectedBooking.session,
+      name: selectedBooking.name,
+      email: selectedBooking.email,
+      phone: selectedBooking.phone,
+      id: selectedBooking.id
+    }
+
+    fetch('/api/update_booking', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'PUT',
+      body: JSON.stringify(requestBody)
+    })
+    .then(() => {
+      let date = this.encodedDate()
+      this.fetchSelectedDate(date)
+      this.setState({selectedId: null})
+    })
+    .catch((error) => {
+      console.log(error); // TODO: Handle error output to user, remove console.log
+    });
   }
 
   componentDidMount(){
-    localStorage.clear()
-    this.formatAndFetchDate();
+    let date = this.encodedDate()
+    this.fetchSelectedDate(date);
+  }
+
+  encodedDate = () => {
+    let selectedDate = this.state.selectedDate;
+    return encodeURIComponent(selectedDate);
   }
 
   selectBookingToEdit = (booking) => {
@@ -59,6 +88,10 @@ export default class Admin extends Component{
       selectedId: booking.id,
       selectedDate: booking.date,
     })
+  }
+
+  setNewDateToState = (date) => {
+    this.setState({ selectedDate: date })
   }
 
   updateSelectedBookingInState = (event) => {
@@ -133,6 +166,7 @@ export default class Admin extends Component{
               key={selectedBooking.id}
               selectedBooking={selectedBooking}
               updateSelectedBookingInState={this.updateSelectedBookingInState}
+              updateSelectedBooking={this.updateSelectedBooking}
             />
           )
         }
@@ -151,7 +185,11 @@ export default class Admin extends Component{
     return(
       <div>
         <h1>Administratör</h1>
-        <Calendar showAdminCalendar={true} fetchSelectedDate={this.fetchSelectedDate}/>
+        <Calendar
+          showAdminCalendar={true}
+          setNewDateToState={this.setNewDateToState}
+          fetchSelectedDate={this.fetchSelectedDate}
+        />
         {this.renderBookings()}
       </div>
     )

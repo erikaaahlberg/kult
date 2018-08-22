@@ -1,9 +1,9 @@
 import React from "react";
 
 export default function SingleEditableBooking(props){
-  const { updateSelectedBookingInState, selectedBooking } = props;
+  const { updateSelectedBookingInState, updateSelectedBooking, selectedBooking } = props;
   return(
-    <form action="/api/update_booking/" method="POST">
+    <div>
       <h2>Bokning:</h2>
       <p>
         <label htmlFor="update_date">Datum:</label>
@@ -66,11 +66,12 @@ export default function SingleEditableBooking(props){
       </p>
       <input
         value={selectedBooking.id}
+        readOnly
         name="id"
         hidden={true}
         id="id"
       />
-      <button type="submit">Klar</button>
-    </form>
+      <button onClick={updateSelectedBooking} type="submit">Klar</button>
+    </div>
   )
 };
