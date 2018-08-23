@@ -1,0 +1,50 @@
+#homeHeader {
+  margin: 0;
+  font-family: 'Circular-Black', sans-serif;
+  font-size: 14vw;
+  color: #25252f;
+  letter-spacing: .5rem;
+  text-align: center;
+  background: url(../images/stroke-zigzag-black.svg) bottom repeat-x;
+  background-size: auto .5rem;
+}
+
+.smallHeader {
+  margin: 0;
+  font-family: 'Circular-Black', sans-serif;
+  font-size: 4rem;
+  color: #25252f;
+  letter-spacing: .5rem;
+  background: url(../images/stroke-zigzag-black.svg) bottom repeat-x;
+  background-size: auto .5rem;
+}
+
+p {
+  font-family: 'Apercu-Mono', monospace;
+  font-size: .8rem;
+  color: #25252f;
+  text-align: center;
+  line-height: 1.2rem;
+  letter-spacing: .05rem;
+}
+
+.homeWrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+::selection {
+  background: #ffdd3e;
+}
