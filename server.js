@@ -21,7 +21,7 @@ app.get('/api/bookings', (req, res) => {
 
   connection.query(queryString, (err, rows, fields) => {
     if (err) {
-      console.log('Failed to get all bookings ' + err);
+      console.log('Failed to get all bookings: ' + err);
       res.sendStatus(500) // Show user internal server error
       res.end();
       return;
@@ -48,7 +48,7 @@ app.get('/api/bookings/date/:date', (req, res) => {
 
   connection.query(queryString, [date], (err, rows, fields) => {
     if (err) {
-      console.log('Failed to query for booking: ' + err);
+      console.log('Failed to query for booking selected date: ' + err);
       res.sendStatus(500) // Show user internal server error
       res.end();
       return;
@@ -84,7 +84,7 @@ app.post('/api/create_booking', (req, res) => {
 
   connection.query(queryString, [guests, date, session, name, email, phone], (err, results, fields) => {
     if(err){
-      console.log('Failed to add booking: ' + err);
+      console.log('Failed to create new booking: ' + err);
       res.sendStatus(500)
       res.end();
       return;
