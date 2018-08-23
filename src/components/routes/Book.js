@@ -124,8 +124,8 @@ export default class Book extends Component{
   render(){
     return(
       <div className="wrapper">
-        <h1 className="smallHeader">Boka bord</h1>
-        <p>Det här är komponenten för bokningssidan – jag finns i components/routes/Book.</p>
+        <h1 className="smallHeader">BOKA BORD</h1>
+        <p>Ha så kult på restaurangen!</p>
         <BookingForm
           setBookingToState={this.setBookingToState}
           setNewDateToState={this.setNewDateToState}

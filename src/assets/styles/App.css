@@ -23,6 +23,8 @@ p {
   font-family: 'Apercu-Mono', monospace;
   font-size: .8rem;
   color: #25252f;
+  text-align: center;
+  line-height: 1.2rem;
   letter-spacing: .05rem;
 }
 

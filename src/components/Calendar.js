@@ -150,7 +150,6 @@ export default class Calendar extends Component{
     return(
       <React.Fragment>
         <DatePicker
-          //inline
           locale="sv"
           minDate={moment()}
           dateFormat={'YYYY/MM/DD'}
@@ -159,8 +158,8 @@ export default class Calendar extends Component{
           excludeDates = {this.props.fullyBooked}
           name="create_date"
         />
-        <br />
-        <input hidden type="text" name="create_date" readOnly value={this.formatDateString(this.state.startDate)} />
+        {/* <br />
+        <input hidden type="text" name="create_date" readOnly value={this.formatDateString(this.state.startDate)} /> */}
       </React.Fragment>
     )
   }
