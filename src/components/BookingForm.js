@@ -1,6 +1,7 @@
 import React from "react";
 import 'react-datepicker/dist/react-datepicker.css';
 import Calendar from "./Calendar";
+import "../assets/styles/Booking.css";
 import clock from "../assets/images/clock.png";
 import calendar from"../assets/images/calendar.svg";
 import persons from"../assets/images/person.png";
