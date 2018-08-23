@@ -40,6 +40,25 @@ export default function BookingForm(){
         <option value="4">4</option>
       </select>
       </div>
+      <div class="infos">
+        <p>Fyll i dina kontaktuppgifter</p>
+        </div>
+      <div className="contact">
+      
+      <br/>
+      <label htmlFor="create_name"></label>
+      <br/>
+      <input placeholder="Namn" name="create_name" id="create_name"/>
+      <br/>
+      <label htmlFor="create_email"></label>
+      <br/>
+      <input placeholder="Email" name="create_email" id="create_email"/>
+      <br/>
+      <label htmlFor="create_phone"></label>
+      <br/>
+      <input placeholder="Telefon" name="create_phone" id="create_phone" required/>
+      <br/>
+      </div>
 
       <div className="bookbutton">
       <button className="findtable" type="submit">BOKA BORD</button>
@@ -47,24 +66,6 @@ export default function BookingForm(){
       <br />
       <br />
 
-      <div className="contact">
-      <p>Not sure how this below is going to be shown </p>
-      <br/>
-      <p>Succesfull search<br/>
-      Please fill in your contact info</p>
-      <label htmlFor="create_name"><p>Namn</p></label>
-      <br/>
-      <input placeholder="Kult Svensson" name="create_name" id="create_name"/>
-      <br/>
-      <label htmlFor="create_email"><p>E-mail</p></label>
-      <br/>
-      <input placeholder="kult@gmail.com" name="create_email" id="create_email"/>
-      <br/>
-      <label htmlFor="create_phone"><p>Phone</p></label>
-      <br/>
-      <input placeholder="+46 761234567" name="create_phone" id="create_phone" required/>
-      <br/>
-      </div>
     </form>
   )
 }
