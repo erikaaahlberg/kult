@@ -17,10 +17,10 @@ export default class Book extends Component{
   }
 
   componentDidMount(){
-    this.fetchBookings();
+    this.fetchAllBookings();
   }
 
-  fetchBookings = () => {
+  fetchAllBookings = () => {
     fetch('/api/bookings')
       .then(response => response.json())
       .then((existingBookings) => {

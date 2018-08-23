@@ -1,9 +1,11 @@
 import React from "react";
 import 'react-datepicker/dist/react-datepicker.css';
 import Calendar from "./Calendar";
+import Selector from "./Form/Selector";
 
 export default function BookingForm(props){
   const { createNewBooking, setBookingToState, setNewDateToState } = props;
+  const tempArray = ['18:00', '21:00'];
   return(
     <div>
      <label htmlFor="create_guests">Antal gäster</label>
@@ -17,10 +19,7 @@ export default function BookingForm(props){
       <br />
       <label htmlFor="create_session">Sittning</label>
       <br/>
-      <select name="create_session" onChange={setBookingToState}>
-        <option value="18:00">18:00</option>
-        <option value="21:00">21:00</option>
-      </select>
+      <Selector name={'create_session'} availableSessions={tempArray} setBookingToState={setBookingToState} />
       <br />
       <label htmlFor="create_date">Välj datum</label>
       <br />

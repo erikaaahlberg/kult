@@ -69,6 +69,28 @@ app.get('/api/bookings/date/:date', (req, res) => {
   })
 })
 
+app.get('/api/count', (req, res) => {
+  const queryString = "SELECT date, session, COUNT(*) as count FROM bookings GROUP BY date, session";
+
+  connection.query(queryString, (err, rows, fields) => {
+    if (err) {
+      console.log('Failed to get all bookings ' + err);
+      res.sendStatus(500) // Show user internal server error
+      res.end();
+      return;
+    }
+
+    const numberOfBookings = rows.map((row) => {
+      return {
+        date: row.date,
+        session: row.session,
+        count: row.count
+      }
+    })
+    res.json(rows)
+  })
+})
+
 app.post('/api/create_booking', (req, res) => {
   const guests = req.body.guests;
   const date = req.body.date;
