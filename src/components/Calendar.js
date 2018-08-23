@@ -23,6 +23,10 @@ export default class Calendar extends Component{
     this.fetchBookingsByCount();
   }
 
+  formatDateString = (unformatted) => {
+    return moment(unformatted).format('YYYY/MM/DD');
+  }
+
   fetchBookingsByCount = () => {
     return fetch('api/count')
       .then((response) => response.json())
@@ -38,10 +42,6 @@ export default class Calendar extends Component{
           // TODO: Handle error output to user, remove console.log
           console.log(error);
         });
-  }
-
-  formatDateString = (unformatted) => {
-    return moment(unformatted).format('YYYY/MM/DD');
   }
 
   sortBySession = () => {
@@ -90,28 +90,6 @@ export default class Calendar extends Component{
     return duplicateDates;
   }
 
-  handleChange = (date) => {
-    const { fetchSelectedDate, setNewDateToState } = this.props;
-    this.findSessionForSelectedDate();
-
-    this.setState({
-      startDate: date,
-    });
-
-    /** Component does not always recive these props,
-    avoid errors by first checking if it exists. */
-    if(setNewDateToState){
-      // Sets the changed date to a parent-state that also needs it.
-      const newDate = this.formatDateString(date);
-      setNewDateToState(newDate);
-    }
-    if(fetchSelectedDate) {
-      const formattedDateString = this.formatDateString(date);
-      const encodedDate = encodeURIComponent(formattedDateString);
-      fetchSelectedDate(encodedDate);
-    }
-  }
-
   removeFromArray = (array, value) => {
     return array.filter(e => e !== value);
   }
@@ -146,71 +124,82 @@ export default class Calendar extends Component{
     console.log(found);*/
   }
 
-  renderRegularDatePicker = () => {
+
+  handleChange = (date) => {
+    /**
+     * Import functions recived as props,
+     * setNewDateToState sets state to parent,
+     * which can be either Admin or Book.
+     */
+    const { fetchSelectedDate, setNewDateToState } = this.props;
+
+    this.findSessionForSelectedDate();
+
+    this.setState({
+      startDate: date,
+    });
+
+    /** Component does not always recive these props,
+    avoid errors by first checking if it exists. */
+    if(setNewDateToState){
+      const newDate = this.formatDateString(date);
+      setNewDateToState(newDate);
+    }
+    if(fetchSelectedDate) {
+      const formattedDateString = this.formatDateString(date);
+      const encodedDate = encodeURIComponent(formattedDateString);
+      fetchSelectedDate(encodedDate);
+    }
+  }
+
+  renderBookingDatePicker = () => {
+    const { startDate } = this.state;
+    const { fullyBooked } = this.props;
     return(
       <React.Fragment>
         <DatePicker
           locale="sv"
           minDate={moment()}
           dateFormat={'YYYY/MM/DD'}
-          selected={this.state.startDate}
+          selected={startDate}
           onChange={this.handleChange}
-          excludeDates = {this.props.fullyBooked}
-          name="create_date"
+          excludeDates={fullyBooked}
         />
-        {/* <br />
-        <input hidden type="text" name="create_date" readOnly value={this.formatDateString(this.state.startDate)} /> */}
       </React.Fragment>
     )
   }
 
-  renderSessionInput = () => {
-    return(
-      <React.Fragment>
-        <label htmlFor="create_session">Sittning</label>
-        <br/>
-        <Selector name = "create_session" availableSessions = {this.state.availableSessions}/>
-      </React.Fragment>
-    )
-  }
   /** Admin datepicker does not have a minDate, since admin
    * should be able to select bookings from past dates.
   */
   renderAdminDatePicker = () => {
+    const { startDate } = this.state;
     return(
       <React.Fragment>
         <DatePicker
           //inline
           dateFormat={'YYYY/MM/DD'}
-          selected={this.state.startDate}
+          selected={startDate}
           onChange={this.handleChange}
-          excludeDates = {this.props.fullyBooked}
         />
-        <br />
-        <input type="text" name="update_date" readOnly value={this.formatDateString(this.state.startDate)} />
       </React.Fragment>
     )
   }
 
-  /** TODO:
-   * Make comp accept array of excluded/highlighted dates (send in as props)
-   * Make dates before today unselectable (min date range or something/use monment, see docs)
-  */
   render(){
     const { showAdminCalendar } = this.props;
     return(
       <React.Fragment>
-       {!showAdminCalendar &&
-        <React.Fragment>
-        {this.renderRegularDatePicker()}
-        {/* {this.renderSessionInput()} */}
-        </React.Fragment>
-       }
-       {showAdminCalendar &&
-        <React.Fragment>
-        {this.renderAdminDatePicker()}
-        </React.Fragment>
-       }
+        {showAdminCalendar &&
+          <React.Fragment>
+            {this.renderAdminDatePicker()}
+          </React.Fragment>
+        }
+        {!showAdminCalendar &&
+          <React.Fragment>
+            {this.renderBookingDatePicker()}
+          </React.Fragment>
+        }
       </React.Fragment>
     )
   }
