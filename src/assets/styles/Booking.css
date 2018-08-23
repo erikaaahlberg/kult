@@ -52,7 +52,7 @@ select {
   margin-left: 0;
 }
 
-button {
+.bookButton {
   margin: 20px 0 0 0;
   padding: 0;
   width: 165px;
@@ -69,7 +69,7 @@ button {
   transition: background-color 400ms;
 }
 
-button:hover {
+.bookButton:hover {
   background-color: #25252f;
   color: #fff;
 }

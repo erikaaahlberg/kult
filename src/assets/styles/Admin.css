@@ -1,0 +1,19 @@
+.adminHeader {
+  margin: 0;
+}
+
+.adminParagraph {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.bookingContainer {
+  margin-bottom: 10px;
+  padding: 20px;
+  width: 300px;
+  background-color: #f0f0f0;
+  border-radius: 15px;
+}
+
+.bookingHeader {
+  margin: 0;
+}

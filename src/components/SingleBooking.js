@@ -3,14 +3,21 @@ import React from "react";
 export default function SingleEditableBooking(props){
   const { booking, selectBookingToEdit } = props;
   return(
-    <div key={booking.id}>
-      <h2>Bokning: </h2>
-      <p>Datum: {booking.date}</p>
-      <p>Antal personer: {booking.guests}</p>
-      <p>Sittning: {booking.session}</p>
-      <p>Bokat av: {booking.name}</p>
-      <p>E-mail: {booking.email}</p>
-      <p>Telefon: {booking.phone}</p>
+    <div className="bookingContainer" key={booking.id}>
+      <h2 className="bookingHeader">Bokning: </h2>
+        <p className="adminParagraph">
+          <strong>Datum:</strong> {booking.date}
+          <br />
+          <strong>Antal personer:</strong> {booking.guests}
+          <br />
+          <strong>Sittning:</strong> {booking.session}
+          <br />
+          <strong>Bokat av:</strong> {booking.name}
+          <br />
+          <strong>E-mail:</strong> {booking.email}
+          <br />
+          <strong>Telefon:</strong> {booking.phone}
+        </p>
       <button onClick={() => {selectBookingToEdit(booking)}}>Redigera</button>
     </div>
   )

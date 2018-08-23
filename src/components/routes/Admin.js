@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import moment from "moment";
+import "../../assets/styles/Admin.css";
 import Calendar from "../Calendar";
 import SingleBooking from '../SingleBooking';
 import SingleEditableBooking from '../SingleEditableBooking';
@@ -209,7 +210,7 @@ export default class Admin extends Component{
   render(){
     return(
       <div>
-        <h1>Administratör</h1>
+        <h1 className="adminHeader">Administratör</h1>
         <Calendar
           showAdminCalendar={true}
           setNewDateToState={this.setNewDateToState}
