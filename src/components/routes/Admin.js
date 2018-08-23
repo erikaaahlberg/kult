@@ -63,6 +63,31 @@ export default class Admin extends Component{
     });
   }
 
+
+  deleteSelectedBooking = (event) => {
+    event.preventDefault();
+    const { selectedBooking } = this.state;
+    const requestBody = {
+      id: selectedBooking.id
+    }
+
+    fetch('/api/delete_booking', {
+      headers: { 'Content-Type': 'application/json' },
+      method: 'DELETE',
+      body: JSON.stringify(requestBody)
+    })
+    .then(() => {
+      let date = this.encodedDate()
+      // Fetch the selected date's bookings again, with new values.
+      this.fetchSelectedDate(date)
+      // Reset selected id so all bookings render as editable again.
+      this.setState({selectedId: null})
+    })
+    .catch((error) => {
+      console.log(error); // TODO: Handle error output to user, remove console.log
+    });
+  }
+
   componentDidMount(){
     let date = this.encodedDate()
     this.fetchSelectedDate(date);
@@ -166,6 +191,7 @@ export default class Admin extends Component{
               selectedBooking={selectedBooking}
               updateSelectedBookingInState={this.updateSelectedBookingInState}
               updateSelectedBooking={this.updateSelectedBooking}
+              deleteSelectedBooking={this.deleteSelectedBooking}
             />
           )
         }

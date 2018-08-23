@@ -1,7 +1,12 @@
 import React from "react";
 
 export default function SingleEditableBooking(props){
-  const { updateSelectedBookingInState, updateSelectedBooking, selectedBooking } = props;
+  const {
+    updateSelectedBookingInState,
+    updateSelectedBooking,
+    deleteSelectedBooking,
+    selectedBooking
+  } = props;
   return(
     <div>
       <h2>Bokning:</h2>
@@ -70,6 +75,7 @@ export default function SingleEditableBooking(props){
         hidden={true}
         id="id"
       />
+      <button onClick={deleteSelectedBooking} type="submit">Delete</button>
       <button onClick={updateSelectedBooking} type="submit">Klar</button>
     </div>
   )
