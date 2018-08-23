@@ -5,9 +5,6 @@ import clock from "./images/clock.png";
 import calendar from"./images/calendar.svg";
 import persons from"./images/person.png";
 
-
-
-
 export default function BookingForm(){
   return(
     

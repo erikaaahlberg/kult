@@ -9,7 +9,7 @@
   background-size: auto .5rem;
 }
 
-#smallHeader {
+.smallHeader {
   margin: 0;
   font-family: 'Circular-Black', sans-serif;
   font-size: 4rem;
