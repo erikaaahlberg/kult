@@ -1,69 +1,43 @@
 import React from "react";
 import 'react-datepicker/dist/react-datepicker.css';
 import Calendar from "./Calendar";
-import "../assets/styles/Booking.css";
-import clock from "../assets/images/clock.png";
-import calendar from"../assets/images/calendar.svg";
-import persons from"../assets/images/person.png";
+// import "../assets/styles/Booking.css";
+// import clock from "../assets/images/clock.png";
+// import calendar from"../assets/images/calendar.svg";
+// import persons from"../assets/images/person.png";
+import Selector from "./Form/Selector";
 
-export default function BookingForm(){
+export default function BookingForm(props){
+  const { createNewBooking, setBookingToState, setNewDateToState } = props;
+  const tempArray = ['18:00', '21:00'];
   return(
     
-    <form action="/api/create_booking/" method="POST">
-    <div className="bookings">
-    <label htmlFor="create_date"></label>
-    <div className="box">
-    <img className="icons"src={calendar} alt="calendar"/>
-    </div>
-    <Calendar/>
-    <label htmlFor="create_session"></label>
-    <div className="box">
-    <img className="icons"src={clock} alt="clock"/>
-    </div>
-      <select name="create_session">
-        <option value="18:00">18:00</option>
-        <option value="21:00">21:00</option>
-      </select>
-     <label htmlFor="create_guests"></label>
-     <div className="box">
-     <img className="icons"src={persons} alt="persons"/>
-     </div>
+    <React.Fragment>
+      <label htmlFor="create_date">Välj datum</label>
+      <Calendar setNewDateToState={setNewDateToState}/>
 
-      <br />
+      <label htmlFor="create_session">Sittning</label>
+      <Selector name={'create_session'} availableSessions={tempArray} setBookingToState={setBookingToState} />
 
-      <select name="create_guests">
+      <label htmlFor="create_guests">Antal personer</label>
+      <select name="create_guests" onChange={setBookingToState}>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
         <option value="4">4</option>
       </select>
-      </div>
-      <div class="infos">
-        <p>Fyll i dina kontaktuppgifter</p>
-        </div>
-      <div className="contact">
       
       <br/>
-      <label htmlFor="create_name"></label>
-      <br/>
-      <input placeholder="Namn" name="create_name" id="create_name"/>
-      <br/>
-      <label htmlFor="create_email"></label>
-      <br/>
-      <input placeholder="Email" name="create_email" id="create_email"/>
-      <br/>
-      <label htmlFor="create_phone"></label>
-      <br/>
-      <input placeholder="Telefon" name="create_phone" id="create_phone" required/>
-      <br/>
-      </div>
+      <label htmlFor="create_name">Namn</label>
+      <input placeholder="Kult Svensson" onChange={setBookingToState} name="create_name" id="create_name" required />
 
-      <div className="bookbutton">
-      <button className="findtable" type="submit">BOKA BORD</button>
-     </div>
-      <br />
-      <br />
+      <label htmlFor="create_email">E-mail</label>
+      <input placeholder="kult@gmail.com" onChange={setBookingToState} name="create_email" id="create_email" required />
 
-    </form>
+      <label htmlFor="create_phone">Telefon</label>
+      <input placeholder="+46 761234567" onChange={setBookingToState} name="create_phone" id="create_phone" required />
+
+      <button onClick={createNewBooking} type="submit">Boka</button>
+    </React.Fragment>
   )
 }
