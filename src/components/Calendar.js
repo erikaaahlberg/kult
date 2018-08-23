@@ -15,17 +15,19 @@ export default class Calendar extends Component{
     fullyBookedSessions: [],
     fullyBookedDates: []
   }
+
   componentDidMount() {
     /*this.setState({
       availableSessions: ['18.00', '21.00']
     });*/
     this.fetchBookingsByCount();
   }
+
   fetchBookingsByCount = () => {
     return fetch('api/count')
       .then((response) => response.json())
         .then((fetchedBookings) => {
-          console.log(fetchedBookings);
+          // console.log(fetchedBookings);
           this.setState({
             allBookings: fetchedBookings
           });
@@ -38,6 +40,10 @@ export default class Calendar extends Component{
         });
   }
 
+  formatDateString = (unformatted) => {
+    return moment(unformatted).format('YYYY/MM/DD');
+  }
+
   sortBySession = () => {
     const allBookings = this.state.allBookings;
     let numberOfBookings = 0;
@@ -45,7 +51,7 @@ export default class Calendar extends Component{
 
     for (let i = 0; i < allBookings.length; i++) {
       let numberOfBookings = allBookings[i].count;
-      console.log(allBookings[i].count);
+      // console.log(allBookings[i].count);
 
       if (numberOfBookings === 5) {
         fullyBookedSessions.push({
@@ -55,7 +61,7 @@ export default class Calendar extends Component{
       }
     }
     if (fullyBookedSessions.length > 0) {
-      console.log(fullyBookedSessions);
+      // console.log(fullyBookedSessions);
       this.setState({ fullyBookedSessions: fullyBookedSessions });
       this.sortByFullyBookedDates();
     }
@@ -85,29 +91,25 @@ export default class Calendar extends Component{
   }
 
   handleChange = (date) => {
-    const { fetchSelectedDate } = this.props;
+    const { fetchSelectedDate, setNewDateToState } = this.props;
     this.findSessionForSelectedDate();
-    /** Component does not always recive this prop,
-    avoid errors by first checking if it exists. */
-    if(!fetchSelectedDate){
-      return;
-    } else {
-      let formattedDateString = moment(date).format('YYYY/MM/DD');
-      // Replace "/" in path so url will send correct date-format to route
-      let encodedDate = encodeURIComponent(formattedDateString);
-      this.setState({
-        startDate: this.reconstructDate()
-      });
-      console.log(this.state.startDate);
-      /*console.log(encodedDate);
-      fetchSelectedDate(encodedDate);*/
-      this.findSessionForSelectedDate();
-    }
-  }
 
-  reconstructDate = () => {
-    const date = new Date(this.state.startDate);
-    return date.toLocaleDateString().split('-').join('/');
+    this.setState({
+      startDate: date,
+    });
+
+    /** Component does not always recive these props,
+    avoid errors by first checking if it exists. */
+    if(setNewDateToState){
+      // Sets the changed date to a parent-state that also needs it.
+      const newDate = this.formatDateString(date);
+      setNewDateToState(newDate);
+    }
+    if(fetchSelectedDate) {
+      const formattedDateString = this.formatDateString(date);
+      const encodedDate = encodeURIComponent(formattedDateString);
+      fetchSelectedDate(encodedDate);
+    }
   }
 
   removeFromArray = (array, value) => {
@@ -115,27 +117,27 @@ export default class Calendar extends Component{
   }
 
   findSessionForSelectedDate = () => {
-    console.log(this.state.fullyBookedSessions);
+    // console.log(this.state.fullyBookedSessions);
     let sessionsLeft = ['18.00', '21.00'];
-    console.log(this.state.availableSessions);
-    const selectedDate = this.reconstructDate();
+    // console.log(this.state.availableSessions);
+    const selectedDate = this.formatDateString();
     for (let i = 0; i < this.state.fullyBookedSessions.length; i++) {
-      console.log(this.state.fullyBookedSessions[i].date);
-      console.log(selectedDate);
+      // console.log(this.state.fullyBookedSessions[i].date);
+      // console.log(selectedDate);
       if (selectedDate === this.state.fullyBookedSessions[i].date) {
         console.log('tjenare');
         sessionsLeft = this.removeFromArray(sessionsLeft,  this.state.fullyBookedSessions[i].session);
       }
     }
-    console.log(sessionsLeft);
+    // console.log(sessionsLeft);
     this.setState({
       availableSessions: sessionsLeft
     });
-    console.log(this.state.availableSessions);
+    // console.log(this.state.availableSessions);
     /*const allBookings = this.fetchBookingsByCount()
     .then((fetchedBookings) => {
       console.log(selectedDate);
-      
+
       }
     })
     const found = this.state.allBookings.find(function(date) {
@@ -158,7 +160,7 @@ export default class Calendar extends Component{
           name="create_date"
         />
         <br />
-        <input hidden type="text" name="create_date" value={this.reconstructDate()} />
+        <input hidden type="text" name="create_date" readOnly value={this.formatDateString(this.state.startDate)} />
       </React.Fragment>
     )
   }
@@ -186,7 +188,7 @@ export default class Calendar extends Component{
           excludeDates = {this.props.fullyBooked}
         />
         <br />
-        <input type="text" name="create_date" value={this.reconstructDate()} />
+        <input type="text" name="update_date" readOnly value={this.formatDateString(this.state.startDate)} />
       </React.Fragment>
     )
   }
@@ -202,7 +204,7 @@ export default class Calendar extends Component{
        {!showAdminCalendar &&
         <React.Fragment>
         {this.renderRegularDatePicker()}
-        {this.renderSessionInput()}
+        {/* {this.renderSessionInput()} */}
         </React.Fragment>
        }
        {showAdminCalendar &&

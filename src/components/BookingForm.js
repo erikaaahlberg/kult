@@ -3,36 +3,41 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Calendar from "./Calendar";
 import Selector from "./Form/Selector";
 
-export default function BookingForm () {
-  return (
-    <form action="/api/create_booking/" method="POST">
-    <label htmlFor="create_date">Välj datum</label>
-    <br />
-    <Calendar/>
-    <br/>
+export default function BookingForm(props){
+  const { createNewBooking, setBookingToState, setNewDateToState } = props;
+  const tempArray = ['18:00', '21:00'];
+  return(
+    <div>
      <label htmlFor="create_guests">Antal gäster</label>
       <br />
-      <select name="create_guests">
+      <select name="create_guests" onChange={setBookingToState}>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
         <option value="4">4</option>
       </select>
       <br />
+      <label htmlFor="create_session">Sittning</label>
+      <br/>
+      <Selector name={'create_session'} availableSessions={tempArray} setBookingToState={setBookingToState} />
       <br />
+      <label htmlFor="create_date">Välj datum</label>
+      <br />
+      <Calendar setNewDateToState={setNewDateToState}/>
+      <br/>
       <label htmlFor="create_name">Namn</label>
       <br/>
-      <input placeholder="Kult Svensson" name="create_name" id="create_name"/>
+      <input placeholder="Kult Svensson" onChange={setBookingToState} name="create_name" id="create_name" required/>
       <br/>
       <label htmlFor="create_email">E-mail</label>
       <br/>
-      <input placeholder="kult@gmail.com" name="create_email" id="create_email"/>
+      <input placeholder="kult@gmail.com" onChange={setBookingToState} name="create_email" id="create_email" required/>
       <br/>
       <label htmlFor="create_phone">Phone</label>
       <br/>
-      <input placeholder="+46 761234567" name="create_phone" id="create_phone" required/>
+      <input placeholder="+46 761234567" onChange={setBookingToState} name="create_phone" id="create_phone" required/>
       <br/>
-      <button type="submit">Boka</button>
-    </form>
+      <button onClick={createNewBooking} type="submit">Boka</button>
+    </div>
   )
 }
