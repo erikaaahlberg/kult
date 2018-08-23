@@ -3,6 +3,7 @@ import moment from 'moment';
 import BookingForm from "../BookingForm";
 
 export default class Book extends Component{
+
   state = {
     existingBookings: [],
     booking: {
@@ -21,20 +22,19 @@ export default class Book extends Component{
 
   fetchBookings = () => {
     fetch('/api/bookings')
-    .then(response => response.json())
-    .then((existingBookings) => {
-        this.setState({existingBookings})
-    })
-    .catch((error) => {
-      // TODO: Handle error output to user, remove console.log
-        console.log(error);
-    });
+      .then(response => response.json())
+      .then((existingBookings) => {
+        this.setState({ existingBookings })
+      })
+      .catch((error) => {
+        console.log(error); // TODO: Handle error output to user, remove console.log
+      });
   }
 
   createNewBooking = (event) => {
     event.preventDefault();
     const { booking } = this.state;
-    let newBooking = {
+    let requestBody = {
       date: booking.date,
       guests: booking.guests,
       session: booking.session,
@@ -42,12 +42,11 @@ export default class Book extends Component{
       email: booking.email,
       phone: booking.phone
     }
+
     fetch('/api/create_booking', {
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       method: 'POST',
-      body: JSON.stringify(newBooking)
+      body: JSON.stringify(requestBody)
     })
     .then((response) => {
       if(response.ok){
@@ -58,7 +57,6 @@ export default class Book extends Component{
     });
   }
 
-
   /** NOTE ON THE TWO FUNCTIONS BELOW:
    * Called onChange in booking form and in calendar,
    * used to set the input values to this state,
@@ -66,62 +64,61 @@ export default class Book extends Component{
    * Date is seperated since it needs to do multiple things onChange,
    * and is not triggered by one onChange event in itself.
    */
-  setNewDateToState = (date) => {
-    this.setState({
-      booking: {
-          ...this.state.booking,
-          date: date,
-      }
-    })
-  }
-
-
   setBookingToState = (event) => {
     let newValue = event.target.value;
     switch(event.target.name){
       case 'create_guests':
         this.setState({
           booking: {
-              ...this.state.booking,
-              guests: newValue,
+            ...this.state.booking,
+            guests: newValue,
           }
         })
         return;
       case 'create_session':
         this.setState({
           booking: {
-              ...this.state.booking,
-              session: newValue,
+            ...this.state.booking,
+            session: newValue,
           }
         })
         return;
       case 'create_name':
         this.setState({
           booking: {
-              ...this.state.booking,
-              name: newValue,
+            ...this.state.booking,
+            name: newValue,
           }
         })
         return;
       case 'create_email':
         this.setState({
           booking: {
-              ...this.state.booking,
-              email: newValue,
+            ...this.state.booking,
+            email: newValue,
           }
         })
         return;
       case 'create_phone':
         this.setState({
           booking: {
-              ...this.state.booking,
-              phone: newValue,
+            ...this.state.booking,
+            phone: newValue,
           }
         })
         return;
       default:
         break;
     }
+  }
+
+  setNewDateToState = (date) => {
+    this.setState({
+      booking: {
+        ...this.state.booking,
+        date: date,
+      }
+    })
   }
 
   render(){

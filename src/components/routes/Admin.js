@@ -36,7 +36,6 @@ export default class Admin extends Component{
   updateSelectedBooking = (event) => {
     event.preventDefault();
     const { selectedBooking } = this.state;
-
     const requestBody = {
       date: selectedBooking.date,
       guests: selectedBooking.guests,
@@ -48,15 +47,15 @@ export default class Admin extends Component{
     }
 
     fetch('/api/update_booking', {
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       method: 'PUT',
       body: JSON.stringify(requestBody)
     })
     .then(() => {
       let date = this.encodedDate()
+      // Fetch the selected date's bookings again, with new values.
       this.fetchSelectedDate(date)
+      // Reset selected id so all bookings render as editable again.
       this.setState({selectedId: null})
     })
     .catch((error) => {

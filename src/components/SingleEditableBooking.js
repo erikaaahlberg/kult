@@ -18,7 +18,6 @@ export default function SingleEditableBooking(props){
         <label htmlFor="update_guests">Antal gäster:</label>
         <input
           type="number"
-          max="4"
           value={selectedBooking.guests}
           name="update_guests"
           id="update_guests"
