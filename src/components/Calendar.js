@@ -27,7 +27,7 @@ export default class Calendar extends Component{
     return fetch('api/count')
       .then((response) => response.json())
         .then((fetchedBookings) => {
-          console.log(fetchedBookings);
+          // console.log(fetchedBookings);
           this.setState({
             allBookings: fetchedBookings
           });
@@ -51,7 +51,7 @@ export default class Calendar extends Component{
 
     for (let i = 0; i < allBookings.length; i++) {
       let numberOfBookings = allBookings[i].count;
-      console.log(allBookings[i].count);
+      // console.log(allBookings[i].count);
 
       if (numberOfBookings === 5) {
         fullyBookedSessions.push({
@@ -61,7 +61,7 @@ export default class Calendar extends Component{
       }
     }
     if (fullyBookedSessions.length > 0) {
-      console.log(fullyBookedSessions);
+      // console.log(fullyBookedSessions);
       this.setState({ fullyBookedSessions: fullyBookedSessions });
       this.sortByFullyBookedDates();
     }
@@ -91,38 +91,25 @@ export default class Calendar extends Component{
   }
 
   handleChange = (date) => {
+    const { fetchSelectedDate, setNewDateToState } = this.props;
+    this.findSessionForSelectedDate();
+
     this.setState({
       startDate: date,
     });
 
-    const { fetchSelectedDate, setNewDateToState } = this.props;
-    this.findSessionForSelectedDate();
-
     /** Component does not always recive these props,
     avoid errors by first checking if it exists. */
-    if(!fetchSelectedDate){
-      // This function has not been passed along as props.
-      return;
-    } else {
-      const formattedDateString = this.formatDateString(date);
-      const encodedDate = encodeURIComponent(formattedDateString);
-      fetchSelectedDate(encodedDate);
-    }
-
-    if(!setNewDateToState){
-      return;
-    } else {
+    if(setNewDateToState){
       // Sets the changed date to a parent-state that also needs it.
       const newDate = this.formatDateString(date);
       setNewDateToState(newDate);
     }
-  }
-
-
-
-  reconstructDate = () => {
-    const date = new Date(this.state.startDate);
-    return date.toLocaleDateString().split('-').join('/');
+    if(fetchSelectedDate) {
+      const formattedDateString = this.formatDateString(date);
+      const encodedDate = encodeURIComponent(formattedDateString);
+      fetchSelectedDate(encodedDate);
+    }
   }
 
   removeFromArray = (array, value) => {
@@ -130,27 +117,27 @@ export default class Calendar extends Component{
   }
 
   findSessionForSelectedDate = () => {
-    console.log(this.state.fullyBookedSessions);
+    // console.log(this.state.fullyBookedSessions);
     let sessionsLeft = ['18.00', '21.00'];
-    console.log(this.state.availableSessions);
-    const selectedDate = this.reconstructDate();
+    // console.log(this.state.availableSessions);
+    const selectedDate = this.formatDateString();
     for (let i = 0; i < this.state.fullyBookedSessions.length; i++) {
-      console.log(this.state.fullyBookedSessions[i].date);
-      console.log(selectedDate);
+      // console.log(this.state.fullyBookedSessions[i].date);
+      // console.log(selectedDate);
       if (selectedDate === this.state.fullyBookedSessions[i].date) {
         console.log('tjenare');
         sessionsLeft = this.removeFromArray(sessionsLeft,  this.state.fullyBookedSessions[i].session);
       }
     }
-    console.log(sessionsLeft);
+    // console.log(sessionsLeft);
     this.setState({
       availableSessions: sessionsLeft
     });
-    console.log(this.state.availableSessions);
+    // console.log(this.state.availableSessions);
     /*const allBookings = this.fetchBookingsByCount()
     .then((fetchedBookings) => {
       console.log(selectedDate);
-      
+
       }
     })
     const found = this.state.allBookings.find(function(date) {
