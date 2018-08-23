@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-// import "../styles/Desktop.css";
 import "../styles/Keyframes.css";
 import "../styles/Gdpr.css";
 import Image from "../Image";
@@ -19,7 +18,7 @@ export default class Home extends Component {
   render(){
     return (
       <React.Fragment>
-        <div className="wrapper">
+        <div className="homeWrapper">
           <h1 id="homeHeader">KULT</h1>
           <p>Ha så kult på restaurangen!</p>
         </div>
