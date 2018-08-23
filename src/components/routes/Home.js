@@ -1,8 +1,8 @@
 import React, {Component} from "react";
-import "../styles/Keyframes.css";
-import "../styles/Gdpr.css";
+import "../../assets/styles/Keyframes.css";
+import "../../assets/styles/Gdpr.css";
 import Image from "../Image";
-import CloseIcon from '../images/close.svg';
+import CloseIcon from '../../assets/images/close.svg';
 
 export default class Home extends Component {
   state = {

@@ -1,9 +1,9 @@
 import React from "react";
 import 'react-datepicker/dist/react-datepicker.css';
 import Calendar from "./Calendar";
-import clock from "./images/clock.png";
-import calendar from"./images/calendar.svg";
-import persons from"./images/person.png";
+import clock from "../assets/images/clock.png";
+import calendar from"../assets/images/calendar.svg";
+import persons from"../assets/images/person.png";
 
 export default function BookingForm(){
   return(

@@ -3,7 +3,7 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'moment/locale/sv';
 import 'react-datepicker/dist/react-datepicker.css';
-import './styles/Datepicker.css';
+import '../assets/styles/Datepicker.css';
 
 export default class Calendar extends Component{
   state = {

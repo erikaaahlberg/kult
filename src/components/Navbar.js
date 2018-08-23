@@ -1,9 +1,9 @@
 import React, {Component} from "react";
 import { Link } from "react-router-dom";
 import Hamburger from "./Hamburger";
-import "./styles/Navigation.css";
-import "./styles/Desktop.css";
-import "./styles/Keyframes.css";
+import "../assets/styles/Navigation.css";
+import "../assets/styles/Desktop.css";
+import "../assets/styles/Keyframes.css";
 
 export default class Navbar extends Component {
   state = {
