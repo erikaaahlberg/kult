@@ -27,7 +27,7 @@
 .closeIcon {
   top: 15px;
   right: 20px;
-  position: fixed;
+  position: absolute;
   height: 25px;
   -webkit-filter: invert(100%);
         filter: invert(100%);
