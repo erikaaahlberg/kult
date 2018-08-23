@@ -49,6 +49,7 @@ li > a:hover {
   width: 30vw;
   height: 100vh;
   background-color: #ebebf1;
+
   position: absolute;
   z-index: 2;
   top: 0;
@@ -120,7 +121,7 @@ li > a:hover {
 #bokah1{
   margin: 0;
   font-family: 'Circular-Bold', sans-serif;
-  font-size: 14vw;
+  font-size: 8vw;
   letter-spacing: .5rem;
   text-align: center;
   padding-top: 200px;
@@ -232,9 +233,7 @@ input{
   align-items: center;
 }
 
-.box img {
-  margin-left: 10px;
-}
+
 .bookbutton{
   text-align: center;
 }

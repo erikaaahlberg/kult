@@ -42,13 +42,13 @@ export default function BookingForm(){
       </div>
 
       <div className="bookbutton">
-      <button className="findtable" type="submit">SÖK BOKNING</button>
+      <button className="findtable" type="submit">BOKA BORD</button>
      </div>
       <br />
       <br />
 
       <div className="contact">
-      <p>this mf suppose to come up when searching for tables if available tables on selected dates fill in your shit here</p>
+      <p>Not sure how this below is going to be shown </p>
       <br/>
       <p>Succesfull search<br/>
       Please fill in your contact info</p>
