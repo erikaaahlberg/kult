@@ -3,41 +3,41 @@
   align-items: center;
 }
 
-label {
+.bookingWrapper > .container > label {
   font-size: .5rem;
   color: #b7b7bd;
   text-transform: uppercase;
   letter-spacing: .1rem;
 }
 
-input {
+div.react-datepicker-wrapper > div > input {
   padding-left: 8px;
   width: 150px; 
   height: 30px; 
   font-size: 1rem;
   letter-spacing: .05rem;
-  color: #3B4044;
-  outline: 1px inset #3B4044;
+  color: #25252f;
+  outline: 1px inset #25252f;
   outline-offset: -1px;
   background-color: #fff; 
   border-radius: 0;
   border: 0;
 }
 
-select { 
+.bookingWrapper > .container >  select { 
   position: relative;
-  border: 1px solid #3B4044;
+  border: 1px solid #25252f;
 }
 
-select { 
+.bookingWrapper > .container >  select { 
   width: 150px; 
   height: 30px; 
   border-radius: 0;
   background-color: #fff; 
   font-size: 14px;
   line-height: 1.3;
-  color: #3B4044;
-  outline: 1px inset #3B4044;
+  color: #25252f;
+  outline: 1px inset #25252f;
   outline-offset: -1px;
   border: 0;
 }

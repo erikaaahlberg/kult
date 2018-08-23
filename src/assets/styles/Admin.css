@@ -1,9 +1,6 @@
 .adminHeader {
   margin: 0;
-}
-
-.adminParagraph {
-  font-family: 'Courier New', Courier, monospace;
+  color: #25252f;
 }
 
 .bookingContainer {
@@ -14,6 +11,23 @@
   border-radius: 15px;
 }
 
-.bookingHeader {
+.bookingContainer > p {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: .8rem;
+  letter-spacing: .05rem;
+}
+
+.editBookingHeader {
   margin: 0;
+  color: #25252f;
+}
+
+.editBooking {
+  padding-left: .53rem;
+  border: 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: .8rem;
+  color: blue;
+  letter-spacing: .05rem;
+  background-color: #f0f0f0;
 }

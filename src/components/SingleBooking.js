@@ -4,8 +4,8 @@ export default function SingleEditableBooking(props){
   const { booking, selectBookingToEdit } = props;
   return(
     <div className="bookingContainer" key={booking.id}>
-      <h2 className="bookingHeader">Bokning: </h2>
-        <p className="adminParagraph">
+      <h2 className="editBookingHeader">Bokning: </h2>
+        <p>
           <strong>Datum:</strong> {booking.date}
           <br />
           <strong>Antal personer:</strong> {booking.guests}

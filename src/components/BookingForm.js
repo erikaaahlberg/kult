@@ -17,7 +17,7 @@ export default function BookingForm(props){
         <Image className="icons" src={CalendarIcon} alt="Calendar" />
         <div className="container">
           <label htmlFor="create_date">Välj datum</label>
-          <Calendar setNewDateToState={setNewDateToState}/>
+          <Calendar className="calendarInput" setNewDateToState={setNewDateToState}/>
         </div>
         <Image className="icons" src={ClockIcon} alt="Clock" />
         <div className="container">
