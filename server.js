@@ -109,7 +109,25 @@ app.put('/api/update_booking', (req, res) => {
 
   connection.query(queryString, [guests, date, session, name, email, phone, id], (err, results, fields) => {
     if(err){
-      console.log('Failed to add booking: ' + err);
+      console.log('Failed to update booking: ' + err);
+      res.sendStatus(500) // Show user internal server error
+      res.end();
+      return;
+    }
+  })
+  res.end();
+});
+
+app.delete('/api/delete_booking', (req, res) => {
+  const id = req.body.id;
+
+  const queryString =
+    `DELETE from bookings
+    WHERE id = ?`
+
+  connection.query(queryString, [id], (err, results, fields) => {
+    if(err){
+      console.log('Failed to delete booking: ' + err);
       res.sendStatus(500) // Show user internal server error
       res.end();
       return;
