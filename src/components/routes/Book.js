@@ -148,7 +148,7 @@ export default class Book extends Component{
       }
       if (fullyBookedSessions.length > 0) {
         this.setState({ fullyBookedSessions: fullyBookedSessions });
-        console.log(this.state.fullyBookedSessions);
+
         this.findFullyBookedDates();
         this.findSessionForSelectedDate();
       }

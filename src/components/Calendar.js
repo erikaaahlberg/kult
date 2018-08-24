@@ -34,10 +34,10 @@ export default class Calendar extends Component{
     avoid errors by first checking if it exists. */
     if(setNewDateToState){
       const newDate = this.formatDateString(date);
-      console.log(newDate);
+      // console.log(newDate);
       setNewDateToState(newDate);
       if(findSessionForSelectedDate) {
-        console.log('fan va kuuuult');
+        // console.log('fan va kuuuult');
         findSessionForSelectedDate(newDate);
       }
     }
