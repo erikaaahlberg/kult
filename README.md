@@ -2,7 +2,7 @@
 
 > "Ha det så kult på restaurangen"
 
-Site and booking-system for the fashionable, non existing restaurant [Kult.](https://www.youtube.com/watch?v=qCSfy670df4)
+Site and booking-system for the fashionable, non existing restaurant Kult. Inspired by [kult på restaurangen.](https://www.youtube.com/watch?v=qCSfy670df4)
 
 ## Installation
 
