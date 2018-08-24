@@ -131,13 +131,14 @@ export default class Book extends Component{
 
   sortBySession = () => {
     const sortedBookings = this.fetchBookingsByCount()
+
     .then((fetchedBookings) => {
       let numberOfBookings = 0;
       let fullyBookedSessions = [];
-  
+
       for (let i = 0; i < fetchedBookings.length; i++) {
         let numberOfBookings = fetchedBookings[i].count;
-  
+
         if (numberOfBookings === 5) {
           fullyBookedSessions.push({
             date: fetchedBookings[i].date,
@@ -176,31 +177,45 @@ export default class Book extends Component{
     return duplicateDates;
   }
 
-  removeFromArray = (array, value) => {
-    return array.filter(e => e !== value);
+  removeFromArray = (sessions, sessionToRemove) => {
+    return sessions.filter(session => session !== sessionToRemove);
   }
 
   findSessionForSelectedDate = (selectedDate) => {
-    let sessionsLeft = ['18.00', '21.00'];
+    if(!selectedDate){
+      /** User has not changed date in the datepickes,
+       * which means they want to book today.*/
+      let today = moment();
+      selectedDate = this.formatDateString(today);
+    }
+
     if (this.state.fullyBookedSessions.length > 0) {
       const fullyBookedSessions = this.state.fullyBookedSessions;
-      /*const selectedDate = this.state.booking.date;*/
+      const sessions = ['18:00', '21:00'];
+
       for (let i = 0; i < fullyBookedSessions.length; i++) {
-        console.log(selectedDate);
-        console.log(fullyBookedSessions[i].date);
         if (selectedDate === fullyBookedSessions[i].date) {
-          console.log('tjenare');
-          sessionsLeft = this.removeFromArray(sessionsLeft, fullyBookedSessions[i].session);
+          let sessionToRemove = fullyBookedSessions[i].session;
+          let availableSessions = this.removeFromArray(sessions, sessionToRemove);
+          this.setState({ availableSessions });
+          return;
+        }
+        else {
+          // No fully booked sessions on selected date, both sessions are available!
+          this.setState({ availableSessions: sessions });
         }
       }
-      this.setState({
-        availableSessions: sessionsLeft
-      });
     }
   }
   /*--------------Collapse----------------*/
 
   render(){
+    console.group('State in Book.js:');
+      console.log('AvailableSessions: ', this.state.availableSessions);
+      console.log('FullyBookedDates: ', this.state.fullyBookedDates);
+      console.log('FullyBookedSessions: ', this.state.fullyBookedSessions);
+    console.groupEnd();
+
     return(
       <div className="wrapper">
         <h1 className="smallHeader">BOKA BORD</h1>
@@ -209,8 +224,9 @@ export default class Book extends Component{
           setBookingToState={this.setBookingToState}
           setNewDateToState={this.setNewDateToState}
           createNewBooking={this.createNewBooking}
+          fullyBookedSessions={this.state.fullyBookedSessions}
           findSessionForSelectedDate = {this.findSessionForSelectedDate}
-          availableSessions = {this.state.availableSessions}
+          availableSessions={this.state.availableSessions}
           fullyBookedDates = {this.state.fullyBookedDates}
         />
       </div>

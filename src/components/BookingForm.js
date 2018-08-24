@@ -15,7 +15,6 @@ export default function BookingForm(props){
     findFullyBookedDates, 
     availableSessions,
     fullyBookedDates } = props;
-  const tempArray = ['18:00', '21:00'];
   return(
     <React.Fragment>
       <div className="bookingWrapper">
