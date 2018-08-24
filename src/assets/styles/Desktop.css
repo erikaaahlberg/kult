@@ -1,0 +1,10 @@
+@media screen and (min-width: 1000px) {
+  #homeHeader {
+    background: url(../images/stroke-zigzag-black.svg) bottom repeat-x;
+    background-size: auto 1rem;
+  }
+
+  .navbarVisible {
+    width: 30vw;
+  }
+}
