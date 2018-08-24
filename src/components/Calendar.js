@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import DatePicker from 'react-datepicker';
-import Selector from "./Form/Selector";
 import moment from 'moment';
 import 'moment/locale/sv';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -19,12 +18,10 @@ export default class Calendar extends Component{
   }
 
   handleChange = (date) => {
-    /**
-     * Import functions recived as props,
+    /** Import functions recived as props,
      * setNewDateToState sets state to parent,
-     * which can be either Admin or Book.
-     */
-    const { fetchSelectedDate, setNewDateToState, fullyBookedDates, findSessionForSelectedDate } = this.props;
+     * which can be either Admin or Book. */
+    const { fetchSelectedDate, setNewDateToState, findSessionForSelectedDate } = this.props;
 
     this.setState({
       startDate: date,
@@ -34,12 +31,8 @@ export default class Calendar extends Component{
     avoid errors by first checking if it exists. */
     if(setNewDateToState){
       const newDate = this.formatDateString(date);
-      // console.log(newDate);
       setNewDateToState(newDate);
-      if(findSessionForSelectedDate) {
-        // console.log('fan va kuuuult');
-        findSessionForSelectedDate(newDate);
-      }
+      findSessionForSelectedDate(newDate);
     }
     if(fetchSelectedDate) {
       const formattedDateString = this.formatDateString(date);

@@ -130,10 +130,8 @@ export default class Book extends Component{
   }
 
   sortBySession = () => {
-    const sortedBookings = this.fetchBookingsByCount()
-
+    this.fetchBookingsByCount()
     .then((fetchedBookings) => {
-      let numberOfBookings = 0;
       let fullyBookedSessions = [];
 
       for (let i = 0; i < fetchedBookings.length; i++) {
@@ -166,7 +164,7 @@ export default class Book extends Component{
     let duplicateDates = [];
     const lastIndex = array.length -1;
     for (let i = 0; i < array.length; i++) {
-      if (i != lastIndex) {
+      if (i !== lastIndex) {
         for (let p = i + 1; p < array.length; p++) {
           if (array[i].date === array[p].date) {
             duplicateDates.push(array[i].date);

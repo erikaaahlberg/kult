@@ -9,10 +9,10 @@ import UserIcon from"../assets/images/user.png";
 import Selector from "./Form/Selector";
 
 export default function BookingForm(props){
-  const { createNewBooking, 
-    setBookingToState, 
-    setNewDateToState, findSessionForSelectedDate, 
-    findFullyBookedDates, 
+  const { createNewBooking,
+    setBookingToState,
+    setNewDateToState,
+    findSessionForSelectedDate,
     availableSessions,
     fullyBookedDates } = props;
   return(
