@@ -5,7 +5,6 @@ import BookingForm from "../BookingForm";
 export default class Book extends Component{
 
   state = {
-    existingBookings: [],
     booking: {
       date: moment().format('YYYY/MM/DD'),
       guests: 1, // Needs this as intial default value.
@@ -20,19 +19,7 @@ export default class Book extends Component{
   }
 
   componentDidMount(){
-    this.fetchAllBookings();
     this.sortBySession();
-  }
-
-  fetchAllBookings = () => {
-    fetch('/api/bookings')
-      .then(response => response.json())
-      .then((existingBookings) => {
-        this.setState({ existingBookings })
-      })
-      .catch((error) => {
-        console.log(error); // TODO: Handle error output to user, remove console.log
-      });
   }
 
   createNewBooking = (event) => {
