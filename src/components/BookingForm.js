@@ -9,7 +9,12 @@ import UserIcon from"../assets/images/user.png";
 import Selector from "./Form/Selector";
 
 export default function BookingForm(props){
-  const { createNewBooking, setBookingToState, setNewDateToState } = props;
+  const { createNewBooking, 
+    setBookingToState, 
+    setNewDateToState, findSessionForSelectedDate, 
+    findFullyBookedDates, 
+    availableSessions,
+    fullyBookedDates } = props;
   const tempArray = ['18:00', '21:00'];
   return(
     <React.Fragment>
@@ -17,13 +22,13 @@ export default function BookingForm(props){
         <Image className="icons" src={CalendarIcon} alt="Calendar" />
         <div className="container">
           <label htmlFor="create_date">Välj datum</label>
-          <Calendar setNewDateToState={setNewDateToState}/>
+          <Calendar setNewDateToState={setNewDateToState} fullyBookedDates = {fullyBookedDates} findSessionForSelectedDate = {findSessionForSelectedDate}/>
         </div>
         <Image className="icons" src={ClockIcon} alt="Clock" />
         <div className="container">
           <label htmlFor="create_session">Sittning</label>
           <br />
-          <Selector name={'create_session'} availableSessions={tempArray} setBookingToState={setBookingToState} />
+          <Selector name={'create_session'} availableSessions={availableSessions} setBookingToState={setBookingToState} />
         </div>
         <Image className="icons" src={UserIcon} alt="User" />
         <div className="container">

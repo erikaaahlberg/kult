@@ -13,11 +13,15 @@ export default class Book extends Component{
       name: null,
       email: null,
       phone: null
-    }
+    },
+    fullyBookedSessions: [],
+    fullyBookedDates: [],
+    availableSessions: []
   }
 
   componentDidMount(){
     this.fetchAllBookings();
+    this.sortBySession();
   }
 
   fetchAllBookings = () => {
@@ -121,6 +125,94 @@ export default class Book extends Component{
     })
   }
 
+  /*-------------From Calendar--------------*/
+  fetchBookingsByCount = () => {
+    return fetch('api/count')
+      .then((response) => response.json())
+        .then((fetchedBookings) => {
+          return fetchedBookings;
+        })
+        .catch((error) => {
+          // TODO: Handle error output to user, remove console.log
+          console.log(error);
+        });
+  }
+
+  formatDateString = (unformatted) => {
+    return moment(unformatted).format('YYYY/MM/DD');
+  }
+
+  sortBySession = () => {
+    const sortedBookings = this.fetchBookingsByCount()
+    .then((fetchedBookings) => {
+      let numberOfBookings = 0;
+      let fullyBookedSessions = [];
+  
+      for (let i = 0; i < fetchedBookings.length; i++) {
+        let numberOfBookings = fetchedBookings[i].count;
+  
+        if (numberOfBookings === 5) {
+          fullyBookedSessions.push({
+            date: fetchedBookings[i].date,
+            session: fetchedBookings[i].session
+          });
+        }
+      }
+      if (fullyBookedSessions.length > 0) {
+        this.setState({ fullyBookedSessions: fullyBookedSessions });
+        console.log(this.state.fullyBookedSessions);
+        this.findFullyBookedDates();
+        this.findSessionForSelectedDate();
+      }
+    });
+  }
+
+  findFullyBookedDates = () => {
+    let fullyBookedDates = this.findDuplicateDates(this.state.fullyBookedSessions);
+    if(fullyBookedDates.length > 0) {
+      this.setState({ fullyBookedDates: fullyBookedDates });
+    }
+  }
+
+  findDuplicateDates = (array) => {
+    let duplicateDates = [];
+    const lastIndex = array.length -1;
+    for (let i = 0; i < array.length; i++) {
+      if (i != lastIndex) {
+        for (let p = i + 1; p < array.length; p++) {
+          if (array[i].date === array[p].date) {
+            duplicateDates.push(array[i].date);
+          }
+        }
+      }
+    }
+    return duplicateDates;
+  }
+
+  removeFromArray = (array, value) => {
+    return array.filter(e => e !== value);
+  }
+
+  findSessionForSelectedDate = (selectedDate) => {
+    let sessionsLeft = ['18.00', '21.00'];
+    if (this.state.fullyBookedSessions.length > 0) {
+      const fullyBookedSessions = this.state.fullyBookedSessions;
+      /*const selectedDate = this.state.booking.date;*/
+      for (let i = 0; i < fullyBookedSessions.length; i++) {
+        console.log(selectedDate);
+        console.log(fullyBookedSessions[i].date);
+        if (selectedDate === fullyBookedSessions[i].date) {
+          console.log('tjenare');
+          sessionsLeft = this.removeFromArray(sessionsLeft, fullyBookedSessions[i].session);
+        }
+      }
+      this.setState({
+        availableSessions: sessionsLeft
+      });
+    }
+  }
+  /*--------------Collapse----------------*/
+
   render(){
     return(
       <div className="wrapper">
@@ -130,6 +222,9 @@ export default class Book extends Component{
           setBookingToState={this.setBookingToState}
           setNewDateToState={this.setNewDateToState}
           createNewBooking={this.createNewBooking}
+          findSessionForSelectedDate = {this.findSessionForSelectedDate}
+          availableSessions = {this.state.availableSessions}
+          fullyBookedDates = {this.state.fullyBookedDates}
         />
       </div>
     )
