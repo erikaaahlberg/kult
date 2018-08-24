@@ -16,6 +16,7 @@ The api is built upon a MySQL database following the schema found in `db_structu
 
 1. Create your own database by importing the sql-file to phpMyAdmin.
 2. Start up MAMP (or equivalent).
+3. In the file `server.js`, make sure the connection applies to your local settings.
 
 ## Development
 
