@@ -24,6 +24,8 @@ export default function Menu(){
 
         BOKA BORD
      </button>
+     <p className="text-align-center">&nbsp;+46 7283941</p>
+
  </div>
   </div>
   <br />
