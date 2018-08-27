@@ -23,12 +23,12 @@ export default function BookingForm(props){
           <label htmlFor="create_date">Välj datum</label>
           <Calendar setNewDateToState={setNewDateToState} fullyBookedDates = {fullyBookedDates} findSessionForSelectedDate = {findSessionForSelectedDate}/>
         </div>
-        <Image className="icons" src={ClockIcon} alt="Clock" />
+          <Image className="icons" src={ClockIcon} alt="Clock" />
         <div className="container">
           <label htmlFor="create_session">Sittning</label>
           <br />
           <Selector name={'create_session'} availableSessions={availableSessions} setBookingToState={setBookingToState} />
-        </div>
+          </div>
         <Image className="icons" src={UserIcon} alt="User" />
         <div className="container">
           <label htmlFor="create_guests">Antal personer</label>
@@ -39,7 +39,7 @@ export default function BookingForm(props){
             <option value="3">3</option>
             <option value="4">4</option>
           </select>
-        </div>
+         </div>
       </div>
       <br />
       <p>Innan din bokning kan genomföras – behöver<br /> vi veta lite mer om dig!</p>
