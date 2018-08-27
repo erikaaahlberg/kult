@@ -8,9 +8,6 @@ import '../assets/styles/Datepicker.css';
 export default class Calendar extends Component{
   state = {
     startDate: moment(),
-    selectedDate: '',
-    allBookings: [],
-    fullyBookedDates: []
   }
 
   formatDateString = (unformatted) => {
