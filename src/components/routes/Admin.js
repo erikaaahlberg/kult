@@ -115,7 +115,7 @@ export default class Admin extends Component{
     })
   }
 
-  setNewDateToState = (date) => {
+  updateDate = (date) => {
     this.setState({ selectedDate: date })
   }
 
@@ -244,7 +244,7 @@ export default class Admin extends Component{
         <div className="adminContainer">
           <Calendar
             showAdminCalendar={true}
-            setNewDateToState={this.setNewDateToState}
+            updateDate={this.updateDate}
             fetchSelectedDate={this.fetchSelectedDate}
           />
           {this.renderHeadings()}
