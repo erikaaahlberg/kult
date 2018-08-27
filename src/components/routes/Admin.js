@@ -176,11 +176,41 @@ export default class Admin extends Component{
     }
   }
 
+  renderHeadings = () => {
+    const { bookingsOnSelectedDate } = this.state;
+    if(bookingsOnSelectedDate < 1) {
+      return;
+    }
+    return (
+      <div className="bookingsHeading">
+        <label htmlFor="update_date">
+          <strong>Datum</strong>
+        </label>
+        <label htmlFor="update_guests">
+          <strong>Antal</strong>
+        </label>
+        <label htmlFor="update_session">
+          <strong>Sittning</strong>
+        </label>
+        <label htmlFor="update_name">
+          <strong>Bokat av</strong>
+        </label>
+        <label htmlFor="update_email">
+          <strong>E-mail</strong>
+        </label>
+        <label htmlFor="update_phone">
+          <strong>Telefon</strong>
+        </label>
+        <strong>Redigera</strong>
+      </div>
+    )
+  }
+
   renderBookings = () => {
     const { bookingsOnSelectedDate, selectedBooking, selectedId } = this.state;
     if(bookingsOnSelectedDate < 1){
       return(
-        <p>Det finns inga bokningar det valda datumet.</p>
+        <p className="noBookings">Det finns inga bokningar det valda datumet.</p>
       )
     }
     else {
@@ -209,24 +239,18 @@ export default class Admin extends Component{
 
   render(){
     return(
-      <div>
+      <React.Fragment>
         <h1 className="adminHeader">Administratör</h1>
-        <Calendar
-          showAdminCalendar={true}
-          setNewDateToState={this.setNewDateToState}
-          fetchSelectedDate={this.fetchSelectedDate}
-        />
-        <div className="bookingGrid">
-          <label htmlFor="update_date"><strong>Datum</strong></label>
-          <label htmlFor="update_guests"><strong>Antal</strong></label>
-          <label htmlFor="update_session"><strong>Sittning</strong></label>
-          <label htmlFor="update_name"><strong>Bokat av</strong></label>
-          <label htmlFor="update_email"><strong>E-mail</strong></label>
-          <label htmlFor="update_phone"><strong>Telefon</strong></label>
-          <strong>Redigera</strong>
+        <div className="adminContainer">
+          <Calendar
+            showAdminCalendar={true}
+            setNewDateToState={this.setNewDateToState}
+            fetchSelectedDate={this.fetchSelectedDate}
+          />
+          {this.renderHeadings()}
+          {this.renderBookings()}
         </div>
-        {this.renderBookings()}
-      </div>
+      </React.Fragment>
     )
   }
 };
