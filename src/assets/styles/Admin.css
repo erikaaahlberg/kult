@@ -1,0 +1,91 @@
+.adminHeader {
+  margin: 10px 0 0 10px;
+  font-family: 'Circular-Black', sans-serif;
+  font-size: 1rem;
+  color: #25252f;
+}
+
+.adminContainer {
+  margin: 30px 0 50px 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.bookingsHeading,
+.booking {
+  padding-left: 0;
+  margin: 0;
+  display: grid;
+  letter-spacing: .05rem;
+  grid-template-columns: 150px 70px 100px 250px 250px 150px 100px;
+}
+
+.bookingsHeading {
+  margin-top: 40px;
+  font-family: 'Circular-Black', sans-serif;
+}
+
+.booking {
+  font-family: 'Apercu-Mono', Courier, monospace;
+  font-size: .8rem;
+}
+
+.bookingsHeading > strong:nth-child(7) {
+  text-align: center;
+}
+
+.booking > li {
+  height: 40px;
+  list-style: none;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+}
+
+.booking > li:nth-child(7) {
+  justify-content: center;
+}
+
+.booking > li > input,
+.booking > li > select {
+  padding: 5px 0;
+  font-family: 'Apercu-Mono', Courier, monospace;
+  font-size: .8rem;
+  color: #1040E2;
+  letter-spacing: .05rem;
+  background-color: transparent;
+  border: 0;
+}
+
+.booking > li > select {
+  margin-top: 2px;
+  margin-left: -8px;
+}
+
+.noBookings {
+  margin: 40px 0 0 0;
+}
+
+#update_date,
+#update_phone {
+  width: 140px;
+}
+
+#update_guests {
+  width: 50px;
+}
+
+#update_name,
+#update_email {
+  width: 220px;
+}
+
+.adminIcon {
+  height: 20px;
+  cursor: pointer;
+}
+
+.adminIcon:nth-child(2) {
+  margin-left: 15px;
+}
