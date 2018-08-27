@@ -21,6 +21,7 @@ export default function Menu(){
           <p class="text-align-center"> </p>
           <p class="text-align-center">&nbsp;755 SEK</p>
       <div className="buttonlink"><button className="button">
+
         BOKA BORD
      </button>
  </div>
