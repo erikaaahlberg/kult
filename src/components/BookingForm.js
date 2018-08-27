@@ -51,7 +51,7 @@ export default function BookingForm(props){
       <br />
       <label htmlFor="create_phone">Telefon</label>
       <input placeholder="+46 761234567" onChange={setBookingToState} name="create_phone" id="create_phone" required />
-      <button onClick={createNewBooking} type="submit">Boka</button>
+      <button className="bookButton" onClick={createNewBooking} type="submit">Boka</button>
     </React.Fragment>
   )
 }

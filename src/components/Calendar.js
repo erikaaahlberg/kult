@@ -66,7 +66,7 @@ export default class Calendar extends Component{
     return(
       <React.Fragment>
         <DatePicker
-          //inline
+          inline
           dateFormat={'YYYY/MM/DD'}
           selected={startDate}
           onChange={this.handleChange}

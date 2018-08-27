@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import moment from "moment";
+import "../../assets/styles/Admin.css";
 import Calendar from "../Calendar";
 import SingleBooking from '../SingleBooking';
 import SingleEditableBooking from '../SingleEditableBooking';
@@ -209,12 +210,21 @@ export default class Admin extends Component{
   render(){
     return(
       <div>
-        <h1>Administratör</h1>
+        <h1 className="adminHeader">Administratör</h1>
         <Calendar
           showAdminCalendar={true}
           setNewDateToState={this.setNewDateToState}
           fetchSelectedDate={this.fetchSelectedDate}
         />
+        <div className="bookingGrid">
+          <label htmlFor="update_date"><strong>Datum</strong></label>
+          <label htmlFor="update_guests"><strong>Antal</strong></label>
+          <label htmlFor="update_session"><strong>Sittning</strong></label>
+          <label htmlFor="update_name"><strong>Bokat av</strong></label>
+          <label htmlFor="update_email"><strong>E-mail</strong></label>
+          <label htmlFor="update_phone"><strong>Telefon</strong></label>
+          <strong>Redigera</strong>
+        </div>
         {this.renderBookings()}
       </div>
     )

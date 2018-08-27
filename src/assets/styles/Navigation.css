@@ -75,11 +75,11 @@
   left: 7px;
 }
 
-ul {
+#navigation {
   margin: 0;
 }
 
-li {
+#navigation > li {
   margin: 10px 0;
   padding-right: 35px;
   font-family: 'Circular-Black', sans-serif;
@@ -88,12 +88,12 @@ li {
   text-align: right;
 }
 
-li > a {
+#navigation > li > a {
   color: #25252f;
   text-decoration: none;
 }
 
-li > a:after {
+#navigation > li > a:after {
   display: block;
   content: '';
   border-bottom: 4px #25252f solid;  
@@ -101,7 +101,7 @@ li > a:after {
   transition: transform 250ms ease-in-out;
 }
 
-li > a:hover:after {
+#navigation > li > a:hover:after {
   transform: scaleX(1);
 }
 

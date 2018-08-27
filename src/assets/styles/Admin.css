@@ -1,0 +1,24 @@
+.adminHeader {
+  margin: 0;
+  color: #25252f;
+}
+
+.bookingGrid {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 100px 50px 100px 250px 250px 150px 80px 80px;
+}
+
+ul.bookingGrid {
+  padding-left: 0;
+  margin: 0;
+}
+
+.bookingGrid > li {
+  list-style: none;
+}
+
+.editBookingHeader {
+  margin: 0;
+  color: #25252f;
+}
