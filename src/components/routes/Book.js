@@ -1,136 +1,29 @@
-import React, {Component} from "react";
-import moment from 'moment';
+import React, { Component } from "react";
+import moment from "moment";
+import { removeFromArray, formatDateString, findDuplicateDates } from '../../helpers';
 import BookingForm from "../BookingForm";
 
 export default class Book extends Component{
 
   state = {
     booking: {
-      date: moment().format('YYYY/MM/DD'),
+      date: moment().format("YYYY/MM/DD"),
       guests: 1, // Needs this as intial default value.
-      session: '18:00', // Same here.
+      session: "18:00", // Same here.
       name: null,
       email: null,
       phone: null
     },
     fullyBookedSessions: [],
     fullyBookedDates: [],
-    availableSessions: ['18:00', '21:00'],
+    availableSessions: ["18:00", "21:00"]
   }
 
   componentDidMount(){
-    this.sortBySession();
+    this.findFullyBookedSessions();
   }
 
-      // There are fully booked sessions, store them in state.
-      /** User has not selected a date,
-       * which means they want to book today. */
-          // No fully booked sessions on selected date, both sessions are available!
-    /** Check if there are two fully booked sessions on the same date,
-    that would mean there are no seats left either 18:00 or 21:00. */
-  createNewBooking = (event) => {
-    event.preventDefault();
-    const { booking } = this.state;
-    let requestBody = {
-      date: booking.date,
-      guests: booking.guests,
-      session: booking.session,
-      name: booking.name,
-      email: booking.email,
-      phone: booking.phone
-    }
-
-    fetch('/api/create_booking', {
-      headers: { 'Content-Type': 'application/json' },
-      method: 'POST',
-      body: JSON.stringify(requestBody)
-    })
-    .then((response) => {
-      if(response.ok){
-        console.log('Booking added!') // TODO: Tell the user thar booking is confirmed! Show this somehow.
-      }
-    }).catch((error) => {
-      console.log(error); // TODO: Handle error output to user, remove console.log
-    });
-  }
-
-  // Called when user changes the input values of booking form.
-  updateBooking = (event) => {
-  setBookingToState = (event) => {
-    let newValue = event.target.value;
-    switch(event.target.name){
-      case 'create_guests':
-        this.setState({
-          booking: {
-            ...this.state.booking,
-            guests: newValue,
-          }
-        })
-        return;
-      case 'create_session':
-        this.setState({
-          booking: {
-            ...this.state.booking,
-            session: newValue,
-          }
-        })
-        return;
-      case 'create_name':
-        this.setState({
-          booking: {
-            ...this.state.booking,
-            name: newValue,
-          }
-        })
-        return;
-      case 'create_email':
-        this.setState({
-          booking: {
-            ...this.state.booking,
-            email: newValue,
-          }
-        })
-        return;
-      case 'create_phone':
-        this.setState({
-          booking: {
-            ...this.state.booking,
-            phone: newValue,
-          }
-        })
-        return;
-      default:
-        break;
-    }
-  }
-
-  setNewDateToState = (date) => {
-    this.setState({
-      booking: {
-        ...this.state.booking,
-        date: date,
-      }
-    })
-  }
-
-  /*-------------From Calendar--------------*/
-  fetchBookingsByCount = () => {
-    return fetch('api/count')
-      .then((response) => response.json())
-        .then((fetchedBookings) => {
-          return fetchedBookings;
-        })
-        .catch((error) => {
-          // TODO: Handle error output to user, remove console.log
-          console.log(error);
-        });
-  }
-
-  formatDateString = (unformatted) => {
-    return moment(unformatted).format('YYYY/MM/DD');
-  }
-
-  sortBySession = () => {
+  findFullyBookedSessions = () => {
     this.fetchBookingsByCount()
     .then((fetchedBookings) => {
       let fullyBookedSessions = [];
@@ -145,48 +38,36 @@ export default class Book extends Component{
           });
         }
       }
+
+      // There are fully booked sessions, store them in state.
       if (fullyBookedSessions.length > 0) {
-        this.setState({ fullyBookedSessions: fullyBookedSessions });
+        this.setState({ fullyBookedSessions });
         this.findFullyBookedDates();
-        this.findSessionForSelectedDate();
+        this.findSessionsForSelectedDate();
       }
     });
   }
 
-  findFullyBookedDates = () => {
-    let fullyBookedDates = this.findDuplicateDates(this.state.fullyBookedSessions);
-    if(fullyBookedDates.length > 0) {
-      this.setState({ fullyBookedDates: fullyBookedDates });
-    }
+  fetchBookingsByCount = () => {
+    return fetch("api/count")
+      .then((response) => response.json())
+      .then((fetchedBookings) => {
+        return fetchedBookings;
+      })
+      .catch((error) => {
+        // TODO: Handle error output to user, remove console.log
+        console.log(error);
+      });
   }
 
-  findDuplicateDates = (array) => {
-    let duplicateDates = [];
-    const lastIndex = array.length -1;
-    for (let i = 0; i < array.length; i++) {
-      if (i !== lastIndex) {
-        for (let p = i + 1; p < array.length; p++) {
-          if (array[i].date === array[p].date) {
-            duplicateDates.push(array[i].date);
-          }
-        }
-      }
-    }
-    return duplicateDates;
-  }
-
-  removeFromArray = (sessions, sessionToRemove) => {
-    return sessions.filter(session => session !== sessionToRemove);
-  }
-
-  findSessionForSelectedDate = (selectedDate) => {
-    const sessions = ['18:00', '21:00'];
+  findSessionsForSelectedDate = (selectedDate) => {
+    const defaultSessions = ["18:00", "21:00"];
 
     if(!selectedDate){
-      /** User has not changed date in the datepickes,
+      /** User has not selected a date,
        * which means they want to book today. */
       let today = moment();
-      selectedDate = this.formatDateString(today);
+      selectedDate = formatDateString(today);
     }
 
     if (this.state.fullyBookedSessions.length > 0) {
@@ -195,37 +76,131 @@ export default class Book extends Component{
       for (let i = 0; i < fullyBookedSessions.length; i++) {
         if (selectedDate === fullyBookedSessions[i].date) {
           let sessionToRemove = fullyBookedSessions[i].session;
-          let availableSessions = this.removeFromArray(sessions, sessionToRemove);
+          let availableSessions = removeFromArray(defaultSessions, sessionToRemove);
           this.setState({ availableSessions });
           return;
         }
         else {
           // No fully booked sessions on selected date, both sessions are available!
-          this.setState({ availableSessions: sessions });
+          this.setState({ availableSessions: defaultSessions });
         }
       }
     }
   }
 
-  render(){
-    console.group('State in Book.js:');
-      console.log('AvailableSessions: ', this.state.availableSessions);
-      console.log('FullyBookedDates: ', this.state.fullyBookedDates);
-      console.log('FullyBookedSessions: ', this.state.fullyBookedSessions);
-    console.groupEnd();
+  findFullyBookedDates = () => {
+    const { fullyBookedSessions } = this.state;
 
+    /** Check if there are two fully booked sessions on the same date,
+    that would mean there are no seats left either 18:00 or 21:00. */
+    let fullyBookedDates = findDuplicateDates(fullyBookedSessions);
+
+    if(fullyBookedDates.length > 0) {
+      this.setState({ fullyBookedDates });
+    }
+  }
+
+  createNewBooking = (event) => {
+    event.preventDefault();
+    const { booking } = this.state;
+    let requestBody = {
+      date: booking.date,
+      guests: booking.guests,
+      session: booking.session,
+      name: booking.name,
+      email: booking.email,
+      phone: booking.phone
+    }
+
+    fetch("/api/create_booking", {
+      headers: { "Content-Type": "application/json" },
+      method: "POST",
+      body: JSON.stringify(requestBody)
+    })
+    .then((response) => {
+      if(response.ok){
+        console.log("Booking added!") // TODO: Tell the user booking is confirmed! Show this somehow.
+      }
+    }).catch((error) => {
+      console.log(error); // TODO: Handle error output to user, remove console.log
+    });
+  }
+
+  // Called when user changes the input values of booking form.
+  updateBooking = (event) => {
+    let newValue = event.target.value;
+    switch(event.target.name){
+      case "create_guests":
+        this.setState({
+          booking: {
+            ...this.state.booking,
+            guests: newValue,
+          }
+        })
+        return;
+      case "create_session":
+        this.setState({
+          booking: {
+            ...this.state.booking,
+            session: newValue,
+          }
+        })
+        return;
+      case "create_name":
+        this.setState({
+          booking: {
+            ...this.state.booking,
+            name: newValue,
+          }
+        })
+        return;
+      case "create_email":
+        this.setState({
+          booking: {
+            ...this.state.booking,
+            email: newValue,
+          }
+        })
+        return;
+      case "create_phone":
+        this.setState({
+          booking: {
+            ...this.state.booking,
+            phone: newValue,
+          }
+        })
+        return;
+      default:
+        break;
+    }
+  }
+
+  /* updateDate() is called when user changes date in the datepicker.
+  * It's seperated from updateBooking() since multiple things happens onChange
+  * for the datepicker. It is not triggered by one onChange event in itself.
+  */
+  updateDate = (date) => {
+    this.setState({
+      booking: {
+        ...this.state.booking,
+        date: date,
+      }
+    })
+  }
+
+  render(){
+    const { fullyBookedDates, availableSessions } = this.state;
     return(
       <div className="wrapper">
         <h1 className="smallHeader">BOKA BORD</h1>
         <p>Ha så kult på restaurangen!</p>
         <BookingForm
-          setBookingToState={this.setBookingToState}
-          setNewDateToState={this.setNewDateToState}
-          createNewBooking={this.createNewBooking}
-          fullyBookedSessions={this.state.fullyBookedSessions}
-          findSessionForSelectedDate={this.findSessionForSelectedDate}
-          availableSessions={this.state.availableSessions}
-          fullyBookedDates={this.state.fullyBookedDates}
+          availableSessions={ availableSessions }
+          fullyBookedDates={ fullyBookedDates }
+          findSessionsForSelectedDate={ this.findSessionsForSelectedDate }
+          updateBooking={ this.updateBooking }
+          updateDate={ this.updateDate }
+          createNewBooking={ this.createNewBooking }
         />
       </div>
     )
