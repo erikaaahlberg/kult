@@ -1,8 +1,9 @@
 import React from 'react';
 
 export default function Selector (props) {
-  const { setBookingToState } = props;
-  const options = props.availableSessions.map((session) =>
+  const { setBookingToState, availableSessions } = props;
+
+  const options = availableSessions.map((session) =>
     <option key={session} value={session}>
       {session}
     </option>
