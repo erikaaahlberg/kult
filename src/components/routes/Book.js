@@ -22,6 +22,12 @@ export default class Book extends Component{
     this.sortBySession();
   }
 
+      // There are fully booked sessions, store them in state.
+      /** User has not selected a date,
+       * which means they want to book today. */
+          // No fully booked sessions on selected date, both sessions are available!
+    /** Check if there are two fully booked sessions on the same date,
+    that would mean there are no seats left either 18:00 or 21:00. */
   createNewBooking = (event) => {
     event.preventDefault();
     const { booking } = this.state;
@@ -48,13 +54,8 @@ export default class Book extends Component{
     });
   }
 
-  /** NOTE ON THE TWO FUNCTIONS BELOW:
-   * Called onChange in booking form and in calendar,
-   * used to set the input values to this state,
-   * which then can be used for createNewBooking
-   * Date is seperated since it needs to do multiple things onChange,
-   * and is not triggered by one onChange event in itself.
-   */
+  // Called when user changes the input values of booking form.
+  updateBooking = (event) => {
   setBookingToState = (event) => {
     let newValue = event.target.value;
     switch(event.target.name){
