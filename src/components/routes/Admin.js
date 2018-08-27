@@ -216,6 +216,15 @@ export default class Admin extends Component{
           setNewDateToState={this.setNewDateToState}
           fetchSelectedDate={this.fetchSelectedDate}
         />
+        <div className="bookingGrid">
+          <label htmlFor="update_date"><strong>Datum</strong></label>
+          <label htmlFor="update_guests"><strong>Antal</strong></label>
+          <label htmlFor="update_session"><strong>Sittning</strong></label>
+          <label htmlFor="update_name"><strong>Bokat av</strong></label>
+          <label htmlFor="update_email"><strong>E-mail</strong></label>
+          <label htmlFor="update_phone"><strong>Telefon</strong></label>
+          <strong>Redigera</strong>
+        </div>
         {this.renderBookings()}
       </div>
     )

@@ -3,31 +3,22 @@
   color: #25252f;
 }
 
-.bookingContainer {
-  margin-bottom: 10px;
-  padding: 20px;
-  width: 300px;
-  background-color: #f0f0f0;
-  border-radius: 15px;
+.bookingGrid {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 100px 50px 100px 250px 250px 150px 80px 80px;
 }
 
-.bookingContainer > p {
-  font-family: 'Courier New', Courier, monospace;
-  font-size: .8rem;
-  letter-spacing: .05rem;
+ul.bookingGrid {
+  padding-left: 0;
+  margin: 0;
+}
+
+.bookingGrid > li {
+  list-style: none;
 }
 
 .editBookingHeader {
   margin: 0;
   color: #25252f;
-}
-
-.editBooking {
-  padding-left: .53rem;
-  border: 0;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: .8rem;
-  color: blue;
-  letter-spacing: .05rem;
-  background-color: #f0f0f0;
 }
