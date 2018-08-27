@@ -11,10 +11,9 @@ export default function SingleEditableBooking(props){
     selectedBooking
   } = props;
   return(
-    <ul className="bookingGrid">
+    <ul className="booking">
       <li>
         <input
-          className="editBooking"
           value={selectedBooking.date}
           name="update_date"
           id="update_date"
@@ -23,7 +22,6 @@ export default function SingleEditableBooking(props){
       </li>
       <li>
         <input
-          className="editBooking"
           type="number"
           min="1"
           max="4"
@@ -35,7 +33,6 @@ export default function SingleEditableBooking(props){
       </li>
       <li>
         <select
-          className="editBooking"
           value={selectedBooking.session}
           name="update_session"
           id="update_session"
@@ -47,7 +44,6 @@ export default function SingleEditableBooking(props){
       </li>
       <li>
         <input
-          className="editBooking"
           value={selectedBooking.name}
           name="update_name"
           id="update_name"
@@ -56,7 +52,6 @@ export default function SingleEditableBooking(props){
       </li>
       <li>
         <input
-          className="editBooking"
           value={selectedBooking.email}
           name="update_email"
           id="update_email"
@@ -65,14 +60,12 @@ export default function SingleEditableBooking(props){
       </li>
       <li>
         <input
-          className="editBooking"
           value={selectedBooking.phone}
           name="update_phone"
           id="update_phone"
           onChange={updateSelectedBookingInState}
         />
         <input
-          className="editBooking"
           value={selectedBooking.id}
           readOnly
           name="id"

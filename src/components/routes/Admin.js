@@ -210,7 +210,7 @@ export default class Admin extends Component{
     const { bookingsOnSelectedDate, selectedBooking, selectedId } = this.state;
     if(bookingsOnSelectedDate < 1){
       return(
-        <p>Det finns inga bokningar det valda datumet.</p>
+        <p className="noBookings">Det finns inga bokningar det valda datumet.</p>
       )
     }
     else {
