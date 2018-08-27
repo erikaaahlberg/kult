@@ -1,4 +1,6 @@
 import React from "react";
+import Image from "../components/Image";
+import Pen from "../assets/images/pen.svg";
 
 export default function SingleEditableBooking(props){
   const { booking, selectBookingToEdit } = props;
@@ -10,7 +12,9 @@ export default function SingleEditableBooking(props){
       <li>{booking.name}</li>
       <li>{booking.email}</li>
       <li>{booking.phone}</li>
-      <li><button onClick={() => {selectBookingToEdit(booking)}}>Redigera</button></li>
+      <li>
+        <Image className="adminIcon" src={ Pen } alt="Edit" handleChange={() => {selectBookingToEdit(booking)}} />
+      </li>
     </ul>
   )
 };

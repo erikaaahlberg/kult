@@ -1,24 +1,45 @@
 .adminHeader {
-  margin: 0;
+  margin: 10px;
+  font-family: 'Circular-Black', sans-serif;
+  font-size: .8rem;
   color: #25252f;
+}
+
+.adminContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .bookingGrid {
-  display: grid;
-  height: 100%;
-  grid-template-columns: 100px 50px 100px 250px 250px 150px 80px 80px;
-}
-
-ul.bookingGrid {
   padding-left: 0;
   margin: 0;
+  display: grid;
+  font-family: 'Courier New', Courier, monospace;
+  grid-template-columns: 150px 70px 100px 250px 250px 150px 100px;
+}
+
+.bookingGrid > strong:nth-child(7) {
+  text-align: center;
 }
 
 .bookingGrid > li {
+  padding: 10px 0;
   list-style: none;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  align-items: center;
 }
 
-.editBookingHeader {
-  margin: 0;
-  color: #25252f;
+.bookingGrid > li:nth-child(7) {
+  justify-content: center;
+}
+
+.adminIcon {
+  height: 20px;
+  cursor: pointer;
+}
+
+.adminIcon:nth-child(2) {
+  margin-left: 15px;
 }
