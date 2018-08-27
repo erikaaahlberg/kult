@@ -182,7 +182,7 @@ export default class Admin extends Component{
       return;
     }
     return (
-      <div className="bookingGrid">
+      <div className="bookingsHeading">
         <label htmlFor="update_date">
           <strong>Datum</strong>
         </label>
@@ -247,7 +247,6 @@ export default class Admin extends Component{
             setNewDateToState={this.setNewDateToState}
             fetchSelectedDate={this.fetchSelectedDate}
           />
-          <br />
           {this.renderHeadings()}
           {this.renderBookings()}
         </div>

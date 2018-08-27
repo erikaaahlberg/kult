@@ -6,25 +6,37 @@
 }
 
 .adminContainer {
+  margin: 50px 0;
   display: flex;
   align-items: center;
   flex-direction: column;
 }
 
+.bookingsHeading,
 .bookingGrid {
   padding-left: 0;
   margin: 0;
   display: grid;
-  font-family: 'Courier New', Courier, monospace;
+  letter-spacing: .05rem;
   grid-template-columns: 150px 70px 100px 250px 250px 150px 100px;
 }
 
-.bookingGrid > strong:nth-child(7) {
+.bookingsHeading {
+  margin-top: 40px;
+  font-family: 'Circular-Black', sans-serif;
+}
+
+.bookingGrid {
+  font-family: 'Apercu-Mono', Courier, monospace;
+  font-size: .8rem;
+}
+
+.bookingsHeading > strong:nth-child(7) {
   text-align: center;
 }
 
 .bookingGrid > li {
-  padding: 10px 0;
+  height: 40px;
   list-style: none;
   border-bottom: 1px solid #f0f0f0;
   display: flex;
@@ -33,6 +45,36 @@
 
 .bookingGrid > li:nth-child(7) {
   justify-content: center;
+}
+
+.bookingGrid > li > input,
+.bookingGrid > li > select {
+  padding: 5px 0;
+  font-family: 'Apercu-Mono', Courier, monospace;
+  font-size: .8rem;
+  color: #1040E2;
+  letter-spacing: .05rem;
+  background-color: transparent;
+  border: 0;
+}
+
+.bookingGrid > li > select {
+  margin-top: 2px;
+  margin-left: -8px;
+}
+
+#update_date,
+#update_phone {
+  width: 140px;
+}
+
+#update_guests {
+  width: 50px;
+}
+
+#update_name,
+#update_email {
+  width: 220px;
 }
 
 .adminIcon {
