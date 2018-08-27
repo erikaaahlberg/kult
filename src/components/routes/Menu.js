@@ -1,5 +1,7 @@
 import React from "react";
 import "../../assets/styles/Meny.css";
+import { Link } from "react-router-dom";
+
 
 
 
@@ -20,10 +22,10 @@ export default function Menu(){
         <p class="text-align-center">&nbsp;LEMON VERBENA - SALT - OLIVE OIL</p>
           <p class="text-align-center"> </p>
           <p class="text-align-center">&nbsp;755 SEK</p>
-      <div className="buttonlink"><button className="button">
-
-        BOKA BORD
-     </button>
+      <div className="buttonlink">      
+      <Link to="/book">
+      <button className="button">BOKA BORD</button>
+      </Link>
      <p className="text-align-center">&nbsp;+46 7283941</p>
 
  </div>
