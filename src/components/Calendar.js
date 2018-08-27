@@ -8,9 +8,6 @@ import '../assets/styles/Datepicker.css';
 export default class Calendar extends Component{
   state = {
     startDate: moment(),
-    selectedDate: '',
-    allBookings: [],
-    fullyBookedDates: []
   }
 
   formatDateString = (unformatted) => {
@@ -28,12 +25,15 @@ export default class Calendar extends Component{
     });
 
     /** Component does not always recive these props,
-    avoid errors by first checking if it exists. */
+    avoid errors by first checking if they exist. */
     if(setNewDateToState){
       const newDate = this.formatDateString(date);
       setNewDateToState(newDate);
-      findSessionForSelectedDate(newDate);
+      if(findSessionForSelectedDate){
+        findSessionForSelectedDate(newDate);
+      }
     }
+
     if(fetchSelectedDate) {
       const formattedDateString = this.formatDateString(date);
       const encodedDate = encodeURIComponent(formattedDateString);
