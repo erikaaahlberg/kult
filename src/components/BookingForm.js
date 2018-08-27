@@ -100,7 +100,7 @@ export default function BookingForm(props){
           name="create_phone"
           id="create_phone"
         />
-        <button className="bookButton" onClick={createNewBooking} type="submit">Boka</button>
+        <button className="button" onClick={createNewBooking} type="submit">Boka</button>
       </div>
     </React.Fragment>
   )

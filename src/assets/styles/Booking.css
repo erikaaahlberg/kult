@@ -1,3 +1,7 @@
+.bookingWrapper {
+  margin-top: 20px;
+}
+
 .bookingWrapper > .container > div > label,
 .contactInfoWrapper > label {
   font-size: .5rem;
@@ -66,7 +70,7 @@ div.react-datepicker-wrapper > div > input {
   width: 25px;
 }
 
-button {
+.button {
   margin: 20px 0 0 0;
   padding: 0;
   width: 165px;
@@ -83,7 +87,7 @@ button {
   transition: background-color 400ms;
 }
 
-button:hover {
+.button:hover {
   background-color: #25252f;
   color: #fff;
 }

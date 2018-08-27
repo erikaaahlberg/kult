@@ -16,7 +16,7 @@ export default function Menu(){
         <p>&nbsp;LEMON VERBENA - SALT - OLIVE OIL</p>
         <p>&nbsp;755 SEK</p>    
         <Link to="/book">
-          <button>BOKA BORD</button>
+          <button className="button">BOKA BORD</button>
         </Link>
         <p className="text-align-center">&nbsp;+46 7283941</p>
       </div>
