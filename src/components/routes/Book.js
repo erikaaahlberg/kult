@@ -15,7 +15,7 @@ export default class Book extends Component{
     },
     fullyBookedSessions: [],
     fullyBookedDates: [],
-    availableSessions: []
+    availableSessions: ['18:00', '21:00'],
   }
 
   componentDidMount(){
@@ -179,16 +179,17 @@ export default class Book extends Component{
   }
 
   findSessionForSelectedDate = (selectedDate) => {
+    const sessions = ['18:00', '21:00'];
+
     if(!selectedDate){
       /** User has not changed date in the datepickes,
-       * which means they want to book today.*/
+       * which means they want to book today. */
       let today = moment();
       selectedDate = this.formatDateString(today);
     }
 
     if (this.state.fullyBookedSessions.length > 0) {
       const fullyBookedSessions = this.state.fullyBookedSessions;
-      const sessions = ['18:00', '21:00'];
 
       for (let i = 0; i < fullyBookedSessions.length; i++) {
         if (selectedDate === fullyBookedSessions[i].date) {
@@ -204,7 +205,6 @@ export default class Book extends Component{
       }
     }
   }
-  /*--------------Collapse----------------*/
 
   render(){
     console.group('State in Book.js:');
@@ -222,9 +222,9 @@ export default class Book extends Component{
           setNewDateToState={this.setNewDateToState}
           createNewBooking={this.createNewBooking}
           fullyBookedSessions={this.state.fullyBookedSessions}
-          findSessionForSelectedDate = {this.findSessionForSelectedDate}
+          findSessionForSelectedDate={this.findSessionForSelectedDate}
           availableSessions={this.state.availableSessions}
-          fullyBookedDates = {this.state.fullyBookedDates}
+          fullyBookedDates={this.state.fullyBookedDates}
         />
       </div>
     )
