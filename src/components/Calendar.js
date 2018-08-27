@@ -1,6 +1,7 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
+import { formatDateString } from '../helpers';
 import 'moment/locale/sv';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../assets/styles/Datepicker.css';
@@ -10,32 +11,23 @@ export default class Calendar extends Component{
     startDate: moment(),
   }
 
-  formatDateString = (unformatted) => {
-    return moment(unformatted).format('YYYY/MM/DD');
-  }
-
   handleChange = (date) => {
-    /** Import functions recived as props,
-     * setNewDateToState sets state to parent,
-     * which can be either Admin or Book. */
-    const { fetchSelectedDate, setNewDateToState, findSessionForSelectedDate } = this.props;
+    this.setState({ startDate: date }); // Store the new date in state
 
-    this.setState({
-      startDate: date,
-    });
-
-    /** Component does not always recive these props,
+     /** Component does not always recive these props,
     avoid errors by first checking if they exist. */
-    if(setNewDateToState){
-      const newDate = this.formatDateString(date);
-      setNewDateToState(newDate);
-      if(findSessionForSelectedDate){
-        findSessionForSelectedDate(newDate);
+    const { updateDate, fetchSelectedDate, findSessionsForSelectedDate } = this.props;
+
+    if(updateDate){
+      const newDate = formatDateString(date);
+      updateDate(newDate);
+      if(findSessionsForSelectedDate){
+        findSessionsForSelectedDate(newDate);
       }
     }
 
     if(fetchSelectedDate) {
-      const formattedDateString = this.formatDateString(date);
+      const formattedDateString = formatDateString(date);
       const encodedDate = encodeURIComponent(formattedDateString);
       fetchSelectedDate(encodedDate);
     }
