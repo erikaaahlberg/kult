@@ -1,7 +1,7 @@
 @media screen and (min-width: 747px) {
   #homeHeader {
     background: url(../images/stroke-zigzag-black.svg) bottom repeat-x;
-    background-size: auto 1rem;
+    background-size: auto .75rem;
   }
 
   .smallHeader {
@@ -10,7 +10,7 @@
   }
 
   .navbarVisible {
-    width: 30vw;
+    width: 300px;
   }
 
   .bookingWrapper {

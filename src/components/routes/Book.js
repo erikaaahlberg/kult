@@ -193,7 +193,6 @@ export default class Book extends Component{
     return(
       <div className="wrapper">
         <h1 className="smallHeader">BOKA BORD</h1>
-        <p>Ha så kult på restaurangen!</p>
         <BookingForm
           availableSessions={ availableSessions }
           fullyBookedDates={ fullyBookedDates }
