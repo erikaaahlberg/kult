@@ -67,34 +67,34 @@ export default function BookingForm(props){
           </select>
         </div>
       </div>
-      <br />
-      <p>
-        Innan din bokning kan genomföras – behöver <br /> vi veta lite mer om dig!
-      </p>
-      <label htmlFor="create_name">Namn</label>
-      <input
-        placeholder="Kult Svensson"
-        onChange={ updateBooking }
-        name="create_name"
-        id="create_name"
-      />
-      <br />
-      <label htmlFor="create_email">E-mail</label>
-      <input
-        placeholder="kult@gmail.com"
-        onChange={ updateBooking }
-        name="create_email"
-        id="create_email"
-      />
-      <br />
-      <label htmlFor="create_phone">Telefon</label>
-      <input
-        placeholder="+46 761234567"
-        onChange={ updateBooking }
-        name="create_phone"
-        id="create_phone"
-      />
-      <button className="bookButton" onClick={createNewBooking} type="submit">Boka</button>
+      <div className="contactInfoWrapper">
+        <p>
+          Innan din bokning kan genomföras – behöver
+          <br />vi veta lite mer om dig!
+        </p>
+        <label htmlFor="create_name">Namn</label>
+        <input
+          placeholder="Kult Svensson"
+          onChange={ updateBooking }
+          name="create_name"
+          id="create_name"
+        />
+        <label htmlFor="create_email">E-mail</label>
+        <input
+          placeholder="kult@gmail.com"
+          onChange={ updateBooking }
+          name="create_email"
+          id="create_email"
+        />
+        <label htmlFor="create_phone">Telefon</label>
+        <input
+          placeholder="+46 761234567"
+          onChange={ updateBooking }
+          name="create_phone"
+          id="create_phone"
+        />
+        <button className="bookButton" onClick={createNewBooking} type="submit">Boka</button>
+      </div>
     </React.Fragment>
   )
 }

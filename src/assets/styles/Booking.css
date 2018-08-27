@@ -3,11 +3,33 @@
   align-items: center;
 }
 
-.bookingWrapper > .container > label {
+.bookingWrapper > .container > label,
+.contactInfoWrapper > label {
   font-size: .5rem;
   color: #b7b7bd;
   text-transform: uppercase;
   letter-spacing: .1rem;
+}
+
+.contactInfoWrapper {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+#create_name,
+#create_email,
+#create_phone {
+  margin: 3px 0 10px 0;
+  padding-left: 5px;
+  width: 180px; 
+  height: 30px; 
+  font-size: 1rem;
+  letter-spacing: .05rem;
+  color: #25252f;
+  border: 1px solid #25252f;
 }
 
 div.react-datepicker-wrapper > div > input {
@@ -24,12 +46,12 @@ div.react-datepicker-wrapper > div > input {
   border: 0;
 }
 
-.bookingWrapper > .container >  select { 
+.bookingWrapper > .container > select { 
   position: relative;
   border: 1px solid #25252f;
 }
 
-.bookingWrapper > .container >  select { 
+.bookingWrapper > .container > select { 
   width: 150px; 
   height: 30px; 
   border-radius: 0;
@@ -52,7 +74,7 @@ div.react-datepicker-wrapper > div > input {
   margin-left: 0;
 }
 
-.bookButton {
+button {
   margin: 20px 0 0 0;
   padding: 0;
   width: 165px;
@@ -69,7 +91,7 @@ div.react-datepicker-wrapper > div > input {
   transition: background-color 400ms;
 }
 
-.bookButton:hover {
+button:hover {
   background-color: #25252f;
   color: #fff;
 }

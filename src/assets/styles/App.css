@@ -44,6 +44,10 @@ p {
   background-color: #fff;
 }
 
+.alignCenter {
+  text-align: center;
+}
+
 ::selection {
   background: #ffdd3e;
 }
