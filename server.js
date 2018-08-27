@@ -87,7 +87,7 @@ app.get('/api/count', (req, res) => {
         count: row.count
       }
     })
-    res.json(rows)
+    res.json(numberOfBookings)
   })
 })
 
