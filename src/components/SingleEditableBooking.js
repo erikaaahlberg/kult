@@ -5,10 +5,10 @@ import Image from "../components/Image";
 
 export default function SingleEditableBooking(props){
   const {
+    selectedBooking,
     updateSelectedBookingInState,
     updateSelectedBooking,
-    deleteSelectedBooking,
-    selectedBooking
+    confirmDeleteBooking,
   } = props;
   return(
     <ul className="booking">
@@ -74,8 +74,8 @@ export default function SingleEditableBooking(props){
         />
       </li>
       <li>
-        <Image className="adminIcon" src={ Check } alt="Delete" handleChange={updateSelectedBooking} />
-        <Image className="adminIcon" src={ TrashCan } alt="Delete" handleChange={deleteSelectedBooking} />
+        <Image className="adminIcon" src={ Check } alt="Done" handleChange={updateSelectedBooking} />
+        <Image className="adminIcon" src={ TrashCan } alt="Delete" handleChange={confirmDeleteBooking} />
       </li>
     </ul>
   )
