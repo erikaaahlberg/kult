@@ -3,7 +3,7 @@
 }
 
 .bookingWrapper > .container > div > label,
-.contactInfoWrapper > label {
+.contactInfoWrapper > label, .contactUsWrapper > .contactName > label {
   font-size: .5rem;
   color: #b7b7bd;
   text-transform: uppercase;
@@ -15,6 +15,61 @@
   justify-content: center;
   align-items: center;
 }
+/*********************contact***********/
+.contactUsWrapper{
+  padding: 20px;
+}
+.contactUsWrapper > p{
+  text-align: center;
+}
+.contactUsWrapper > label,
+.phone > label,
+.email > label,
+.contactMessage > label{
+  font-size: .5rem;
+  color: #b7b7bd;
+  text-transform: uppercase;
+  letter-spacing: .1rem;
+}
+
+.phoneEmail{
+  display: flex;
+  justify-content: space-between;
+}
+
+#contactName {
+  margin: 3px 0 10px 0;
+  padding-left: 5px;
+  width: 400px; 
+  height: 30px; 
+  font-size: 1rem;
+  letter-spacing: .05rem;
+  color: #25252f;
+  border: 1px solid #25252f;  
+}
+#contactEmail,
+#contactPhone {
+  margin: 3px 0 10px 0;
+  padding-left: 5px;
+  width: 190px; 
+  height: 30px; 
+  font-size: 1rem;
+  letter-spacing: .05rem;
+  color: #25252f;
+  border: 1px solid #25252f;  
+}
+#contactMessage {
+  margin: 3px 0 10px 0;
+  padding-left: 5px;
+  width: 400px; 
+  height: 100px; 
+  font-size: 1rem;
+  letter-spacing: .05rem;
+  color: #25252f;
+  border: 1px solid #25252f;  
+}
+
+/******************Contactend***********/
 
 .contactInfoWrapper {
   margin-top: 20px;
