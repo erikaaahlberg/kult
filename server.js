@@ -17,7 +17,7 @@ app.listen(3001, () => {
 })
 
 app.get('/api/bookings', (req, res) => {
-  const queryString = "SELECT * FROM bookings";
+  const queryString = "SELECT date FROM bookings";
 
   connection.query(queryString, (err, rows, fields) => {
     if (err) {
@@ -28,15 +28,7 @@ app.get('/api/bookings', (req, res) => {
     }
 
     const bookings = rows.map((row) => {
-      return {
-        id: row.id,
-        guests: row.guests,
-        date: row.date,
-        session: row.session,
-        name: row.name,
-        email: row.email,
-        phone: row.phone,
-      }
+      return row.date;
     })
     res.json(bookings)
   })

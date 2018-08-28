@@ -19,20 +19,28 @@ export default class Admin extends Component{
       name: null,
       email: null,
       phone: null
-    }
+    },
+    bookedDates: []
   }
 
+  /* ------- Added by Erika ------- */
   fetchAllBookings = () => {
     return fetch("api/bookings")
       .then((response) => response.json())
-        .then((fetchedBookings) => {
-          return fetchedBookings;
+        .then((bookedDates) => {
+          console.log(bookedDates);
+          this.setState({
+            bookedDates: bookedDates
+          });
+          console.log(this.state.bookedDates);
+          return bookedDates;
         })
         .catch((error) => {
           // TODO: Handle error output to user, remove console.log
           console.log(error);
         });
   }
+/* ------- Added by Erika collapse ------- */
 
   fetchSelectedDate = (date) => {
     fetch(`/api/bookings/date/${date}`)
@@ -104,6 +112,7 @@ export default class Admin extends Component{
   componentDidMount(){
     let date = this.encodedDate()
     this.fetchSelectedDate(date);
+    this.fetchAllBookings();
   }
 
   encodedDate = () => {
@@ -258,6 +267,7 @@ export default class Admin extends Component{
             showAdminCalendar={true}
             updateDate={this.updateDate}
             fetchSelectedDate={this.fetchSelectedDate}
+            bookedDates = { this.state.bookedDates }
           />
           {this.renderHeadings()}
           {this.renderBookings()}

@@ -55,6 +55,17 @@ export default class Calendar extends Component{
   */
   renderAdminDatePicker = () => {
     const { startDate } = this.state;
+    const { bookedDates } = this.props;
+    const { fullyBookedDates } = this.props;    
+    
+    const highlightedDates = [{"react-datepicker__day--highlighted-bookings"
+      : bookedDates
+    },
+    {
+      "react-datepicker__day--highlighted-fullyBooked": fullyBookedDates
+    }];
+
+    const tempArray = ["2018/08/30", "2018/08/29"];
     return(
       <React.Fragment>
         <DatePicker
@@ -62,6 +73,7 @@ export default class Calendar extends Component{
           dateFormat={'YYYY/MM/DD'}
           selected={startDate}
           onChange={this.handleChange}
+          highlightDates = { tempArray }
         />
       </React.Fragment>
     )
