@@ -124,3 +124,9 @@
 	-webkit-animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
           animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
+
+@media screen and (min-width: 747px) {
+  .navbarVisible {
+    width: 300px;
+  }
+}
