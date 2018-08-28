@@ -1,6 +1,4 @@
 import React, {Component} from "react";
-import "../../assets/styles/Desktop.css";
-import "../../assets/styles/Keyframes.css";
 import "../../assets/styles/Gdpr.css";
 import Image from "../Image";
 import CloseIcon from '../../assets/images/close.svg';
