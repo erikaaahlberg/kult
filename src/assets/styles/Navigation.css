@@ -1,5 +1,5 @@
 #navIcon {
-  background-color: #ebebf1;
+  background-color: #f0f0f0;
   width: 70px;
   height: 66px;
   position: fixed;
@@ -115,7 +115,7 @@
 .navbarVisible {
   width: 100vw;
   height: 100vh;
-  background-color: #ebebf1;
+  background-color: #f0f0f0;
   position: fixed;
   z-index: 2;
   top: 0;
