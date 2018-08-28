@@ -22,6 +22,18 @@ export default class Admin extends Component{
     }
   }
 
+  fetchAllBookings = () => {
+    return fetch("api/bookings")
+      .then((response) => response.json())
+        .then((fetchedBookings) => {
+          return fetchedBookings;
+        })
+        .catch((error) => {
+          // TODO: Handle error output to user, remove console.log
+          console.log(error);
+        });
+  }
+
   fetchSelectedDate = (date) => {
     fetch(`/api/bookings/date/${date}`)
     .then(response => response.json())
