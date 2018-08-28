@@ -22,3 +22,10 @@ export const findDuplicateDates = (array) => {
   }
   return duplicateDates;
 }
+
+export const transformDatesToMoment = (dateArray) => {
+  const transformed = dateArray.map((date) => {
+    return moment(date);
+  });
+  return transformed;
+}

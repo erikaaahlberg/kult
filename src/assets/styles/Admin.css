@@ -95,6 +95,19 @@
   margin-right: 15px;
 }
 
+.squareBox {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  margin-bottom: -5px;
+}
+.--yellow {
+  background: #ffdd3e;
+}
+.--red {
+  background: rgb(241, 53, 46);
+}
+
 @media screen and (min-width: 768px) {
   .bookingHeader {
     display: none;

@@ -1,21 +1,20 @@
 import React, { Component } from "react";
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
-import { formatDateString } from '../helpers';
+import { formatDateString, transformDatesToMoment } from './GlobalFunctions/Helpers';
 import 'moment/locale/sv';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../assets/styles/Datepicker.css';
 
 export default class Calendar extends Component{
   state = {
-    startDate: moment(),
-    fullyBookedDates: this.props
+    startDate: moment()
   }
 
   handleChange = (date) => {
     this.setState({ startDate: date }); // Store the new date in state
 
-     /** Component does not always recive these props,
+     /** Component does not always receive these props,
     avoid errors by first checking if they exist. */
     const { updateDate, fetchSelectedDate, findSessionsForSelectedDate } = this.props;
 
@@ -37,7 +36,6 @@ export default class Calendar extends Component{
   renderBookingDatePicker = () => {
     const { startDate } = this.state;
     const { fullyBookedDates } = this.props;
-    console.log(fullyBookedDates);
     return(
       <React.Fragment>
         <DatePicker
@@ -57,17 +55,13 @@ export default class Calendar extends Component{
   */
   renderAdminDatePicker = () => {
     const { startDate } = this.state;
-    const { bookedDates } = this.props;
-    const { fullyBookedDates } = this.props;  
-    console.log(bookedDates);  
-    console.log(fullyBookedDates);
-    console.log(this.state.fullyBookedDates);
+    const { bookedDates, fullyBookedDates } = this.props;  
     
     const highlightedDates = [{"react-datepicker__day--highlighted-bookings"
-      : bookedDates
+      : transformDatesToMoment(bookedDates)
     },
     {
-      "react-datepicker__day--highlighted-fullyBooked": fullyBookedDates
+      "react-datepicker__day--highlighted-fullyBooked": transformDatesToMoment(fullyBookedDates)
     }];
 
     const tempArray = ["2018/08/30", "2018/08/29"];
@@ -78,7 +72,7 @@ export default class Calendar extends Component{
           dateFormat={'YYYY/MM/DD'}
           selected={startDate}
           onChange={this.handleChange}
-          dayClassName={date => date.date() < Math.random() * 31 ? 'random' : undefined}
+          highlightDates = { highlightedDates }
         />
       </React.Fragment>
     )

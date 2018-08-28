@@ -108,15 +108,11 @@ div.react-datepicker__day--sun.react-datepicker__day--disabled:hover {
 }
 
 /*-----Erika test-----*/
-.react-datepicker__day--highlighted {
-  color: red;
-}
-
 .react-datepicker__day--highlighted-bookings {
-  color: red;
+  background: #ffdd3e;
 }
 
 .react-datepicker__day--highlighted-fullyBooked {
-  color: green;
+  background: rgb(238, 71, 71);
 }
 /*-----Erika test collapse-----*/

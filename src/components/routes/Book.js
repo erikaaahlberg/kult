@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import moment from "moment";
-import { removeFromArray, formatDateString, findDuplicateDates } from '../../helpers';
+import { removeFromArray, formatDateString } from '../GlobalFunctions/Helpers';
+/*---ERIKA--- */
 import { fetchBookingsByCount } from '../GlobalFunctions/Fetch';
+import { filterFullyBookedSessions, filterDuplicateDates } from '../GlobalFunctions/Filter';
+/*---ERIKA--- */
 import BookingForm from "../BookingForm";
 
 export default class Book extends Component{
@@ -21,34 +24,27 @@ export default class Book extends Component{
   }
 
   componentDidMount(){
-    this.findFullyBookedSessions();
+    this.sortBookings();
+    this.findSessionsForSelectedDate();
   }
 
-  findFullyBookedSessions = () => {
-    this.fetchBookingsByCount()
-    .then((fetchedBookings) => {
-      let fullyBookedSessions = [];
+  sortBookings = () => {
+    fetchBookingsByCount()
+      .then((fetchedBookings) => {
+        /* First filter fully booked sessions, if any, then filter fully booked dates. All to be excluded in datepicker */
+        let fullyBookedSessions = filterFullyBookedSessions(fetchedBookings);
 
-      for (let i = 0; i < fetchedBookings.length; i++) {
-        let numberOfBookings = fetchedBookings[i].count;
-
-        if (numberOfBookings === 5) {
-          fullyBookedSessions.push({
-            date: fetchedBookings[i].date,
-            session: fetchedBookings[i].session
-          });
+        // There are fully booked sessions, store them in state.
+        if (fullyBookedSessions.length > 0) {
+          this.setState({ fullyBookedSessions });
+          const fullyBookedDates = filterDuplicateDates(fullyBookedSessions);
+          if(fullyBookedDates.length > 0) {
+            this.setState({ fullyBookedDates });
+          }
         }
-      }
-
-      // There are fully booked sessions, store them in state.
-      if (fullyBookedSessions.length > 0) {
-        this.setState({ fullyBookedSessions });
-        this.findFullyBookedDates();
-        this.findSessionsForSelectedDate();
-      }
-    });
+      });
   }
-
+/*
   fetchBookingsByCount = () => {
     return fetch("api/count")
       .then((response) => response.json())
@@ -60,7 +56,7 @@ export default class Book extends Component{
         console.log(error);
       });
   }
-
+*/
   findSessionsForSelectedDate = (selectedDate) => {
     const defaultSessions = ["18:00", "21:00"];
 
@@ -88,19 +84,19 @@ export default class Book extends Component{
       }
     }
   }
-
+/*
   findFullyBookedDates = () => {
     const { fullyBookedSessions } = this.state;
 
     /** Check if there are two fully booked sessions on the same date,
-    that would mean there are no seats left either 18:00 or 21:00. */
+    that would mean there are no seats left either 18:00 or 21:00. 
     let fullyBookedDates = findDuplicateDates(fullyBookedSessions);
 
     if(fullyBookedDates.length > 0) {
       this.setState({ fullyBookedDates });
     }
   }
-
+*/
   createNewBooking = (event) => {
     event.preventDefault();
     const { booking } = this.state;
