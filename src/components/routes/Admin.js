@@ -253,7 +253,7 @@ export default class Admin extends Component{
     return(
       <React.Fragment>
         <h1 className="adminHeader">Administratör</h1>
-        <div className="adminContainer">
+        <div className="adminWrapper">
           <Calendar
             showAdminCalendar={true}
             updateDate={this.updateDate}
