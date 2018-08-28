@@ -2,13 +2,14 @@ import React, {Component} from "react";
 import moment from "moment";
 import "../../assets/styles/Admin.css";
 import Calendar from "../Calendar";
-import SingleBooking from '../SingleBooking';
-import SingleEditableBooking from '../SingleEditableBooking';
+import Modal from "../Modal";
+import SingleBooking from "../SingleBooking";
+import SingleEditableBooking from "../SingleEditableBooking";
 
 export default class Admin extends Component{
 
   state = {
-    selectedDate: moment().format('YYYY/MM/DD'),
+    selectedDate: moment().format("YYYY/MM/DD"),
     bookingsOnSelectedDate: [],
     selectedId: null,
     selectedBooking: {
@@ -19,6 +20,11 @@ export default class Admin extends Component{
       name: null,
       email: null,
       phone: null
+    },
+    modal: {
+      showRegularModal: true,
+      showModal: false,
+      message: null,
     }
   }
 
@@ -28,9 +34,9 @@ export default class Admin extends Component{
     .then((bookingsOnSelectedDate) => {
       this.setState({bookingsOnSelectedDate})
     })
-    .catch((error) => {
-      // TODO: Handle error output to user, remove console.log
-      console.log(error);
+    .catch(() => {
+      const message = "Det går inte att hämta bokningar just nu."
+      this.triggerShowModal(message, true);
     });
   }
 
@@ -47,10 +53,18 @@ export default class Admin extends Component{
       id: selectedBooking.id
     }
 
-    fetch('/api/update_booking', {
-      headers: { 'Content-Type': 'application/json' },
-      method: 'PUT',
+    fetch("/api/update_booking", {
+      headers: { "Content-Type": "application/json" },
+      method: "PUT",
       body: JSON.stringify(requestBody)
+    })
+    .then((response) => {
+      if (response.ok){
+        return;
+      } else {
+        const message = "Det gick inte att uppdatera. Försök igen."
+        this.triggerShowModal(message, true);
+      }
     })
     .then(() => {
       let date = this.encodedDate()
@@ -58,24 +72,28 @@ export default class Admin extends Component{
       this.fetchSelectedDate(date)
       // Reset selected id so all bookings render as editable again.
       this.setState({selectedId: null})
-    })
-    .catch((error) => {
-      console.log(error); // TODO: Handle error output to user, remove console.log
     });
   }
 
 
-  deleteSelectedBooking = (event) => {
-    event.preventDefault();
+  deleteSelectedBooking = () => {
     const { selectedBooking } = this.state;
     const requestBody = {
       id: selectedBooking.id
     }
 
-    fetch('/api/delete_booking', {
-      headers: { 'Content-Type': 'application/json' },
-      method: 'DELETE',
+    fetch("/api/delete_booking", {
+      headers: { "Content-Type": "application/json" },
+      method: "DELETE",
       body: JSON.stringify(requestBody)
+    })
+    .then((response) => {
+      if (response.ok){
+        return;
+      } else {
+        const message = "Det gick inte att ta bort bokningen. Försök igen."
+        this.triggerShowModal(message, true);
+      }
     })
     .then(() => {
       let date = this.encodedDate()
@@ -84,9 +102,6 @@ export default class Admin extends Component{
       // Reset selected id so all bookings render as editable again.
       this.setState({selectedId: null})
     })
-    .catch((error) => {
-      console.log(error); // TODO: Handle error output to user, remove console.log
-    });
   }
 
   componentDidMount(){
@@ -123,7 +138,7 @@ export default class Admin extends Component{
     let newValue = event.target.value;
 
     switch(event.target.name){
-      case 'update_date':
+      case "update_date":
         this.setState({
           selectedBooking: {
               ...this.state.selectedBooking,
@@ -131,7 +146,7 @@ export default class Admin extends Component{
           }
         })
         return;
-      case 'update_guests':
+      case "update_guests":
         this.setState({
           selectedBooking: {
               ...this.state.selectedBooking,
@@ -139,7 +154,7 @@ export default class Admin extends Component{
           }
         })
         return;
-      case 'update_session':
+      case "update_session":
         this.setState({
           selectedBooking: {
               ...this.state.selectedBooking,
@@ -147,7 +162,7 @@ export default class Admin extends Component{
           }
         })
         return;
-      case 'update_name':
+      case "update_name":
         this.setState({
           selectedBooking: {
               ...this.state.selectedBooking,
@@ -155,7 +170,7 @@ export default class Admin extends Component{
           }
         })
         return;
-      case 'update_email':
+      case "update_email":
         this.setState({
           selectedBooking: {
               ...this.state.selectedBooking,
@@ -163,7 +178,7 @@ export default class Admin extends Component{
           }
         })
         return;
-      case 'update_phone':
+      case "update_phone":
         this.setState({
           selectedBooking: {
               ...this.state.selectedBooking,
@@ -174,6 +189,20 @@ export default class Admin extends Component{
       default:
         break;
     }
+  }
+
+  triggerShowModal = (message, showRegularModal) => {
+    this.setState({
+      modal: {
+        message,
+        showRegularModal,
+        showModal: true,
+      }
+    })
+  }
+
+  closeModal = () => {
+    this.setState({ modal: { showModal: false } });
   }
 
   renderHeadings = () => {
@@ -208,9 +237,12 @@ export default class Admin extends Component{
 
   renderBookings = () => {
     const { bookingsOnSelectedDate, selectedBooking, selectedId } = this.state;
-    if(bookingsOnSelectedDate < 1){
+
+    if (bookingsOnSelectedDate < 1) {
       return(
-        <p className="noBookings">Det finns inga bokningar det valda datumet.</p>
+        <p className="noBookings">
+          Det finns inga bokningar det valda datumet.
+        </p>
       )
     }
     else {
@@ -222,7 +254,7 @@ export default class Admin extends Component{
               selectedBooking={selectedBooking}
               updateSelectedBookingInState={this.updateSelectedBookingInState}
               updateSelectedBooking={this.updateSelectedBooking}
-              deleteSelectedBooking={this.deleteSelectedBooking}
+              confirmDeleteBooking={this.confirmDeleteBooking}
             />
           )
         }
@@ -238,17 +270,29 @@ export default class Admin extends Component{
   }
 
   render(){
+    const { showModal, showRegularModal, message } = this.state.modal;
     return(
       <React.Fragment>
         <h1 className="adminHeader">Administratör</h1>
         <div className="adminContainer">
+
+          <Modal
+            showRegularModal={ showRegularModal }
+            modalState={ showModal }
+            message={ message }
+            closeModal={ this.closeModal }
+            clearPage={ this.clearPage }
+          />
+
           <Calendar
             showAdminCalendar={true}
             updateDate={this.updateDate}
             fetchSelectedDate={this.fetchSelectedDate}
           />
+
           {this.renderHeadings()}
           {this.renderBookings()}
+
         </div>
       </React.Fragment>
     )
