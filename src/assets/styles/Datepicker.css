@@ -108,7 +108,7 @@ div.react-datepicker__day--sun.react-datepicker__day--disabled:hover {
 }
 
 /*-----Erika test-----*/
-div.react-datepicker__day--highlighted {
+.react-datepicker__day--highlighted {
   color: red;
 }
 

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import moment from "moment";
 import { removeFromArray, formatDateString, findDuplicateDates } from '../../helpers';
+import { fetchBookingsByCount } from '../GlobalFunctions/Fetch';
 import BookingForm from "../BookingForm";
 
 export default class Book extends Component{

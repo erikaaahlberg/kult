@@ -25,15 +25,15 @@ export default class Admin extends Component{
 
   /* ------- Added by Erika ------- */
   fetchAllBookings = () => {
-    return fetch("api/bookings")
+    return fetch("api/count")
       .then((response) => response.json())
         .then((bookedDates) => {
           console.log(bookedDates);
-          this.setState({
+          /*this.setState({
             bookedDates: bookedDates
           });
           console.log(this.state.bookedDates);
-          return bookedDates;
+          return bookedDates;*/
         })
         .catch((error) => {
           // TODO: Handle error output to user, remove console.log

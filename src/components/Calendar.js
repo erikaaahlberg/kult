@@ -9,6 +9,7 @@ import '../assets/styles/Datepicker.css';
 export default class Calendar extends Component{
   state = {
     startDate: moment(),
+    fullyBookedDates: this.props
   }
 
   handleChange = (date) => {
@@ -36,6 +37,7 @@ export default class Calendar extends Component{
   renderBookingDatePicker = () => {
     const { startDate } = this.state;
     const { fullyBookedDates } = this.props;
+    console.log(fullyBookedDates);
     return(
       <React.Fragment>
         <DatePicker
@@ -56,7 +58,10 @@ export default class Calendar extends Component{
   renderAdminDatePicker = () => {
     const { startDate } = this.state;
     const { bookedDates } = this.props;
-    const { fullyBookedDates } = this.props;    
+    const { fullyBookedDates } = this.props;  
+    console.log(bookedDates);  
+    console.log(fullyBookedDates);
+    console.log(this.state.fullyBookedDates);
     
     const highlightedDates = [{"react-datepicker__day--highlighted-bookings"
       : bookedDates
@@ -73,7 +78,7 @@ export default class Calendar extends Component{
           dateFormat={'YYYY/MM/DD'}
           selected={startDate}
           onChange={this.handleChange}
-          highlightDates = { tempArray }
+          dayClassName={date => date.date() < Math.random() * 31 ? 'random' : undefined}
         />
       </React.Fragment>
     )
