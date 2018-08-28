@@ -1,7 +1,6 @@
 import React from "react";
 import 'react-datepicker/dist/react-datepicker.css';
 import "../assets/styles/Booking.css";
-import "../assets/styles/Desktop.css";
 import ClockIcon from "../assets/images/clock.png";
 import CalendarIcon from"../assets/images/calendar.svg";
 import UserIcon from"../assets/images/user.png";
@@ -10,12 +9,15 @@ import Calendar from "./Calendar";
 import Image from "./Image";
 
 export default function BookingForm(props){
-  const { createNewBooking,
+  const { 
+    createNewBooking,
     updateBooking,
     updateDate,
     findSessionsForSelectedDate,
     availableSessions,
-    fullyBookedDates } = props;
+    fullyBookedDates 
+  } = props;
+
   return(
     <React.Fragment>
       <div className="bookingWrapper">

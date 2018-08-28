@@ -28,6 +28,18 @@ export default class Admin extends Component{
     }
   }
 
+  fetchAllBookings = () => {
+    return fetch("api/bookings")
+      .then((response) => response.json())
+        .then((fetchedBookings) => {
+          return fetchedBookings;
+        })
+        .catch((error) => {
+          // TODO: Handle error output to user, remove console.log
+          console.log(error);
+        });
+  }
+
   fetchSelectedDate = (date) => {
     fetch(`/api/bookings/date/${date}`)
     .then(response => response.json())
@@ -219,7 +231,7 @@ export default class Admin extends Component{
       return;
     }
     return (
-      <div className="bookingsHeading">
+      <div className="bookingHeading">
         <label htmlFor="update_date">
           <strong>Datum</strong>
         </label>
@@ -281,8 +293,8 @@ export default class Admin extends Component{
     const { showModal, showRegularModal, message } = this.state.modal;
     return(
       <React.Fragment>
-        <h1 className="adminHeader">Administratör</h1>
-        <div className="adminContainer">
+        <div className="adminWrapper">
+          <h1 className="adminHeader">Administratör</h1>
 
           <Modal
             showRegularModal={ showRegularModal }
