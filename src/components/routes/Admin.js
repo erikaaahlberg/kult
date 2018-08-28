@@ -194,7 +194,7 @@ export default class Admin extends Component{
       return;
     }
     return (
-      <div className="bookingsHeading">
+      <div className="bookingHeading">
         <label htmlFor="update_date">
           <strong>Datum</strong>
         </label>

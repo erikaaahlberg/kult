@@ -12,35 +12,34 @@
   flex-direction: column;
 }
 
-.bookingsHeading,
-.booking {
-  padding-left: 0;
-  margin: 0;
-  display: grid;
-  letter-spacing: .05rem;
-  grid-template-columns: 150px 70px 100px 250px 250px 150px 100px;
-}
-
-.bookingsHeading {
-  margin-top: 40px;
+.bookingHeader {
+  margin: 20px 0 0 0;
   font-family: 'Circular-Black', sans-serif;
 }
 
+div.adminContainer > h2:nth-child(3) {
+  margin-top: 40px;
+}
+
+.bookingHeading {
+  display: none;
+}
+
 .booking {
+  padding-left: 0;
   font-family: 'Apercu-Mono', Courier, monospace;
   font-size: .8rem;
 }
 
-.bookingsHeading > strong:nth-child(7) {
-  text-align: center;
-}
-
 .booking > li {
-  height: 40px;
+  height: 25px;
+  letter-spacing: .05rem;
   list-style: none;
-  border-bottom: 1px solid #f0f0f0;
   display: flex;
   align-items: center;
+  justify-content: center;
+  display: grid;
+  grid-template-columns: 100px 200px;
 }
 
 .booking > li:nth-child(7) {
@@ -59,8 +58,15 @@
 }
 
 .booking > li > select {
-  margin-top: 2px;
+  margin-top: 0px;
   margin-left: -8px;
+}
+
+.booking > li > span {
+  max-width: 25ch;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .noBookings {
@@ -73,7 +79,7 @@
 }
 
 #update_guests {
-  width: 50px;
+  width: 30px;
 }
 
 #update_name,
@@ -86,6 +92,72 @@
   cursor: pointer;
 }
 
-.adminIcon:nth-child(2) {
-  margin-left: 15px;
+.adminIcon:nth-child(1) {
+  margin-right: 15px;
+}
+
+@media screen and (min-width: 768px) {
+  .bookingHeader {
+    display: none;
+  }
+
+  .bookingHeading,
+  .booking {
+    padding-left: 0;
+    margin: 0;
+    letter-spacing: .05rem;
+    display: grid;
+    grid-template-columns: 95px 55px 80px 150px 150px 130px 70px;
+  }
+
+  .bookingHeading {
+    margin-top: 40px;
+    font-family: 'Circular-Black', sans-serif;
+  }
+
+  .bookingHeading > strong {
+    display: block;
+  }
+
+  .deviceHeading {
+    display: none;
+  }
+
+  .booking > li {
+    height: 40px;
+    display: flex;
+    justify-content: flex-start;
+    border-bottom: 1px solid #f0f0f0;    
+  }
+
+  .booking > li:nth-child(2) {
+    padding-left: 18px;
+  }
+
+  .booking > li > select {
+    margin-top: 2px;
+    margin-left: -8px;
+  }
+
+  .booking > li > span {
+    max-width: 18ch;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+@media screen and (min-width: 930px) {
+  .bookingHeading,
+  .booking {
+    grid-template-columns: 120px 70px 90px 200px 200px 130px 100px;
+  }
+  
+  .bookingHeading > strong:nth-child(7) {
+    text-align: center;
+  }
+
+  .booking > li > span {
+    max-width: 23ch;
+  }
 }
