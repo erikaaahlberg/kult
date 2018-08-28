@@ -75,6 +75,14 @@ export default class Admin extends Component{
     });
   }
 
+  confirmDeleteBooking = () => {
+    let confirmed = window.confirm("Vill du verkligen ta bort bokningen?");
+    if (!confirmed) {
+      return;
+    } else {
+      this.deleteSelectedBooking();
+    }
+  }
 
   deleteSelectedBooking = () => {
     const { selectedBooking } = this.state;
