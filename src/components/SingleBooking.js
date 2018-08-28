@@ -1,24 +1,32 @@
 import React from "react";
 import Image from "../components/Image";
+import BookingListItem from "../components/BookingListItem";
 import Pen from "../assets/images/pen.svg";
 
 export default function SingleEditableBooking(props){
   const { booking, selectBookingToEdit } = props;
   return(
-    <ul className="booking" key={booking.id}>
-      <li>{booking.date}</li>
-      <li>{booking.guests}</li>
-      <li>{booking.session}</li>
-      <li>
-        <span>{booking.name}</span>
-      </li>
-      <li>
-        <span>{booking.email}</span>
-      </li>
-      <li>{booking.phone}</li>
-      <li>
-        <Image className="adminIcon" src={ Pen } alt="Edit" handleChange={() => {selectBookingToEdit(booking)}} />
-      </li>
-    </ul>
+    <React.Fragment>
+      <h2 className="bookingHeader">Bokning:</h2>
+      <ul className="booking" key={booking.id}>
+        <BookingListItem title="Datum" item={booking.date} />
+        <BookingListItem title="Antal" item={booking.guests} />
+        <BookingListItem title="Sittning" item={booking.session} />
+        <BookingListItem title="Namn" item={ <span>{booking.name}</span> } />
+        <BookingListItem title="E-mail" item={ <span>{booking.email}</span> } />
+        <BookingListItem title="Telefon" item={booking.phone} />
+        <BookingListItem 
+          title="Redigera" 
+          item={ 
+            <Image 
+              className="adminIcon"
+              src={ Pen } 
+              alt="Edit" 
+              handleChange={() => {selectBookingToEdit(booking)}} 
+            />
+          }
+        />
+      </ul>
+    </React.Fragment>
   )
 };
