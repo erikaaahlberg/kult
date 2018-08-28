@@ -203,7 +203,7 @@ export default class Admin extends Component{
       return;
     }
     return (
-      <div className="bookingsHeading">
+      <div className="bookingHeading">
         <label htmlFor="update_date">
           <strong>Datum</strong>
         </label>
@@ -262,7 +262,7 @@ export default class Admin extends Component{
     return(
       <React.Fragment>
         <h1 className="adminHeader">Administratör</h1>
-        <div className="adminContainer">
+        <div className="adminWrapper">
           <Calendar
             showAdminCalendar={true}
             updateDate={this.updateDate}

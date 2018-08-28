@@ -54,3 +54,15 @@ p {
 ::selection {
   background: #ffdd3e;
 }
+
+@media screen and (min-width: 747px) {
+  #homeHeader {
+    background: url(../images/stroke-zigzag-black.svg) bottom repeat-x;
+    background-size: auto .75rem;
+  }
+
+  .smallHeader {
+    font-size: 4rem;
+    background: url(../images/stroke-zigzag-black.svg) bottom repeat-x;
+  }
+}
