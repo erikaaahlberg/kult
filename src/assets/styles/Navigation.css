@@ -1,10 +1,11 @@
 #navIcon {
-  width: 50px;
-  height: 25px;
+  background-color: #f0f0f0;
+  width: 70px;
+  height: 66px;
   position: fixed;
   z-index: 3;
-  top: 35px;
-  right: 35px;
+  top: 0px;
+  right: 0px;
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
   -o-transform: rotate(0deg);
@@ -19,8 +20,10 @@
 #navIcon span {
   display: block;
   position: absolute;
+  margin-top: 21px;
+  margin-left: 10px;
   height: 1px;
-  width: 100%;
+  width: 50px;
   background: #25252f;
   opacity: 1;
   left: 0;
@@ -112,7 +115,7 @@
 .navbarVisible {
   width: 100vw;
   height: 100vh;
-  background-color: #ebebf1;
+  background-color: #f0f0f0;
   position: fixed;
   z-index: 2;
   top: 0;
