@@ -2,10 +2,14 @@ import React, { Component } from "react";
 import moment from "moment";
 import { removeFromArray, formatDateString, findDuplicateDates } from '../../helpers';
 import BookingForm from "../BookingForm";
+import Modal from "../Modal";
 
 export default class Book extends Component{
 
   state = {
+    fullyBookedSessions: [],
+    fullyBookedDates: [],
+    availableSessions: ["18:00", "21:00"],
     booking: {
       date: moment().format("YYYY/MM/DD"),
       guests: 1, // Needs this as intial default value.
@@ -14,9 +18,11 @@ export default class Book extends Component{
       email: null,
       phone: null
     },
-    fullyBookedSessions: [],
-    fullyBookedDates: [],
-    availableSessions: ["18:00", "21:00"]
+    modal: {
+      showRegularModal: true,
+      showModal: false,
+      message: null,
+    }
   }
 
   componentDidMount(){
@@ -26,6 +32,9 @@ export default class Book extends Component{
   findFullyBookedSessions = () => {
     this.fetchBookingsByCount()
     .then((fetchedBookings) => {
+      if(!fetchedBookings){
+        return;
+      }
       let fullyBookedSessions = [];
 
       for (let i = 0; i < fetchedBookings.length; i++) {
@@ -54,9 +63,10 @@ export default class Book extends Component{
       .then((fetchedBookings) => {
         return fetchedBookings;
       })
-      .catch((error) => {
-        // TODO: Handle error output to user, remove console.log
-        console.log(error);
+      .catch(() => {
+        const message = `Bokningssystemet fungerar inte för tillfället
+          – vi ber om ursäkt. Du kan även nå oss på telefon. Läs mer under `
+        this.triggerShowModal(message, false);
       });
   }
 
@@ -118,11 +128,17 @@ export default class Book extends Component{
       body: JSON.stringify(requestBody)
     })
     .then((response) => {
+      const { name, date, session } = this.state.booking;
+
       if(response.ok){
-        console.log("Booking added!") // TODO: Tell the user booking is confirmed! Show this somehow.
+        const message = `Tack ${name} för din bokning!
+          Välkommen till Kult den ${date} kl.${session}.
+          Vi ser fram emot besöket!`;
+        this.triggerShowModal(message, true)
+      } else {
+        const message = "Bokningen misslyckades, försök igen.";
+        this.triggerShowModal(message, true)
       }
-    }).catch((error) => {
-      console.log(error); // TODO: Handle error output to user, remove console.log
     });
   }
 
@@ -188,11 +204,40 @@ export default class Book extends Component{
     })
   }
 
+  triggerShowModal = (message, showRegularModal) => {
+    this.setState({
+      modal: {
+        message,
+        showRegularModal,
+        showModal: true,
+      }
+    })
+  }
+
+  closeModal = () => {
+    this.setState({ modal: { showModal: false } });
+  }
+
+  clearPage = () => {
+    window.location.reload();
+  }
+
   render(){
     const { fullyBookedDates, availableSessions } = this.state;
+    const { showModal, showRegularModal, message } = this.state.modal;
+
     return(
       <div className="wrapper">
         <h1 className="smallHeader">BOKA BORD</h1>
+
+        <Modal
+          showRegularModal={ showRegularModal }
+          modalState={ showModal }
+          message={ message }
+          closeModal={ this.closeModal }
+          clearPage={ this.clearPage }
+        />
+
         <BookingForm
           availableSessions={ availableSessions }
           fullyBookedDates={ fullyBookedDates }
@@ -201,6 +246,7 @@ export default class Book extends Component{
           updateDate={ this.updateDate }
           createNewBooking={ this.createNewBooking }
         />
+
       </div>
     )
   }
