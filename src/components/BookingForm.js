@@ -10,12 +10,15 @@ import Calendar from "./Calendar";
 import Image from "./Image";
 
 export default function BookingForm(props){
-  const { createNewBooking,
+  const { 
+    createNewBooking,
     updateBooking,
     updateDate,
     findSessionsForSelectedDate,
     availableSessions,
-    fullyBookedDates } = props;
+    fullyBookedDates 
+  } = props;
+
   return(
     <React.Fragment>
       <div className="bookingWrapper">

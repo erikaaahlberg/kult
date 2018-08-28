@@ -9,8 +9,12 @@ export default function SingleEditableBooking(props){
       <li>{booking.date}</li>
       <li>{booking.guests}</li>
       <li>{booking.session}</li>
-      <li>{booking.name}</li>
-      <li>{booking.email}</li>
+      <li>
+        <span>{booking.name}</span>
+      </li>
+      <li>
+        <span>{booking.email}</span>
+      </li>
       <li>{booking.phone}</li>
       <li>
         <Image className="adminIcon" src={ Pen } alt="Edit" handleChange={() => {selectBookingToEdit(booking)}} />
