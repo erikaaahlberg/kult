@@ -69,6 +69,7 @@ div.react-datepicker__day--selected {
   margin: 0;
   padding: 0.166rem;
   background-color: #25252f;
+  color: #fff;
   border-radius: 0;
 }
 
@@ -107,12 +108,46 @@ div.react-datepicker__day--sun.react-datepicker__day--disabled:hover {
   border-radius: 0;
 }
 
-/*-----Erika test-----*/
-.react-datepicker__day--highlighted-bookings {
-  background: #ffdd3e;
+div.react-datepicker__day.react-datepicker__day--sat.react-datepicker__day--weekend.bookings,
+div.react-datepicker__day.react-datepicker__day--sun.react-datepicker__day--weekend.bookings {
+  background-color: #ffd33c;
 }
 
-.react-datepicker__day--highlighted-fullyBooked {
-  background: rgb(238, 71, 71);
+div.react-datepicker__day.react-datepicker__day--sat.react-datepicker__day--weekend.fullyBooked,
+div.react-datepicker__day.react-datepicker__day--sun.react-datepicker__day--weekend.fullyBooked {
+  background-color: #c02427;
 }
-/*-----Erika test collapse-----*/
+
+div.react-datepicker__day--selected.bookings:hover,
+div.react-datepicker__day--selected.fullyBooked:hover,
+div.react-datepicker__day.react-datepicker__day--sat.react-datepicker__day--selected.react-datepicker__day--weekend.bookings,
+div.react-datepicker__day.react-datepicker__day--sun.react-datepicker__day--selected.react-datepicker__day--weekend.bookings,
+div.react-datepicker__day.react-datepicker__day--sat.react-datepicker__day--selected.react-datepicker__day--weekend.fullyBooked,
+div.react-datepicker__day.react-datepicker__day--sun.react-datepicker__day--selected.react-datepicker__day--weekend.fullyBooked,
+div.react-datepicker__day.react-datepicker__day--sat.react-datepicker__day--selected.react-datepicker__day--weekend.bookings:hover,
+div.react-datepicker__day.react-datepicker__day--sun.react-datepicker__day--selected.react-datepicker__day--weekend.bookings:hover,
+div.react-datepicker__day.react-datepicker__day--sat.react-datepicker__day--selected.react-datepicker__day--weekend.fullyBooked:hover,
+div.react-datepicker__day.react-datepicker__day--sun.react-datepicker__day--selected.react-datepicker__day--weekend.fullyBooked:hover {
+  background-color: #25252f;
+}
+
+div.react-datepicker__day.react-datepicker__day--sat.react-datepicker__day--weekend.bookings:hover,
+div.react-datepicker__day.react-datepicker__day--sun.react-datepicker__day--weekend.bookings:hover,
+div.react-datepicker__day.react-datepicker__day--sat.react-datepicker__day--weekend.fullyBooked:hover,
+div.react-datepicker__day.react-datepicker__day--sun.react-datepicker__day--weekend.fullyBooked:hover {
+  background-color: #666;
+}
+
+.bookings {
+  margin: 0;
+  padding: 0.166rem;
+  color: #c02427;
+  background-color: #ffd33c;
+}
+
+.fullyBooked {
+  margin: 0;
+  padding: 0.166rem;
+  color: #ffd33c;
+  background-color: #c02427;
+}

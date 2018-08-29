@@ -57,11 +57,11 @@ export default class Calendar extends Component{
     const { startDate } = this.state;
     const { bookedDates, fullyBookedDates } = this.props;  
     
-    const highlightedDates = [{"react-datepicker__day--highlighted-bookings"
+    const highlightedDates = [{"bookings"
       : transformDatesToMoment(bookedDates)
     },
     {
-      "react-datepicker__day--highlighted-fullyBooked": transformDatesToMoment(fullyBookedDates)
+      "fullyBooked": transformDatesToMoment(fullyBookedDates)
     }];
 
     const tempArray = ["2018/08/30", "2018/08/29"];

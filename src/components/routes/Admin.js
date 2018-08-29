@@ -349,14 +349,17 @@ export default class Admin extends Component{
             showAdminCalendar={true}
             updateDate={this.updateDate}
             fetchSelectedDate={this.fetchSelectedDate}
-            bookedDates = { this.state.bookedDates } 
-            fullyBookedDates = { this.state.fullyBookedDates }
+            bookedDates={this.state.bookedDates} 
+            fullyBookedDates={this.state.fullyBookedDates}
           />
-          <p className = "noBookings"><div className = "squareBox --yellow"></div> = Dates with bookings
-          <div className = "squareBox --red"></div> = Fully booked</p>
+          <div className="boxContainer">
+            <div className="boxYellow"></div>
+            <p>= Bokningar</p>
+            <div className="boxRed"></div>
+            <p>= Fullbokat</p>
+          </div>
           {this.renderHeadings()}
           {this.renderBookings()}
-
         </div>
       </React.Fragment>
     )
