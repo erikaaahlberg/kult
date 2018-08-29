@@ -48,10 +48,10 @@ export default class Admin extends Component{
         } else {
           /* Filter dates with bookings to be highlighted in datepicker */
           const bookedDates = filterBookedDates(fetchedBookings);
-          console.log(bookedDates);
+          // console.log(bookedDates);
 
           if(bookedDates && bookedDates.lenght !== 0) {
-            console.log(`bokade: ${bookedDates}`);
+            // console.log(`bokade: ${bookedDates}`);
             this.setState({ bookedDates });
           }
           const fullyBookedDates = filterFullyBookedDates(fetchedBookings);
@@ -123,12 +123,18 @@ export default class Admin extends Component{
       }
     })
     .then(() => {
-      let date = this.encodedDate()
-      // Fetch the selected date's bookings again, with new values.
-      this.fetchSelectedDate(date)
-      // Reset selected id so all bookings render as editable again.
-      this.setState({selectedId: null})
+      this.updateAdminState();
     });
+  }
+
+  updateAdminState = () => {
+    let date = this.encodedDate()
+    // Fetch the selected date's bookings again, with new values.
+    this.fetchSelectedDate(date)
+    // Sort bookings again.
+    this.sortBookings();
+    // Reset selected id so all bookings render as editable again.
+    this.setState({selectedId: null})
   }
 
   confirmDeleteBooking = () => {
@@ -160,11 +166,7 @@ export default class Admin extends Component{
       }
     })
     .then(() => {
-      let date = this.encodedDate()
-      // Fetch the selected date's bookings again, with new values.
-      this.fetchSelectedDate(date)
-      // Reset selected id so all bookings render as editable again.
-      this.setState({selectedId: null})
+      this.updateAdminState();
     })
   }
 
