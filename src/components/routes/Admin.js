@@ -2,14 +2,18 @@ import React, {Component} from "react";
 import moment from "moment";
 import "../../assets/styles/Admin.css";
 import Calendar from "../Calendar";
+import { fetchBookingsByCount } from '../GlobalFunctions/Fetch';
+import { filterFullyBookedSessions, filterFullyBookedDates, filterDuplicateDates, filterBookedDates, sortBySession } from '../GlobalFunctions/Filter';
+import SingleBooking from '../SingleBooking';
+import SingleEditableBooking from '../SingleEditableBooking';
 import Modal from "../Modal";
-import SingleBooking from "../SingleBooking";
-import SingleEditableBooking from "../SingleEditableBooking";
 
 export default class Admin extends Component{
 
   state = {
     selectedDate: moment().format("YYYY/MM/DD"),
+    fullyBookedDates: [],
+    bookedDates: [],
     bookingsOnSelectedDate: [],
     selectedId: null,
     selectedBooking: {
@@ -28,22 +32,62 @@ export default class Admin extends Component{
     }
   }
 
-  fetchAllBookings = () => {
-    return fetch("api/bookings")
-      .then((response) => response.json())
-        .then((fetchedBookings) => {
-          return fetchedBookings;
-        })
-        .catch((error) => {
-          // TODO: Handle error output to user, remove console.log
-          console.log(error);
-        });
+  componentDidMount(){
+    let date = this.encodedDate();
+    this.sortBookings();
+    this.fetchSelectedDate(date);
   }
+
+  /* ------- Added by Erika ------- */
+  sortBookings = () => {
+    fetchBookingsByCount()
+      .then((fetchedBookings) => {
+        /* First filter fully booked sessions, if any, then filter fully booked dates. All to be excluded in datepicker */
+        if (!fetchedBookings || fetchedBookings.length === 0) {
+          return;
+        } else {
+          /* Filter dates with bookings to be highlighted in datepicker */
+          const bookedDates = filterBookedDates(fetchedBookings);
+          console.log(bookedDates);
+
+          if(bookedDates && bookedDates.lenght !== 0) {
+            console.log(`bokade: ${bookedDates}`);
+            this.setState({ bookedDates });
+          }
+          const fullyBookedDates = filterFullyBookedDates(fetchedBookings);
+
+          if(fullyBookedDates && fullyBookedDates.length !== 0) {
+            this.setState({ fullyBookedDates });
+          }
+        }
+      })
+      .catch(() => {
+        const message = `Bokningssystemet fungerar inte för tillfället `
+        this.triggerShowModal(message, false);
+      });
+  }
+
+  /* Test if the above works before removing this!
+
+  fetchBookingsByCount = () => {
+    return fetch("api/count")
+      .then((response) => response.json())
+      .then((fetchedBookings) => {
+        return fetchedBookings;
+      })
+      .catch(() => {
+        const message = `Bokningssystemet fungerar inte för tillfället
+          – vi ber om ursäkt. Du kan även nå oss på telefon. Läs mer under `
+        this.triggerShowModal(message, false);
+      });
+  }
+*/
 
   fetchSelectedDate = (date) => {
     fetch(`/api/bookings/date/${date}`)
     .then(response => response.json())
     .then((bookingsOnSelectedDate) => {
+      const sortedBookings = sortBySession(bookingsOnSelectedDate);
       this.setState({bookingsOnSelectedDate})
     })
     .catch(() => {
@@ -122,11 +166,6 @@ export default class Admin extends Component{
       // Reset selected id so all bookings render as editable again.
       this.setState({selectedId: null})
     })
-  }
-
-  componentDidMount(){
-    let date = this.encodedDate()
-    this.fetchSelectedDate(date);
   }
 
   encodedDate = () => {
@@ -308,8 +347,11 @@ export default class Admin extends Component{
             showAdminCalendar={true}
             updateDate={this.updateDate}
             fetchSelectedDate={this.fetchSelectedDate}
+            bookedDates = { this.state.bookedDates } 
+            fullyBookedDates = { this.state.fullyBookedDates }
           />
-
+          <p className = "noBookings"><div className = "squareBox --yellow"></div> = Dates with bookings
+          <div className = "squareBox --red"></div> = Fully booked</p>
           {this.renderHeadings()}
           {this.renderBookings()}
 
