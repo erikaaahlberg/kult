@@ -1,8 +1,11 @@
-.contactUsWrapper > p {
+.contactUsWrapper > p{
   text-align: center;
 }
 
-.contactUsWrapper > label {
+.contactUsWrapper > label,
+.phone > label,
+.email > label,
+.contactMessage > label {
   font-size: .5rem;
   color: #b7b7bd;
   text-transform: uppercase;
