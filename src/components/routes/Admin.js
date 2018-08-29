@@ -277,7 +277,7 @@ export default class Admin extends Component{
           <strong>Datum</strong>
         </label>
         <label htmlFor="update_guests">
-          <strong>Antal</strong>
+          <strong>Gäster</strong>
         </label>
         <label htmlFor="update_session">
           <strong>Sittning</strong>

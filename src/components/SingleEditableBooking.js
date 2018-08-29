@@ -27,7 +27,7 @@ export default function SingleEditableBooking(props){
           }
         />
         <BookingListItem
-          title="Antal"
+          title="Gäster"
           item= {
             <input
               type="number"
