@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import { formatDateString, transformDatesToMoment } from './GlobalFunctions/Helpers';
+import { checkForDuplicateValues } from './GlobalFunctions/Filter';
 import 'moment/locale/sv';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../assets/styles/Datepicker.css';
@@ -56,6 +57,16 @@ export default class Calendar extends Component{
   renderAdminDatePicker = () => {
     const { startDate } = this.state;
     const { bookedDates, fullyBookedDates } = this.props;  
+    let selectedDate = '';
+
+    /* Check if today is fullybooked, then next day has to be selected in date picker */
+    const isFullyBooked = checkForDuplicateValues(fullyBookedDates, formatDateString(startDate));
+    
+    if (isFullyBooked) {
+      selectedDate = startDate.add('1', 'days');
+    } else {
+      selectedDate = startDate;
+    }
     
     const highlightedDates = [{"bookings"
       : transformDatesToMoment(bookedDates)
@@ -70,7 +81,7 @@ export default class Calendar extends Component{
         <DatePicker
           inline
           dateFormat={'YYYY/MM/DD'}
-          selected={startDate}
+          selected={selectedDate}
           onChange={this.handleChange}
           highlightDates = { highlightedDates }
         />

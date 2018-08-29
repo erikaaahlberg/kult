@@ -38,7 +38,6 @@ export default class Admin extends Component{
     this.fetchSelectedDate(date);
   }
 
-  /* ------- Added by Erika ------- */
   sortBookings = () => {
     fetchBookingsByCount()
       .then((fetchedBookings) => {
@@ -66,22 +65,6 @@ export default class Admin extends Component{
         this.triggerShowModal(message, false);
       });
   }
-
-  /* Test if the above works before removing this!
-
-  fetchBookingsByCount = () => {
-    return fetch("api/count")
-      .then((response) => response.json())
-      .then((fetchedBookings) => {
-        return fetchedBookings;
-      })
-      .catch(() => {
-        const message = `Bokningssystemet fungerar inte för tillfället
-          – vi ber om ursäkt. Du kan även nå oss på telefon. Läs mer under `
-        this.triggerShowModal(message, false);
-      });
-  }
-*/
 
   fetchSelectedDate = (date) => {
     fetch(`/api/bookings/date/${date}`)

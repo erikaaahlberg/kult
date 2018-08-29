@@ -50,7 +50,16 @@ export const filterBookedDates = (bookings) => {
   });
   return bookedDates;
 }
-
+export const checkForDuplicateValues = (array, value) => {
+  const sameValues = array.map((item) => {
+    return item === value;
+  });
+  if (sameValues.length > 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
 /* Under construction */
 export const sortBySession = (bookings) => {
   let sortedBookings = {
