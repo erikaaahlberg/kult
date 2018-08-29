@@ -6,18 +6,18 @@ import Image from "../components/Image";
 
 export default function SingleEditableBooking(props){
   const {
+    selectedBooking,
     updateSelectedBookingInState,
     updateSelectedBooking,
-    deleteSelectedBooking,
-    selectedBooking
+    confirmDeleteBooking,
   } = props;
   return(
     <React.Fragment>
       <h2 className="bookingHeader">Bokning:</h2>
       <ul className="booking">
-        <BookingListItem 
+        <BookingListItem
           title="Datum"
-          item={ 
+          item={
             <input
               value={selectedBooking.date}
               name="update_date"
@@ -26,7 +26,7 @@ export default function SingleEditableBooking(props){
             />
           }
         />
-        <BookingListItem 
+        <BookingListItem
           title="Antal"
           item= {
             <input
@@ -102,20 +102,20 @@ export default function SingleEditableBooking(props){
           item={
             <span>
               <Image
-                className="adminIcon" 
+                className="adminIcon"
                 src={ Check } alt="Delete"
                 handleChange={updateSelectedBooking}
               />
-              <Image 
+              <Image
                 className="adminIcon"
                 src={ TrashCan }
                 alt="Delete"
-                handleChange={deleteSelectedBooking}
+                handleChange={confirmDeleteBooking}
               />
             </span>
           }
         />
-      </ul>
+    </ul>
     </React.Fragment>
   )
 };

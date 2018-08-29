@@ -50,6 +50,8 @@ export const filterBookedDates = (bookings) => {
   });
   return bookedDates;
 }
+
+/* Under construction */
 export const sortBySession = (bookings) => {
   let sortedBookings = {
     session1: [],
@@ -69,3 +71,4 @@ export const countTablesLeft = (sortedBookings) => {
   let numberOfBookings = sortedBookings.length;
   //return tablesLeft;
 }
+/* collapse */
