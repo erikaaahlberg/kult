@@ -4,7 +4,7 @@ import "../../assets/styles/Admin.css";
 import Calendar from "../Calendar";
 /*---ERIKA--- */
 import { fetchBookingsByCount, fetchByDate } from '../GlobalFunctions/Fetch';
-import { filterFullyBookedSessions, filterDuplicateDates } from '../GlobalFunctions/Filter';
+import { filterFullyBookedSessions, filterFullyBookedDates, filterDuplicateDates, filterBookedDates, sortBySession } from '../GlobalFunctions/Filter';
 /*---ERIKA--- */
 import SingleBooking from '../SingleBooking';
 import SingleEditableBooking from '../SingleEditableBooking';
@@ -24,9 +24,9 @@ export default class Admin extends Component{
       email: null,
       phone: null
     },
-    fullyBookedSessions: [],
     fullyBookedDates: [],
-    bookedDates: []
+    bookedDates: [],
+    tablesLeft: []
   }
 
   componentDidMount(){
@@ -44,30 +44,26 @@ export default class Admin extends Component{
           return;
         } else {
           /* Filter dates with bookings to be highlighted in datepicker */
-          const bookedDates = fetchedBookings.map((booking) => {
-            return booking.date
-          });
-          
-          console.log(`bokade: ${bookedDates}`);
-          this.setState({ bookedDates });
-          
-          /* Checking for fully booked sessions, if any, also check for fully booked dates to be highlighted in datepicker */
-          let fullyBookedSessions = filterFullyBookedSessions(fetchedBookings);
-  
-          /* There are fully booked sessions, store them in state. */
-          if (fullyBookedSessions.length > 0) {
-            this.setState({ fullyBookedSessions });
-            const fullyBookedDates = filterDuplicateDates(fullyBookedSessions);
-            if(fullyBookedDates.length > 0) {
-              this.setState({ fullyBookedDates });
-            }
-          }}
+          const bookedDates = filterBookedDates(fetchedBookings);
+          console.log(bookedDates);
+
+          if(bookedDates && bookedDates.lenght !== 0) {
+            console.log(`bokade: ${bookedDates}`);
+            this.setState({ bookedDates });
+          }
+          const fullyBookedDates = filterFullyBookedDates(fetchedBookings);
+
+          if(fullyBookedDates && fullyBookedDates.length !== 0) {
+            this.setState({ fullyBookedDates });
+          }
+        }
       });
   }
 
   fetchSelectedDate = (date) => {
     fetchByDate(date)
     .then((bookingsOnSelectedDate) => {
+      const sortedBookings = sortBySession(bookingsOnSelectedDate);
       this.setState({ bookingsOnSelectedDate });
     })
     .catch((error) => {

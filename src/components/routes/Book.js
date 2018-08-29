@@ -31,32 +31,21 @@ export default class Book extends Component{
   sortBookings = () => {
     fetchBookingsByCount()
       .then((fetchedBookings) => {
-        /* First filter fully booked sessions, if any, then filter fully booked dates. All to be excluded in datepicker */
+        /* First filter fully booked sessions, to be excluded in session selector. If any, then filter fully booked dates to be excluded in datepicker */
         let fullyBookedSessions = filterFullyBookedSessions(fetchedBookings);
 
-        // There are fully booked sessions, store them in state.
-        if (fullyBookedSessions.length > 0) {
+        /* If there are fully booked sessions, store them in state */
+        if (fullyBookedSessions && fullyBookedSessions.length !== 0) {
           this.setState({ fullyBookedSessions });
           const fullyBookedDates = filterDuplicateDates(fullyBookedSessions);
-          if(fullyBookedDates.length > 0) {
+
+          if(fullyBookedDates && fullyBookedDates.length !== 0) {
             this.setState({ fullyBookedDates });
           }
         }
       });
   }
-/*
-  fetchBookingsByCount = () => {
-    return fetch("api/count")
-      .then((response) => response.json())
-      .then((fetchedBookings) => {
-        return fetchedBookings;
-      })
-      .catch((error) => {
-        // TODO: Handle error output to user, remove console.log
-        console.log(error);
-      });
-  }
-*/
+
   findSessionsForSelectedDate = (selectedDate) => {
     const defaultSessions = ["18:00", "21:00"];
 

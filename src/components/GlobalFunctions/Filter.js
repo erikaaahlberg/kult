@@ -14,11 +14,6 @@ export const filterFullyBookedSessions = (bookings) => {
   return fullyBookedSessions;
 }
 
-export const countTablesLeft = (booking) => {
-  const tablesLeft = 5 - booking.count;
-  return tablesLeft;
-}
-
 export const filterDuplicateDates = (bookings) => {
   /** Check if there are two fully booked sessions on the same date,
   that would mean there are no seats left either 18:00 or 21:00. */
@@ -34,4 +29,43 @@ export const filterDuplicateDates = (bookings) => {
     }
   }
   return duplicateDates;
+}
+
+export const filterFullyBookedDates = (bookings) => {
+  /* Checking for fully booked sessions to be able to check for fully booked dates */  
+  const fullyBookedSessions = filterFullyBookedSessions(bookings);
+
+   /* If there are any fully booked sessions with the same date, that date is fully booked */
+  if (fullyBookedSessions) {
+    const fullyBookedDates = filterDuplicateDates(fullyBookedSessions);
+    return fullyBookedDates;
+  } else {
+    return fullyBookedSessions;
+  }
+}
+
+export const filterBookedDates = (bookings) => {
+  const bookedDates = bookings.map((booking) => {
+    return booking.date
+  });
+  return bookedDates;
+}
+export const sortBySession = (bookings) => {
+  let sortedBookings = {
+    session1: [],
+    session2: []
+  };
+  for (let i = 0; i < bookings.length; i++) {
+    if (bookings[i].session === '18:00') {
+      sortedBookings.session1.push(bookings[i]);
+    } else {
+      sortedBookings.session2.push(bookings[i]);
+    }
+  }
+  return sortedBookings;
+}
+/* Below is a questionmark so far */
+export const countTablesLeft = (sortedBookings) => {
+  let numberOfBookings = sortedBookings.length;
+  //return tablesLeft;
 }
