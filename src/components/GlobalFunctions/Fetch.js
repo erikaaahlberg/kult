@@ -5,10 +5,6 @@ export const fetchBookingsByCount = () => {
         console.log(fetchedBookings);
         return fetchedBookings;
       })
-      .catch((error) => {
-        // TODO: Handle error output to user, remove console.log
-        console.log(error);
-      });
 }
 
 export const fetchByDate = (date) => {
