@@ -10,7 +10,7 @@ export default class Modal extends Component{
     return(
       <ReactModal
         isOpen={ modalState }
-        onRequestClose={ closeModal }
+        onRequestClose={ clearPage || closeModal }
         shouldCloseOnOverlayClick={ true }
       >
         <p>
