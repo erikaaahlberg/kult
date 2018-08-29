@@ -2,8 +2,9 @@
   margin-top: 20px;
 }
 
-.bookingWrapper > .container > div > label,
-.contactInfoWrapper > label, .contactUsWrapper > .contactName > label {
+.container > div > label,
+.contactInfoWrapper > label, 
+.contactName > label {
   font-size: .5rem;
   color: #b7b7bd;
   text-transform: uppercase;
