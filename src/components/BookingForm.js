@@ -20,7 +20,7 @@ export default function BookingForm(props) {
 
   return (
     <React.Fragment>
-      <form>
+      <form onSubmit={createNewBooking}>
         <div className="bookingWrapper">
           <div className="container">
             <Image
@@ -81,7 +81,7 @@ export default function BookingForm(props) {
           <p>
             Innan din bokning kan genomföras – behöver
             <br />
-vi veta lite mer om dig!
+            vi veta lite mer om dig!
           </p>
           <label htmlFor="create_name">Namn</label>
           <input
@@ -107,7 +107,7 @@ vi veta lite mer om dig!
             id="create_phone"
             required
           />
-          <button className="button" onClick={() => { createNewBooking; }} type="submit">Boka</button>
+          <button className="button" type="submit">Boka</button>
         </div>
       </form>
     </React.Fragment>

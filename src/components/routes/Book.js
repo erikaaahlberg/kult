@@ -10,7 +10,7 @@ export default class Book extends Component {
   state = {
     fullyBookedSessions: [],
     fullyBookedDates: [],
-    availableSessions: ['-'],
+    availableSessions: ["18:00", "21:00"],
     booking: {
       date: moment().format("YYYY/MM/DD"),
       guests: 1, // Needs this as intial default value.
@@ -130,6 +130,7 @@ export default class Book extends Component {
 
   // Called when user changes the input values of booking form.
   updateBooking = (event) => {
+    event.preventDefault();
     const newValue = event.target.value;
     switch (event.target.name) {
       case "create_guests":
