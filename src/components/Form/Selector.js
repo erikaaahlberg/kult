@@ -9,7 +9,7 @@ export default function Selector(props) {
     </option>
   ));
   return (
-    <select onChange={updateBooking} name={name}>
+    <select className="bookingSelect" onChange={ updateBooking }  name={ name }>
       { options }
     </select>
   );
