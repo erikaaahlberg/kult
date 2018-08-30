@@ -119,7 +119,6 @@ export default function BookingForm(props) {
                     required
                   />
                 </div>
-                <button className="button" type="submit">Boka</button>
               </React.Fragment>
             }
           </div>
@@ -131,6 +130,11 @@ export default function BookingForm(props) {
           </p>
         }
       </form>
+
+      {!bookingShouldBeDisabled &&
+        <button className="button" type="submit">Boka</button>
+      }
+
     </React.Fragment>
   );
 }
