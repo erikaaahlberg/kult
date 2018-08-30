@@ -228,7 +228,7 @@ export default class Admin extends Component {
             phone: newValue,
           },
         });
-
+        break;
       default:
         break;
     }
