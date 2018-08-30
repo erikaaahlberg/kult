@@ -1,24 +1,33 @@
 import React, { Component } from "react";
 import ReactModal from "react-modal";
-import { Link } from "react-router-dom";
+import "../assets/styles/Modal.css";
+
 ReactModal.setAppElement("#root");
 
-export default class Modal extends Component{
-
+export default class Modal extends Component {
   renderRegularModal = () => {
-    const { message, closeModal, modalState, clearPage } = this.props;
-    return(
+    const {
+      message, closeModal, modalState, clearPage,
+    } = this.props;
+    return (
       <ReactModal
-        isOpen={ modalState }
-        onRequestClose={ clearPage || closeModal }
-        shouldCloseOnOverlayClick={ true }
+        isOpen={modalState}
+        onRequestClose={clearPage || closeModal}
+        shouldCloseOnOverlayClick
+        overlayClassName="modalOverlay"
+        className="modal"
       >
         <p>
           { message }
         </p>
-        <button onClick={ clearPage || closeModal }>Stäng</button>
+        <button
+          onClick={clearPage || closeModal}
+          className="buttonSmall"
+        >
+            Stäng
+        </button>
       </ReactModal>
-    )
+    );
   }
 
   /** Used for error cases when we don't want the user to be able to close the modal,
@@ -27,31 +36,36 @@ export default class Modal extends Component{
   */
   renderNonClosableModal = () => {
     const { message, modalState } = this.props;
-    return(
+    return (
       <ReactModal
-        isOpen={ modalState }
+        isOpen={modalState}
         shouldCloseOnOverlayClick={false}
+        overlayClassName="modalOverlay"
+        className="modal"
       >
         <p>
           { message }
-          <Link to="/contact">Kontakt.</Link>
         </p>
       </ReactModal>
     );
   }
 
-  render(){
-    return(
+  render() {
+    return (
       <React.Fragment>
-        {this.props.showRegularModal &&
+        {this.props.showRegularModal
+          && (
           <React.Fragment>
             {this.renderRegularModal()}
           </React.Fragment>
+          )
         }
-        {!this.props.showRegularModal &&
+        {!this.props.showRegularModal
+          && (
           <React.Fragment>
             {this.renderNonClosableModal()}
           </React.Fragment>
+          )
         }
       </React.Fragment>
     );

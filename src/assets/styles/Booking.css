@@ -41,8 +41,8 @@
 div.react-datepicker-wrapper > div > input {
   padding-left: 8px;
   width: 150px; 
-  height: 30px; 
-  font-size: 1rem;
+  height: 28px; 
+  font-size: .9rem;
   letter-spacing: .05rem;
   color: #25252f;
   outline: 1px inset #25252f;
@@ -71,7 +71,7 @@ div.react-datepicker-wrapper > div > input {
   width: 25px;
 }
 
-.button {
+.button, .buttonSmall {
   margin: 20px 0 0 0;
   padding: 0;
   width: 165px;
@@ -88,9 +88,15 @@ div.react-datepicker-wrapper > div > input {
   transition: background-color 400ms;
 }
 
-.button:hover {
+.button:hover, .buttonSmall:hover {
   background-color: #25252f;
   color: #fff;
+}
+
+.buttonSmall {
+  font-size: 0.7rem;
+  width: 90px;
+  height: 40px;
 }
 
 @media screen and (min-width: 747px) {

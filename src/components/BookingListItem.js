@@ -1,11 +1,14 @@
 import React from "react";
 
-export default function BookingListItem(props){
+export default function BookingListItem(props) {
   const { item, title } = props;
-  return(
-      <li>
-        <span className="deviceHeading">{title}:</span> 
-        {item}
-      </li>
-  )
-};
+  return (
+    <li>
+      <span className="deviceHeading">
+        {title}
+:
+      </span>
+      {item}
+    </li>
+  );
+}
