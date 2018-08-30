@@ -5,10 +5,9 @@ export default function BookingListItem(props) {
   return (
     <li>
       <span className="deviceHeading">
-        {title}
-:
+        { title }
       </span>
-      {item}
+      { item }
     </li>
   );
 }

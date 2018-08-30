@@ -1,0 +1,13 @@
+.menuBackground {
+  display: none;
+}
+
+@media screen and (min-width: 820px) {
+  .menuBackground {
+    width: 40%;
+    display: block;
+    background-image: url("../images/fish.jpg");
+    background-size: cover;
+    background-position: center;
+  }
+}

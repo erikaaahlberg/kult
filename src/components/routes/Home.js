@@ -24,13 +24,16 @@ export default class Home extends Component {
         <div className={this.state.gdpr}>
           <Image className="closeIcon" src={CloseIcon} alt="Close GDPR" handleChange={this.removeGDPR} />
           <p>
-          Genom att fortsätta på denna sida accepterar du vår integritetspolicy och villkoren som ingår i den. 
-          Du tillåter oss även att lagra den informationen du ger oss vid bokningar och direkt kontakt. 
-          Du kan läsa mer om detta under integritetspolicy eller villkor. <br></br>
-          För frågor når du oss via vår kontaktsida.<br></br>
-         <br></br>Ha så kult på restaurangen!
+            Genom att fortsätta på denna sida accepterar du vår integritetspolicy och villkoren som ingår i den.
+            Du tillåter oss även att lagra den informationen du ger oss vid bokningar och direkt kontakt.
+            Du kan läsa mer om detta under integritetspolicy eller villkor.
           </p>
-
+          <p>
+            För frågor når du oss via vår kontaktsida.
+          </p>
+          <p>
+            Ha så kult på restaurangen!
+          </p>
         </div>
       </React.Fragment>
     );

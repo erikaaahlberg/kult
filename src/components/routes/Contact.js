@@ -3,7 +3,7 @@ import "../../assets/styles/Contact.css";
 
 export default function Contact() {
   return (
-    <div className="wrapper">
+    <div className="mainWrapper">
       <h1 className="smallHeader">KONTAKT</h1>
       <p>
         Kontakta oss gärna!

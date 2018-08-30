@@ -1,6 +1,5 @@
 import React from "react";
 import "react-datepicker/dist/react-datepicker.css";
-import "../assets/styles/Booking.css";
 import ClockIcon from "../assets/images/clock.png";
 import CalendarIcon from "../assets/images/calendar.svg";
 import UserIcon from "../assets/images/user.png";
