@@ -37,13 +37,25 @@ export default class Calendar extends Component{
   renderBookingDatePicker = () => {
     const { startDate } = this.state;
     const { fullyBookedDates } = this.props;
+    let selectedDate = startDate;
+    
+    console.log(fullyBookedDates);
+    /* Check if today is fullybooked, then next day has to be selected in date picker */
+    const isFullyBooked = checkForDuplicateValues(fullyBookedDates, formatDateString(startDate));
+    console.log(isFullyBooked);
+    if (isFullyBooked === true) {
+      selectedDate = startDate.add('1', 'days');
+    }
+    console.log(`startdate: ${startDate}`)
+    console.log(`selected: ${selectedDate}`);
+        
     return(
       <React.Fragment>
         <DatePicker
           locale="sv"
           minDate={moment()}
           dateFormat={'YYYY/MM/DD'}
-          selected={startDate}
+          selected={selectedDate}
           onChange={this.handleChange}
           excludeDates={fullyBookedDates}
         />
@@ -57,15 +69,7 @@ export default class Calendar extends Component{
   renderAdminDatePicker = () => {
     const { startDate } = this.state;
     const { bookedDates, fullyBookedDates } = this.props;  
-    let selectedDate = startDate;
 
-    /* Check if today is fullybooked, then next day has to be selected in date picker */
-    const isFullyBooked = checkForDuplicateValues(fullyBookedDates, formatDateString(startDate));
-
-    if (isFullyBooked === true) {
-      selectedDate = startDate.add('1', 'days');
-    }
-    
     const highlightedDates = [{"bookings"
       : transformDatesToMoment(bookedDates)
     },
@@ -78,7 +82,7 @@ export default class Calendar extends Component{
         <DatePicker
           inline
           dateFormat={'YYYY/MM/DD'}
-          selected={selectedDate}
+          selected={startDate}
           onChange={this.handleChange}
           highlightDates = { highlightedDates }
         />
