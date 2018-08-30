@@ -1,11 +1,11 @@
 import React from "react";
 import "react-datepicker/dist/react-datepicker.css";
-import ClockIcon from "../assets/images/clock.png";
-import CalendarIcon from "../assets/images/calendar.svg";
-import UserIcon from "../assets/images/user.png";
-import Selector from "./Form/Selector";
-import Calendar from "./Calendar";
-import Image from "./Image";
+import ClockIcon from "../../assets/images/clock.png";
+import CalendarIcon from "../../assets/images/calendar.svg";
+import UserIcon from "../../assets/images/user.png";
+import Selector from "./Selector";
+import Calendar from "../Calendar";
+import Image from "../Image";
 
 export default function BookingForm(props) {
   const {
