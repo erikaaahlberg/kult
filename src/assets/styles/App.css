@@ -1,7 +1,7 @@
 #homeHeader {
   margin: 0;
   font-family: 'Circular-Black', sans-serif;
-  font-size: 14vw;
+  font-size: 5rem;
   color: #25252f;
   letter-spacing: .5rem;
   text-align: center;
@@ -71,6 +71,7 @@ p {
 
 @media screen and (min-width: 747px) {
   #homeHeader {
+    font-size: 14vw;
     background: url(../images/stroke-zigzag-black.svg) bottom repeat-x;
     background-size: auto .75rem;
   }
