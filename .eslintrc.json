@@ -9,7 +9,15 @@
     "react/sort-comp": ["off"],
     "react/prefer-stateless-function": ["off"],
     "quotes": ["error", "double"],
-    "react/prop-types": 0
+    "react/prop-types": 0,
+    "space-in-brackets": ["error", "always", {
+      "singleValue": false,
+      "objectsInArrays": false,
+      "arraysInArrays": false,
+      "arraysInObjects": false,
+      "objectsInObjects": false,
+      "propertyName": true
+    }]
   },
   "globals": {
     "it": 0,

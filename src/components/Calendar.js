@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import DatePicker from 'react-datepicker';
-import moment from 'moment';
-import { formatDateString, transformDatesToMoment } from './GlobalFunctions/Helpers';
-import { checkForDuplicateValues } from './GlobalFunctions/Filter';
-import 'moment/locale/sv';
-import 'react-datepicker/dist/react-datepicker.css';
-import '../assets/styles/Datepicker.css';
+import DatePicker from "react-datepicker";
+import moment from "moment";
+import { formatDateString, transformDatesToMoment } from "./GlobalFunctions/Helpers";
+import { checkForDuplicateValues } from "./GlobalFunctions/Filter";
+import "moment/locale/sv";
+import "react-datepicker/dist/react-datepicker.css";
+import "../assets/styles/Datepicker.css";
 
 export default class Calendar extends Component {
   state = {
@@ -18,15 +18,17 @@ export default class Calendar extends Component {
   }
 
   handleChange = (date) => {
-    this.setState({ startDate: date }); // Store the new date in state
+     /* Store the new date in state */
+    this.setState({ startDate: date });
 
-    /** Component does not always receive these props,
+    /* Component does not always receive these props,
     avoid errors by first checking if they exist. */
     const { updateDate, fetchSelectedDate, findSessionsForSelectedDate } = this.props;
 
     if (updateDate) {
       const newDate = formatDateString(date);
       updateDate(newDate);
+
       if (findSessionsForSelectedDate) {
         findSessionsForSelectedDate(newDate);
       }
@@ -64,15 +66,13 @@ export default class Calendar extends Component {
     );
   }
 
-  /** Admin datepicker does not have a minDate, since admin
-   * should be able to select bookings from past dates.
-  */
+  /* Admin datepicker does not have a minDate, since admin should be able to select bookings from past dates. */
   renderAdminDatePicker = () => {
     const { startDate } = this.state;
     const { bookedDates, fullyBookedDates } = this.props;  
 
-    const highlightedDates = [{"bookings"
-      : transformDatesToMoment(bookedDates)
+    const highlightedDates = [{
+      "bookings" : transformDatesToMoment(bookedDates)
     },
     {
       "fullyBooked": transformDatesToMoment(fullyBookedDates)
@@ -82,7 +82,7 @@ export default class Calendar extends Component {
       <React.Fragment>
         <DatePicker
           inline
-          dateFormat={ 'YYYY/MM/DD' }
+          dateFormat={ "YYYY/MM/DD" }
           selected={ startDate }
           onChange={ this.handleChange }
           highlightDates={ highlightedDates }
@@ -95,17 +95,17 @@ export default class Calendar extends Component {
     const { showAdminCalendar } = this.props;
     return (
       <React.Fragment>
-        {showAdminCalendar
+        { showAdminCalendar
           && (
           <React.Fragment>
-            {this.renderAdminDatePicker()}
+            { this.renderAdminDatePicker() }
           </React.Fragment>
           )
         }
-        {!showAdminCalendar
+        { !showAdminCalendar
           && (
           <React.Fragment>
-            {this.renderBookingDatePicker()}
+            { this.renderBookingDatePicker() }
           </React.Fragment>
           )
         }

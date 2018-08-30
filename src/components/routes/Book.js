@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import moment from "moment";
 import { removeFromArray, formatDateString } from "../GlobalFunctions/Helpers";
-/* ---ERIKA--- */
 import { fetchBookingsByCount } from "../GlobalFunctions/Fetch";
 import { filterFullyBookedSessions, filterDuplicateDates } from "../GlobalFunctions/Filter";
-/* ---ERIKA--- */
 import BookingForm from "../BookingForm";
 import Modal from "../Modal";
 
