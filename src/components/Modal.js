@@ -20,6 +20,7 @@ export default class Modal extends Component{
         </p>
         <button
           onClick={ clearPage || closeModal }
+          className="buttonSmall">
             Stäng
         </button>
       </ReactModal>
