@@ -52,7 +52,7 @@ export default class Book extends Component{
     })
     .catch(() => {
       const message = `Bokningssystemet fungerar inte för tillfället
-        – vi ber om ursäkt. Du kan även nå oss på telefon. Läs mer under `
+        – vi ber om ursäkt. Du kan nå oss på telefon, läs mer under "kontakt".`
       this.triggerShowModal(message, false);
     });
   }
