@@ -1,7 +1,7 @@
+// TODO: Maybe not call this endpoint and it's functions count?
 export const fetchBookingsByCount = () => fetch("api/count")
   .then(response => response.json())
   .then((fetchedBookings) => {
-    console.log(fetchedBookings);
     return fetchedBookings;
   });
 

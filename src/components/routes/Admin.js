@@ -3,9 +3,7 @@ import moment from "moment";
 import "../../assets/styles/Admin.css";
 import Calendar from "../Calendar";
 import { fetchBookingsByCount } from "../GlobalFunctions/Fetch";
-import {
-  filterFullyBookedSessions, filterFullyBookedDates, filterDuplicateDates, filterBookedDates, sortBySession,
-} from "../GlobalFunctions/Filter";
+import { filterFullyBookedDates, filterBookedDates } from "../GlobalFunctions/Filter";
 import SingleBooking from "../SingleBooking";
 import SingleEditableBooking from "../SingleEditableBooking";
 import Modal from "../Modal";
@@ -70,7 +68,6 @@ export default class Admin extends Component {
     fetch(`/api/bookings/date/${date}`)
       .then(response => response.json())
       .then((bookingsOnSelectedDate) => {
-        const sortedBookings = sortBySession(bookingsOnSelectedDate);
         this.setState({ bookingsOnSelectedDate });
       })
       .catch(() => {
@@ -228,7 +225,7 @@ export default class Admin extends Component {
             phone: newValue,
           },
         });
-
+        break;
       default:
         break;
     }
