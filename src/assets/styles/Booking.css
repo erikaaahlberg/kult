@@ -110,9 +110,10 @@ div.react-datepicker-wrapper > div > input {
 }
 
 .buttonSmall {
-  font-size: 0.7rem;
   width: 90px;
   height: 40px;
+  font-size: 0.7rem;
+  letter-spacing: .1rem;
 }
 
 ::placeholder {
