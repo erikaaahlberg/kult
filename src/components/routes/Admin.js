@@ -1,15 +1,16 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import moment from "moment";
 import "../../assets/styles/Admin.css";
 import Calendar from "../Calendar";
-import { fetchBookingsByCount } from '../GlobalFunctions/Fetch';
-import { filterFullyBookedSessions, filterFullyBookedDates, filterDuplicateDates, filterBookedDates, sortBySession } from '../GlobalFunctions/Filter';
-import SingleBooking from '../SingleBooking';
-import SingleEditableBooking from '../SingleEditableBooking';
+import { fetchBookingsByCount } from "../GlobalFunctions/Fetch";
+import {
+  filterFullyBookedSessions, filterFullyBookedDates, filterDuplicateDates, filterBookedDates, sortBySession,
+} from "../GlobalFunctions/Filter";
+import SingleBooking from "../SingleBooking";
+import SingleEditableBooking from "../SingleEditableBooking";
 import Modal from "../Modal";
 
-export default class Admin extends Component{
-
+export default class Admin extends Component {
   state = {
     selectedDate: moment().format("YYYY/MM/DD"),
     fullyBookedDates: [],
@@ -23,17 +24,17 @@ export default class Admin extends Component{
       session: null,
       name: null,
       email: null,
-      phone: null
+      phone: null,
     },
     modal: {
       showRegularModal: true,
       showModal: false,
       message: null,
-    }
+    },
   }
 
-  componentDidMount(){
-    let date = this.encodedDate();
+  componentDidMount() {
+    const date = this.encodedDate();
     this.sortBookings();
     this.fetchSelectedDate(date);
   }
@@ -45,24 +46,23 @@ export default class Admin extends Component{
         /* First filter fully booked sessions, if any, then filter fully booked dates. All to be excluded in datepicker */
         if (!fetchedBookings || fetchedBookings.length === 0) {
           return;
-        } else {
-          /* Filter dates with bookings to be highlighted in datepicker */
-          const bookedDates = filterBookedDates(fetchedBookings);
-          // console.log(bookedDates);
+        }
+        /* Filter dates with bookings to be highlighted in datepicker */
+        const bookedDates = filterBookedDates(fetchedBookings);
+        // console.log(bookedDates);
 
-          if(bookedDates && bookedDates.lenght !== 0) {
-            // console.log(`bokade: ${bookedDates}`);
-            this.setState({ bookedDates });
-          }
-          const fullyBookedDates = filterFullyBookedDates(fetchedBookings);
+        if (bookedDates && bookedDates.lenght !== 0) {
+          // console.log(`bokade: ${bookedDates}`);
+          this.setState({ bookedDates });
+        }
+        const fullyBookedDates = filterFullyBookedDates(fetchedBookings);
 
-          if(fullyBookedDates && fullyBookedDates.length !== 0) {
-            this.setState({ fullyBookedDates });
-          }
+        if (fullyBookedDates && fullyBookedDates.length !== 0) {
+          this.setState({ fullyBookedDates });
         }
       })
       .catch(() => {
-        const message = `Bokningssystemet fungerar inte för tillfället `
+        const message = "Bokningssystemet fungerar inte för tillfället ";
         this.triggerShowModal(message, false);
       });
   }
@@ -85,15 +85,15 @@ export default class Admin extends Component{
 
   fetchSelectedDate = (date) => {
     fetch(`/api/bookings/date/${date}`)
-    .then(response => response.json())
-    .then((bookingsOnSelectedDate) => {
-      const sortedBookings = sortBySession(bookingsOnSelectedDate);
-      this.setState({bookingsOnSelectedDate})
-    })
-    .catch(() => {
-      const message = "Det går inte att hämta bokningar just nu."
-      this.triggerShowModal(message, true);
-    });
+      .then(response => response.json())
+      .then((bookingsOnSelectedDate) => {
+        const sortedBookings = sortBySession(bookingsOnSelectedDate);
+        this.setState({ bookingsOnSelectedDate });
+      })
+      .catch(() => {
+        const message = "Det går inte att hämta bokningar just nu.";
+        this.triggerShowModal(message, true);
+      });
   }
 
   updateSelectedBooking = (event) => {
@@ -106,41 +106,41 @@ export default class Admin extends Component{
       name: selectedBooking.name,
       email: selectedBooking.email,
       phone: selectedBooking.phone,
-      id: selectedBooking.id
-    }
+      id: selectedBooking.id,
+    };
 
     fetch("/api/update_booking", {
       headers: { "Content-Type": "application/json" },
       method: "PUT",
-      body: JSON.stringify(requestBody)
+      body: JSON.stringify(requestBody),
     })
-    .then((response) => {
-      if (response.ok){
-        return;
-      } else {
-        const message = "Det gick inte att uppdatera. Försök igen."
-        this.triggerShowModal(message, true);
-      }
-    })
-    .then(() => {
-      this.updateAdminState();
-    });
+      .then((response) => {
+        if (response.ok) {
+
+        } else {
+          const message = "Det gick inte att uppdatera. Försök igen.";
+          this.triggerShowModal(message, true);
+        }
+      })
+      .then(() => {
+        this.updateAdminState();
+      });
   }
 
   updateAdminState = () => {
-    let date = this.encodedDate()
+    const date = this.encodedDate();
     // Fetch the selected date's bookings again, with new values.
-    this.fetchSelectedDate(date)
+    this.fetchSelectedDate(date);
     // Sort bookings again.
     this.sortBookings();
     // Reset selected id so all bookings render as editable again.
-    this.setState({selectedId: null})
+    this.setState({ selectedId: null });
   }
 
   confirmDeleteBooking = () => {
-    let confirmed = window.confirm("Vill du verkligen ta bort bokningen?");
+    const confirmed = window.confirm("Vill du verkligen ta bort bokningen?");
     if (!confirmed) {
-      return;
+
     } else {
       this.deleteSelectedBooking();
     }
@@ -149,29 +149,28 @@ export default class Admin extends Component{
   deleteSelectedBooking = () => {
     const { selectedBooking } = this.state;
     const requestBody = {
-      id: selectedBooking.id
-    }
+      id: selectedBooking.id,
+    };
 
     fetch("/api/delete_booking", {
       headers: { "Content-Type": "application/json" },
       method: "DELETE",
-      body: JSON.stringify(requestBody)
+      body: JSON.stringify(requestBody),
     })
-    .then((response) => {
-      if (response.ok){
-        return;
-      } else {
-        const message = "Det gick inte att ta bort bokningen. Försök igen."
+      .then((response) => {
+        if (response.ok) {
+          return;
+        }
+        const message = "Det gick inte att ta bort bokningen. Försök igen.";
         this.triggerShowModal(message, true);
-      }
-    })
-    .then(() => {
-      this.updateAdminState();
-    })
+      })
+      .then(() => {
+        this.updateAdminState();
+      });
   }
 
   encodedDate = () => {
-    let selectedDate = this.state.selectedDate;
+    const selectedDate = this.state.selectedDate;
     return encodeURIComponent(selectedDate);
   }
 
@@ -184,69 +183,69 @@ export default class Admin extends Component{
         session: booking.session,
         name: booking.name,
         email: booking.email,
-        phone: booking.phone
+        phone: booking.phone,
       },
       selectedId: booking.id,
       selectedDate: booking.date,
-    })
+    });
   }
 
   updateDate = (date) => {
-    this.setState({ selectedDate: date })
+    this.setState({ selectedDate: date });
   }
 
   updateSelectedBookingInState = (event) => {
-    let newValue = event.target.value;
+    const newValue = event.target.value;
 
-    switch(event.target.name){
+    switch (event.target.name) {
       case "update_date":
         this.setState({
           selectedBooking: {
-              ...this.state.selectedBooking,
-              date: newValue,
-          }
-        })
+            ...this.state.selectedBooking,
+            date: newValue,
+          },
+        });
         return;
       case "update_guests":
         this.setState({
           selectedBooking: {
-              ...this.state.selectedBooking,
-              guests: newValue,
-          }
-        })
+            ...this.state.selectedBooking,
+            guests: newValue,
+          },
+        });
         return;
       case "update_session":
         this.setState({
           selectedBooking: {
-              ...this.state.selectedBooking,
-              session: newValue,
-          }
-        })
+            ...this.state.selectedBooking,
+            session: newValue,
+          },
+        });
         return;
       case "update_name":
         this.setState({
           selectedBooking: {
-              ...this.state.selectedBooking,
-              name: newValue,
-          }
-        })
+            ...this.state.selectedBooking,
+            name: newValue,
+          },
+        });
         return;
       case "update_email":
         this.setState({
           selectedBooking: {
-              ...this.state.selectedBooking,
-              email: newValue,
-          }
-        })
+            ...this.state.selectedBooking,
+            email: newValue,
+          },
+        });
         return;
       case "update_phone":
         this.setState({
           selectedBooking: {
-              ...this.state.selectedBooking,
-              phone: newValue,
-          }
-        })
-        return;
+            ...this.state.selectedBooking,
+            phone: newValue,
+          },
+        });
+
       default:
         break;
     }
@@ -258,8 +257,8 @@ export default class Admin extends Component{
         message,
         showRegularModal,
         showModal: true,
-      }
-    })
+      },
+    });
   }
 
   closeModal = () => {
@@ -268,7 +267,7 @@ export default class Admin extends Component{
 
   renderHeadings = () => {
     const { bookingsOnSelectedDate } = this.state;
-    if(bookingsOnSelectedDate < 1) {
+    if (bookingsOnSelectedDate < 1) {
       return;
     }
     return (
@@ -293,75 +292,74 @@ export default class Admin extends Component{
         </label>
         <strong>Redigera</strong>
       </div>
-    )
+    );
   }
 
   renderBookings = () => {
     const { bookingsOnSelectedDate, selectedBooking, selectedId } = this.state;
 
     if (bookingsOnSelectedDate < 1) {
-      return(
+      return (
         <p className="noBookings">
           Det finns inga bokningar det valda datumet.
         </p>
-      )
+      );
     }
-    else {
-      return bookingsOnSelectedDate.map((booking) => {
-        if(selectedId === booking.id){
-          return(
-            <SingleEditableBooking
-              key={selectedBooking.id}
-              selectedBooking={selectedBooking}
-              updateSelectedBookingInState={this.updateSelectedBookingInState}
-              updateSelectedBooking={this.updateSelectedBooking}
-              confirmDeleteBooking={this.confirmDeleteBooking}
-            />
-          )
-        }
+
+    return bookingsOnSelectedDate.map((booking) => {
+      if (selectedId === booking.id) {
         return (
-          <SingleBooking
-            key={booking.id}
-            selectBookingToEdit={this.selectBookingToEdit}
-            booking={booking}
+          <SingleEditableBooking
+            key={selectedBooking.id}
+            selectedBooking={selectedBooking}
+            updateSelectedBookingInState={this.updateSelectedBookingInState}
+            updateSelectedBooking={this.updateSelectedBooking}
+            confirmDeleteBooking={this.confirmDeleteBooking}
           />
-        )
-      })
-    }
+        );
+      }
+      return (
+        <SingleBooking
+          key={booking.id}
+          selectBookingToEdit={this.selectBookingToEdit}
+          booking={booking}
+        />
+      );
+    });
   }
 
-  render(){
+  render() {
     const { showModal, showRegularModal, message } = this.state.modal;
-    return(
+    return (
       <React.Fragment>
         <div className="adminWrapper">
           <h1 className="adminHeader">Administratör</h1>
 
           <Modal
-            showRegularModal={ showRegularModal }
-            modalState={ showModal }
-            message={ message }
-            closeModal={ this.closeModal }
-            clearPage={ this.clearPage }
+            showRegularModal={showRegularModal}
+            modalState={showModal}
+            message={message}
+            closeModal={this.closeModal}
+            clearPage={this.clearPage}
           />
 
           <Calendar
-            showAdminCalendar={true}
+            showAdminCalendar
             updateDate={this.updateDate}
             fetchSelectedDate={this.fetchSelectedDate}
-            bookedDates={this.state.bookedDates} 
+            bookedDates={this.state.bookedDates}
             fullyBookedDates={this.state.fullyBookedDates}
           />
           <div className="boxContainer">
-            <div className="boxYellow"></div>
+            <div className="boxYellow" />
             <p>= Bokningar</p>
-            <div className="boxRed"></div>
+            <div className="boxRed" />
             <p>= Fullbokat</p>
           </div>
           {this.renderHeadings()}
           {this.renderBookings()}
         </div>
       </React.Fragment>
-    )
+    );
   }
-};
+}
