@@ -15,8 +15,12 @@
 }
 
 .gdprVisible > p {
-  width: 70vw;
+  width: 55vw;
   line-height: 1.2rem;
+  color: #fff;
+}
+
+.gdprVisible p a {
   color: #fff;
 }
 

@@ -24,12 +24,13 @@ export default class Home extends Component {
         <div className={ this.state.gdpr }>
           <Image className="closeIcon" src={ CloseIcon } alt="Close GDPR" handleChange={ this.removeGDPR } />
           <p>
-            Casper nose grab aerial 1080 Danny Way. Nosegrind pogo boned out indy grab. Air
-            rail Stacy Peralta hand rail hardware. Kevin Harris drop in lip fastplant. Craig
-            Patterson speed wobbles judo air blunt Tracker. Grab 540 baseplate nosegrind. 
-            Bruised heel nose bump ho-ho vert. Cess slide bluntslide kidney Mike York skater.
-            Rad 900 Primo slide helipop Powell Peralta.
+          Genom att fortsätta på denna sida accepterar du vår integritetspolicy och villkoren som ingår i den. 
+          Du tillåter oss även att lagra den informationen du ger oss vid bokningar och direkt kontakt. 
+          Du kan läsa mer om detta under <a href="#">integritetspolicy</a> eller <a href="#">villkor</a>. <br></br>
+          För frågor når du oss via vår kontaktsida.<br></br>
+         <br></br>Ha så kult på restaurangen!
           </p>
+
         </div>
       </React.Fragment>
     )
