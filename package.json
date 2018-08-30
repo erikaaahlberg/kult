@@ -5,6 +5,7 @@
   "dependencies": {
     "ajv-keywords": "^3.2.0",
     "body-parser": "^1.18.3",
+    "eslint": "^5.4.0",
     "express": "^4.16.3",
     "moment": "^2.22.2",
     "mysql": "^2.16.0",
@@ -22,11 +23,23 @@
     "build": "react-scripts build",
     "server": "node server.js",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint src/components"
   },
   "proxy": {
     "/api": {
       "target": "http://localhost:3001"
     }
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^9.0.0",
+    "babel-preset-airbnb": "^2.6.0",
+    "babel-preset-react-native": "^4.0.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "eslint-watch": "^4.0.2"
   }
 }
