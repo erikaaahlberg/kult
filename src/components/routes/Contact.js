@@ -1,27 +1,27 @@
 import React from "react";
 import "../../assets/styles/Contact.css";
 
-export default function Contact(){
-  return(
+export default function Contact() {
+  return (
     <div className="wrapper">
       <h1 className="smallHeader">KONTAKT</h1>
       <p>
         Kontakta oss gärna!
       </p>
-        <div className="contactUsWrapper">
+      <div className="contactUsWrapper">
         <label htmlFor="name">Namn*</label>
         <br />
         <input
           type="text"
           placeholder="Namn"
           id="contactName"
-         />
+        />
         <div className="phoneEmail">
           <div className="phone">
             <label htmlFor="name">Telefon*</label>
             <br />
-            <input 
-              type="text" 
+            <input
+              type="text"
               placeholder="Telefon"
               id="contactPhone"
             />
@@ -30,7 +30,7 @@ export default function Contact(){
             <label htmlFor="name">Email*</label>
             <br />
             <input
-              type="text" 
+              type="text"
               placeholder="Email"
               id="contactEmail"
             />
@@ -39,13 +39,13 @@ export default function Contact(){
         <div className="contactMessage">
           <label htmlFor="name">Meddelande*</label>
           <br />
-          <textarea  
+          <textarea
             placeholder="Meddelande"
             id="contactMessage"
           />
-         </div>
         </div>
-        <button className="button" type="submit">SKICKA</button>
       </div>
-  )
-};
+      <button className="button" type="submit">SKICKA</button>
+    </div>
+  );
+}

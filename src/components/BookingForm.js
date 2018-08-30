@@ -1,31 +1,31 @@
 import React from "react";
-import 'react-datepicker/dist/react-datepicker.css';
+import "react-datepicker/dist/react-datepicker.css";
 import "../assets/styles/Booking.css";
 import ClockIcon from "../assets/images/clock.png";
-import CalendarIcon from"../assets/images/calendar.svg";
-import UserIcon from"../assets/images/user.png";
+import CalendarIcon from "../assets/images/calendar.svg";
+import UserIcon from "../assets/images/user.png";
 import Selector from "./Form/Selector";
 import Calendar from "./Calendar";
 import Image from "./Image";
 
-export default function BookingForm(props){
+export default function BookingForm(props) {
   const {
     createNewBooking,
     updateBooking,
     updateDate,
     findSessionsForSelectedDate,
     availableSessions,
-    fullyBookedDates
+    fullyBookedDates,
   } = props;
 
-  return(
+  return (
     <React.Fragment>
       <form>
         <div className="bookingWrapper">
           <div className="container">
             <Image
               className="icons"
-              src={ CalendarIcon }
+              src={CalendarIcon}
               alt="Calendar"
             />
             <div>
@@ -33,16 +33,16 @@ export default function BookingForm(props){
                 Välj datum
               </label>
               <Calendar
-                updateDate={ updateDate }
-                fullyBookedDates={ fullyBookedDates }
-                findSessionsForSelectedDate={ findSessionsForSelectedDate }
+                updateDate={updateDate}
+                fullyBookedDates={fullyBookedDates}
+                findSessionsForSelectedDate={findSessionsForSelectedDate}
               />
             </div>
           </div>
           <div className="container">
             <Image
               className="icons"
-              src={ ClockIcon }
+              src={ClockIcon}
               alt="Clock"
             />
             <div>
@@ -51,16 +51,16 @@ export default function BookingForm(props){
               </label>
               <br />
               <Selector
-                name={'create_session'}
-                availableSessions={ availableSessions }
-                updateBooking={ updateBooking }
+                name="create_session"
+                availableSessions={availableSessions}
+                updateBooking={updateBooking}
               />
             </div>
           </div>
           <div className="container">
             <Image
               className="icons"
-              src={ UserIcon }
+              src={UserIcon}
               alt="User"
             />
             <div>
@@ -68,7 +68,7 @@ export default function BookingForm(props){
                 Antal personer
               </label>
               <br />
-              <select name="create_guests" onChange={ updateBooking }>
+              <select name="create_guests" onChange={updateBooking}>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -80,12 +80,13 @@ export default function BookingForm(props){
         <div className="contactInfoWrapper">
           <p>
             Innan din bokning kan genomföras – behöver
-            <br />vi veta lite mer om dig!
+            <br />
+vi veta lite mer om dig!
           </p>
           <label htmlFor="create_name">Namn</label>
           <input
             placeholder="Kult Svensson"
-            onChange={ updateBooking }
+            onChange={updateBooking}
             name="create_name"
             id="create_name"
             required
@@ -93,7 +94,7 @@ export default function BookingForm(props){
           <label htmlFor="create_email">E-mail</label>
           <input
             placeholder="kult@gmail.com"
-            onChange={ updateBooking }
+            onChange={updateBooking}
             name="create_email"
             id="create_email"
             required
@@ -101,14 +102,14 @@ export default function BookingForm(props){
           <label htmlFor="create_phone">Telefon</label>
           <input
             placeholder="+46 761234567"
-            onChange={ updateBooking }
+            onChange={updateBooking}
             name="create_phone"
             id="create_phone"
             required
           />
-          <button className="button" onClick={() => {createNewBooking}} type="submit">Boka</button>
+          <button className="button" onClick={() => { createNewBooking; }} type="submit">Boka</button>
         </div>
       </form>
     </React.Fragment>
-  )
+  );
 }
