@@ -14,7 +14,7 @@ export default function SingleEditableBooking(props){
           item={booking.date}
         />
         <BookingListItem
-          title="Antal" 
+          title="Gäster" 
           item={booking.guests}
         />
         <BookingListItem
