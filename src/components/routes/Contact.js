@@ -4,16 +4,16 @@ import "../../assets/styles/Contact.css";
 
 export default function Contact(){
   return(
-    <div className="rapper">
+    <div className="megaWrapper">
     <div className="imageWrapper">
     </div>
-    <div className="crapper">
+    <div className="wrapContact">
       <h1 className="smallHeader">KONTAKT</h1>
       <div className="contactUs">
         <p>GRISKULTSGATAN 59</p>
         <p>Stockholm</p>
         <p>+4613370808</p> 
-        
+
         <p>Kontakta oss gärna nedan!</p>
         </div>
         <div className="contactUsWrapper">

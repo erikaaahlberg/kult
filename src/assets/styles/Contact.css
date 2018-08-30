@@ -51,7 +51,7 @@
   border: 1px solid #25252f; 
   resize: none; 
 }
-.crapper {
+.wrapContact {
   width: 60%;
   display: flex;
   justify-content: center;
@@ -61,7 +61,7 @@
   height: 100vh;
 }
 
-.rapper{
+.megaWrapper{
   display: flex;
   justify-content: center;
   align-items: center;
