@@ -136,7 +136,7 @@ div.react-datepicker-wrapper > div > input {
   .bookingBackground {
     width: 40%;
     display: block;
-    background-image: url("../images/fish.jpg");
+    background-image: url("../images/restaurant.jpg");
     background-size: cover;
     background-position: center;
   }
