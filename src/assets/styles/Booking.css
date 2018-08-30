@@ -9,14 +9,6 @@
   display: none;
 }
 
-.bookingContent {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
 .bookingFormWrapper {
   display: flex;
   align-items: center;
@@ -118,9 +110,10 @@ div.react-datepicker-wrapper > div > input {
 }
 
 .buttonSmall {
-  font-size: 0.7rem;
   width: 90px;
   height: 40px;
+  font-size: 0.7rem;
+  letter-spacing: .1rem;
 }
 
 ::placeholder {
@@ -129,9 +122,6 @@ div.react-datepicker-wrapper > div > input {
 }
 
 @media screen and (min-width: 820px) {
-  .bookingContent {
-    width: 60%;
-  }
 
   .bookingBackground {
     width: 40%;
