@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactModal from "react-modal";
-import { Link } from "react-router-dom";
+import "../assets/styles/Modal.css";
 ReactModal.setAppElement("#root");
 
 export default class Modal extends Component{
@@ -12,11 +12,16 @@ export default class Modal extends Component{
         isOpen={ modalState }
         onRequestClose={ clearPage || closeModal }
         shouldCloseOnOverlayClick={ true }
+        overlayClassName={"modalOverlay"}
+        className={"modal"}
       >
         <p>
           { message }
         </p>
-        <button onClick={ clearPage || closeModal }>Stäng</button>
+        <button
+          onClick={ clearPage || closeModal }
+            Stäng
+        </button>
       </ReactModal>
     )
   }
@@ -31,10 +36,11 @@ export default class Modal extends Component{
       <ReactModal
         isOpen={ modalState }
         shouldCloseOnOverlayClick={false}
+        overlayClassName={"modalOverlay"}
+        className={"modal"}
       >
         <p>
           { message }
-          <Link to="/contact">Kontakt.</Link>
         </p>
       </ReactModal>
     );
