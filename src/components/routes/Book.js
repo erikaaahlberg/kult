@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import moment from "moment";
 import { removeFromArray, formatDateString } from "../GlobalFunctions/Helpers";
 import { fetchBookingsByCount } from "../GlobalFunctions/Fetch";
-import { filterFullyBookedSessions, filterDuplicateDates } from "../GlobalFunctions/Filter";
+import { filterFullyBookedSessions, checkForDuplicateValues, filterDuplicateDates } from "../GlobalFunctions/Filter";
 import BookingForm from "../BookingForm";
 import Modal from "../Modal";
 
@@ -10,7 +10,8 @@ export default class Book extends Component {
   state = {
     fullyBookedSessions: [],
     fullyBookedDates: [],
-    availableSessions: ["18:00", "21:00"],
+    availableSessions: ["-"],
+    todayIsFullyBooked: false,
     booking: {
       date: moment().format("YYYY/MM/DD"),
       guests: 1, // Needs this as intial default value.
@@ -26,6 +27,15 @@ export default class Book extends Component {
     },
   }
 
+  todayIsFullyBooked = (fullyBookedDates, todaysDate) => {
+    const isFullyBooked = checkForDuplicateValues(fullyBookedDates, todaysDate);
+    if (isFullyBooked[0] === true) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   componentDidMount() {
     this.sortBookings();
     this.findSessionsForSelectedDate();
@@ -34,18 +44,30 @@ export default class Book extends Component {
   sortBookings = () => {
     fetchBookingsByCount()
       .then((fetchedBookings) => {
-        /* First filter fully booked sessions, to be excluded in session selector. If any, then filter fully booked dates to be excluded in datepicker */
+        /* First filter fully booked sessions, to be excluded in session selector. 
+        If any, then filter fully booked dates to be excluded in datepicker */
         const fullyBookedSessions = filterFullyBookedSessions(fetchedBookings);
 
         /* If there are fully booked sessions, store them in state */
         if (fullyBookedSessions && fullyBookedSessions.length !== 0) {
           this.setState({ fullyBookedSessions });
+
+          /* Knowing what sessions are full, we can filter out sessions with the
+          same date, meaning the date is fully booked. */
           const fullyBookedDates = filterDuplicateDates(fullyBookedSessions);
 
           if (fullyBookedDates && fullyBookedDates.length !== 0) {
+            // Store the dates in state!
             this.setState({ fullyBookedDates });
           }
         }
+      })
+      .then(() => {
+        // Also check if today's date (NOT selected date) is one of the fully booked ones.
+        let todaysDate = formatDateString(moment());
+        let todayIsFullyBooked = this.todayIsFullyBooked(this.state.fullyBookedDates, todaysDate);
+
+        this.setState({ todayIsFullyBooked })
       })
       .catch(() => {
         const message = `Bokningssystemet fungerar inte för tillfället
@@ -54,29 +76,14 @@ export default class Book extends Component {
       });
   }
 
-  /* Test if the above works before removing this!
-
-  fetchBookingsByCount = () => {
-    return fetch("api/count")
-      .then((response) => response.json())
-      .then((fetchedBookings) => {
-        return fetchedBookings;
-      })
-      .catch(() => {
-        const message = `Bokningssystemet fungerar inte för tillfället
-          – vi ber om ursäkt. Du kan även nå oss på telefon. Läs mer under `
-        this.triggerShowModal(message, false);
-      });
-  }
-*/
   findSessionsForSelectedDate = (selectedDate) => {
     const defaultSessions = ["18:00", "21:00"];
+    const todaysDate = formatDateString(moment());
 
     if (!selectedDate) {
       /** User has not selected a date,
        * which means they want to book today. */
-      const today = moment();
-      selectedDate = formatDateString(today);
+      selectedDate = todaysDate;
     }
 
     if (this.state.fullyBookedSessions.length > 0) {
@@ -172,7 +179,7 @@ export default class Book extends Component {
             phone: newValue,
           },
         });
-
+        break;
       default:
         break;
     }
@@ -210,7 +217,7 @@ export default class Book extends Component {
   }
 
   render() {
-    const { fullyBookedDates, availableSessions } = this.state;
+    const { fullyBookedDates, availableSessions, todayIsFullyBooked } = this.state;
     const { showModal, showRegularModal, message } = this.state.modal;
 
     return (
@@ -224,11 +231,11 @@ export default class Book extends Component {
         />
 
         <div className="bookingWrapper">
-          <div className="bookingBackground"> </div>
-
+          <div className="bookingBackground"/>
           <div className="bookingContent">
             <h1 className="smallHeader">BOKA BORD</h1>
             <BookingForm
+              bookingShouldBeDisabled={ todayIsFullyBooked }
               availableSessions={ availableSessions }
               fullyBookedDates={ fullyBookedDates }
               findSessionsForSelectedDate={ this.findSessionsForSelectedDate }
@@ -237,7 +244,6 @@ export default class Book extends Component {
               createNewBooking={ this.createNewBooking }
             />
           </div>
-
         </div>
       </div>
     );

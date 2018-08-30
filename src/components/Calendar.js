@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import DatePicker from "react-datepicker";
 import moment from "moment";
 import { formatDateString, transformDatesToMoment } from "./GlobalFunctions/Helpers";
-import { checkForDuplicateValues } from "./GlobalFunctions/Filter";
 import "moment/locale/sv";
 import "react-datepicker/dist/react-datepicker.css";
 import "../assets/styles/Datepicker.css";
@@ -12,13 +11,7 @@ export default class Calendar extends Component {
     startDate: moment(),
   }
 
-  checkIfTodayIsFullyBooked = (fullyBookedDates, todaysDate) => {
-    const isFullyBooked = checkForDuplicateValues(fullyBookedDates, todaysDate);
-    return isFullyBooked;
-  }
-
   handleChange = (date) => {
-     /* Store the new date in state */
     this.setState({ startDate: date });
 
     /* Component does not always receive these props,
@@ -44,14 +37,7 @@ export default class Calendar extends Component {
   renderBookingDatePicker = () => {
     const { startDate } = this.state;
     const { fullyBookedDates } = this.props;
-    
-    /* Check if today is fullybooked, then next day has to be selected in date picker */
-    const isFullyBooked = this.checkIfTodayIsFullyBooked(fullyBookedDates, formatDateString(startDate));
 
-    if (isFullyBooked === true) {
-      const hej='lägg funktion här';
-    }
-        
     return(
       <React.Fragment>
         <DatePicker
@@ -66,10 +52,11 @@ export default class Calendar extends Component {
     );
   }
 
-  /* Admin datepicker does not have a minDate, since admin should be able to select bookings from past dates. */
+  /* Admin datepicker does not have a minDate,
+  since admin should be able to select bookings from past dates. */
   renderAdminDatePicker = () => {
     const { startDate } = this.state;
-    const { bookedDates, fullyBookedDates } = this.props;  
+    const { bookedDates, fullyBookedDates } = this.props;
 
     const highlightedDates = [{
       "bookings" : transformDatesToMoment(bookedDates)
