@@ -215,7 +215,7 @@ export default class Book extends Component {
     const { showModal, showRegularModal, message } = this.state.modal;
 
     return (
-      <div className="wrapper">
+      <div className="mainWrapper">
         <Modal
           showRegularModal={showRegularModal}
           modalState={showModal}
@@ -224,10 +224,10 @@ export default class Book extends Component {
           clearPage={this.clearPage}
         />
 
-        <div className="bookingWrapper">
+        <div className="contentWrapper">
           <div className="bookingBackground"> </div>
 
-          <div className="bookingContent">
+          <div className="rightContent">
             <h1 className="smallHeader">BOKA BORD</h1>
             <BookingForm
               availableSessions={ availableSessions }

@@ -4,10 +4,10 @@ import "../../assets/styles/Menu.css";
 
 export default function Menu() {
   return (
-    <div className="wrapper">
-      <div className="menuWrapper">
+    <div className="mainWrapper">
+      <div className="contentWrapper">
         <div className="menuBackground"></div>
-        <div className="menuContent">
+        <div className="rightContent">
           <h2>MENY N°7</h2>
           <p>&nbsp;BLEAK ROE - LICHEN - HORSERADISH</p>
           <p>RAINBOW TROUT - DILL FLOWER - KOHLRABI</p>
