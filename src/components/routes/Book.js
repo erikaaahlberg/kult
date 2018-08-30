@@ -3,6 +3,7 @@ import moment from "moment";
 import { removeFromArray, formatDateString } from "../GlobalFunctions/Helpers";
 import { fetchBookingsByCount } from "../GlobalFunctions/Fetch";
 import { filterFullyBookedSessions, filterDuplicateDates } from "../GlobalFunctions/Filter";
+import "../../assets/styles/Booking.css";
 import BookingForm from "../BookingForm";
 import Modal from "../Modal";
 

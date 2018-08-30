@@ -1,0 +1,36 @@
+.menuWrapper {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.menuBackground {
+  display: none;
+}
+
+.menuContent {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.menuContent > p {
+  margin: 5px 0;
+}
+
+@media screen and (min-width: 820px) {
+  .menuContent {
+    width: 60%;
+  }
+
+  .menuBackground {
+    width: 40%;
+    display: block;
+    background-image: url("../images/fish.jpg");
+    background-size: cover;
+    background-position: center;
+  }
+}
