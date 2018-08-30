@@ -12,6 +12,11 @@ export default class Calendar extends Component{
     startDate: moment()
   }
 
+  checkIfTodayIsFullyBooked = (fullyBookedDates, todaysDate) => {
+    const isFullyBooked = checkForDuplicateValues(fullyBookedDates, todaysDate);
+    return isFullyBooked;
+  }
+
   handleChange = (date) => {
     this.setState({ startDate: date }); // Store the new date in state
 
@@ -37,13 +42,12 @@ export default class Calendar extends Component{
   renderBookingDatePicker = () => {
     const { startDate } = this.state;
     const { fullyBookedDates } = this.props;
-    let selectedDate = startDate;
     
-    console.log(fullyBookedDates);
     /* Check if today is fullybooked, then next day has to be selected in date picker */
-    const isFullyBooked = checkForDuplicateValues(fullyBookedDates, formatDateString(startDate));
+    const isFullyBooked = this.checkIfTodayIsFullyBooked(fullyBookedDates, formatDateString(startDate));
+
     if (isFullyBooked === true) {
-      selectedDate = startDate.add('1', 'days');
+      const hej='lägg funktion här';
     }
         
     return(
