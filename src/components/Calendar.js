@@ -57,15 +57,13 @@ export default class Calendar extends Component{
   renderAdminDatePicker = () => {
     const { startDate } = this.state;
     const { bookedDates, fullyBookedDates } = this.props;  
-    let selectedDate = '';
+    let selectedDate = startDate;
 
     /* Check if today is fullybooked, then next day has to be selected in date picker */
     const isFullyBooked = checkForDuplicateValues(fullyBookedDates, formatDateString(startDate));
-    
-    if (isFullyBooked) {
+
+    if (isFullyBooked === true) {
       selectedDate = startDate.add('1', 'days');
-    } else {
-      selectedDate = startDate;
     }
     
     const highlightedDates = [{"bookings"
@@ -75,7 +73,6 @@ export default class Calendar extends Component{
       "fullyBooked": transformDatesToMoment(fullyBookedDates)
     }];
 
-    const tempArray = ["2018/08/30", "2018/08/29"];
     return(
       <React.Fragment>
         <DatePicker

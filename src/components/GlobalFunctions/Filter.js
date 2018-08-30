@@ -54,11 +54,7 @@ export const checkForDuplicateValues = (array, value) => {
   const sameValues = array.map((item) => {
     return item === value;
   });
-  if (sameValues.length > 0) {
-    return true;
-  } else {
-    return false;
-  }
+  return sameValues;
 }
 /* Under construction */
 export const sortBySession = (bookings) => {
