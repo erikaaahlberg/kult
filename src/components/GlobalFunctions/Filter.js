@@ -69,8 +69,8 @@ export const sortBySession = (bookings) => {
   return sortedBookings;
 };
 /* Below is a questionmark so far */
-export const countTablesLeft = (sortedBookings) => {
-  const numberOfBookings = sortedBookings.length;
-  // return tablesLeft;
-};
+// export const countTablesLeft = (sortedBookings) => {
+//   const numberOfBookings = sortedBookings.length;
+//   // return tablesLeft;
+// };
 /* collapse */

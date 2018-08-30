@@ -26,7 +26,7 @@ export default class Home extends Component {
           <p>
           Genom att fortsätta på denna sida accepterar du vår integritetspolicy och villkoren som ingår i den. 
           Du tillåter oss även att lagra den informationen du ger oss vid bokningar och direkt kontakt. 
-          Du kan läsa mer om detta under <a href="#">integritetspolicy</a> eller <a href="#">villkor</a>. <br></br>
+          Du kan läsa mer om detta under integritetspolicy eller villkor. <br></br>
           För frågor når du oss via vår kontaktsida.<br></br>
          <br></br>Ha så kult på restaurangen!
           </p>
