@@ -8,20 +8,22 @@ export default function Contact(){
     <div className="imageWrapper">
     </div>
     <div className="wrapContact">
-      <h1 className="smallHeader">KONTAKT</h1>
       <div className="contactUs">
-        <p>GRISKULTSGATAN 59</p>
-        <p>Stockholm</p>
-        <p>+4613370808</p> 
-
-        <p>Kontakta oss gärna nedan!</p>
+        <h2>KONTAKT</h2>
+        <p> 
+        GRISKULTSGATAN 59, 113 23 STOCKHOLM
+        </p>
+        <br />
+        <p>+ 46(0)8 949113</p> 
+        <br />
+          <p>Kontakta oss gärna nedan!</p>
         </div>
         <div className="contactUsWrapper">
         <label htmlFor="name">Namn*</label>
         <br />
         <input
           type="text"
-          placeholder="Namn"
+          placeholder="Fullständigt namn"
           id="contactName"
          />
         <div className="phoneEmail">
@@ -48,7 +50,7 @@ export default function Contact(){
           <label htmlFor="name">Meddelande*</label>
           <br />
           <textarea  
-            placeholder="Meddelande"
+            placeholder="Skriv ditt meddelande här"
             id="contactMessage"
           />
          </div>
