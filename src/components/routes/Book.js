@@ -28,15 +28,6 @@ export default class Book extends Component {
     },
   }
 
-  todayIsFullyBooked = (fullyBookedDates, todaysDate) => {
-    const isFullyBooked = checkForDuplicateValues(fullyBookedDates, todaysDate);
-    if (isFullyBooked[0] === true) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   componentDidMount() {
     this.sortBookings();
     this.findSessionsForSelectedDate();
@@ -64,11 +55,7 @@ export default class Book extends Component {
         }
       })
       .then(() => {
-        // Also check if today's date (NOT selected date) is one of the fully booked ones.
-        let todaysDate = formatDateString(moment());
-        let todayIsFullyBooked = this.todayIsFullyBooked(this.state.fullyBookedDates, todaysDate);
-
-        this.setState({ todayIsFullyBooked })
+        this.checkIfTodayIsFullyBooked();
       })
       .catch(() => {
         const message = `Bokningssystemet fungerar inte för tillfället
@@ -80,6 +67,7 @@ export default class Book extends Component {
   findSessionsForSelectedDate = (selectedDate) => {
     const defaultSessions = ["18:00", "21:00"];
     const todaysDate = formatDateString(moment());
+    this.checkIfTodayIsFullyBooked(selectedDate);
 
     if (!selectedDate) {
       /** User has not selected a date,
@@ -101,6 +89,28 @@ export default class Book extends Component {
         // No fully booked sessions on selected date, both sessions are available!
         this.setState({ availableSessions: defaultSessions });
       }
+    }
+  }
+
+  checkIfTodayIsFullyBooked = (selectedDate) => {
+    let todaysDate = formatDateString(moment());
+    let todayIsFullyBooked = false;
+
+    if (!selectedDate) {
+      selectedDate = todaysDate;
+    }
+    if (todaysDate === selectedDate) {
+      todayIsFullyBooked = this.todayIsFullyBooked(this.state.fullyBookedDates, todaysDate);
+    }
+    this.setState({ todayIsFullyBooked })
+  }
+
+  todayIsFullyBooked = (fullyBookedDates, todaysDate) => {
+    const isFullyBooked = checkForDuplicateValues(fullyBookedDates, todaysDate);
+    if (isFullyBooked[0] === true) {
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -236,6 +246,7 @@ export default class Book extends Component {
 
           <div className="rightContent">
             <h1 className="smallHeader">BOKA BORD</h1>
+
             <BookingForm
               bookingShouldBeDisabled={ todayIsFullyBooked }
               availableSessions={ availableSessions }
@@ -245,6 +256,7 @@ export default class Book extends Component {
               updateDate={ this.updateDate }
               createNewBooking={ this.createNewBooking }
             />
+
           </div>
         </div>
       </div>
