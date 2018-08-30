@@ -1,32 +1,32 @@
 import React from "react";
-import 'react-datepicker/dist/react-datepicker.css';
+import "react-datepicker/dist/react-datepicker.css";
 import "../assets/styles/Booking.css";
 import ClockIcon from "../assets/images/clock.png";
-import CalendarIcon from"../assets/images/calendar.svg";
-import UserIcon from"../assets/images/user.png";
+import CalendarIcon from "../assets/images/calendar.svg";
+import UserIcon from "../assets/images/user.png";
 import Selector from "./Form/Selector";
 import Calendar from "./Calendar";
 import Image from "./Image";
 
-export default function BookingForm(props){
+export default function BookingForm(props) {
   const {
     createNewBooking,
     updateBooking,
     updateDate,
     findSessionsForSelectedDate,
     availableSessions,
-    fullyBookedDates
+    fullyBookedDates,
   } = props;
 
-  return(
+  return (
     <React.Fragment>
-      <form className="bookingFormWrapper">
+      <form onSubmit={ createNewBooking } className="bookingFormWrapper">
         <div className="bookingForm">
         <div>
           <div className="container">
             <Image
               className="icons"
-              src={ CalendarIcon }
+              src={CalendarIcon}
               alt="Calendar"
             />
             <div>
@@ -34,16 +34,16 @@ export default function BookingForm(props){
                 Välj datum
               </label>
               <Calendar
-                updateDate={ updateDate }
-                fullyBookedDates={ fullyBookedDates }
-                findSessionsForSelectedDate={ findSessionsForSelectedDate }
+                updateDate={updateDate}
+                fullyBookedDates={fullyBookedDates}
+                findSessionsForSelectedDate={findSessionsForSelectedDate}
               />
             </div>
           </div>
           <div className="container">
             <Image
               className="icons"
-              src={ ClockIcon }
+              src={ClockIcon}
               alt="Clock"
             />
             <div>
@@ -52,9 +52,9 @@ export default function BookingForm(props){
               </label>
               <br />
               <Selector
-                name={'create_session'}
-                availableSessions={ availableSessions }
-                updateBooking={ updateBooking }
+                name="create_session"
+                availableSessions={availableSessions}
+                updateBooking={updateBooking}
               />
             </div>
           </div>
@@ -116,8 +116,8 @@ export default function BookingForm(props){
             </div>
           </div>
         </div>
-        <button className="button" onClick={() => {createNewBooking}} type="submit">Boka</button>
+        <button className="button" type="submit">Boka</button>
       </form>
     </React.Fragment>
-  )
+  );
 }
