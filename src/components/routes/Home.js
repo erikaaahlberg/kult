@@ -1,7 +1,7 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import "../../assets/styles/Gdpr.css";
 import Image from "../Image";
-import CloseIcon from '../../assets/images/close.svg';
+import CloseIcon from "../../assets/images/close.svg";
 
 export default class Home extends Component {
   state = {
@@ -11,18 +11,18 @@ export default class Home extends Component {
   removeGDPR = () => {
     this.setState({
       gdpr: "gdprHidden",
-    })
+    });
   }
-  
-  render(){
+
+  render() {
     return (
       <React.Fragment>
         <div className="homeWrapper">
           <h1 id="homeHeader">KULT</h1>
           <p>Ha så kult på restaurangen!</p>
         </div>
-        <div className={ this.state.gdpr }>
-          <Image className="closeIcon" src={ CloseIcon } alt="Close GDPR" handleChange={ this.removeGDPR } />
+        <div className={this.state.gdpr}>
+          <Image className="closeIcon" src={CloseIcon} alt="Close GDPR" handleChange={this.removeGDPR} />
           <p>
           Genom att fortsätta på denna sida accepterar du vår integritetspolicy och villkoren som ingår i den. 
           Du tillåter oss även att lagra den informationen du ger oss vid bokningar och direkt kontakt. 
@@ -33,6 +33,6 @@ export default class Home extends Component {
 
         </div>
       </React.Fragment>
-    )
+    );
   }
-};
+}

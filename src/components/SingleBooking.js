@@ -1,30 +1,30 @@
 import React from "react";
-import Image from "../components/Image";
-import BookingListItem from "../components/BookingListItem";
+import Image from "./Image";
+import BookingListItem from "./BookingListItem";
 import Pen from "../assets/images/pen.svg";
 
-export default function SingleEditableBooking(props){
+export default function SingleEditableBooking(props) {
   const { booking, selectBookingToEdit } = props;
-  return(
+  return (
     <React.Fragment>
       <h2 className="bookingHeader">Bokning:</h2>
       <ul className="booking" key={booking.id}>
-        <BookingListItem 
-          title="Datum" 
+        <BookingListItem
+          title="Datum"
           item={booking.date}
         />
         <BookingListItem
-          title="Gäster" 
+          title="Gäster"
           item={booking.guests}
         />
         <BookingListItem
           title="Sittning"
-          item={booking.session} 
+          item={booking.session}
         />
-        <BookingListItem 
+        <BookingListItem
           title="Namn"
-          item={ 
-            <span>{booking.name}</span> 
+          item={
+            <span>{booking.name}</span>
           }
         />
         <BookingListItem
@@ -37,18 +37,18 @@ export default function SingleEditableBooking(props){
           title="Telefon"
           item={booking.phone}
         />
-        <BookingListItem 
-          title="Redigera" 
-          item={ 
-            <Image 
+        <BookingListItem
+          title="Redigera"
+          item={(
+            <Image
               className="adminIcon"
-              src={ Pen } 
-              alt="Edit" 
-              handleChange={() => {selectBookingToEdit(booking)}} 
+              src={Pen}
+              alt="Edit"
+              handleChange={() => { selectBookingToEdit(booking); }}
             />
-          }
+)}
         />
       </ul>
     </React.Fragment>
-  )
-};
+  );
+}
