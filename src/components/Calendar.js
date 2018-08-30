@@ -82,10 +82,10 @@ export default class Calendar extends Component{
       <React.Fragment>
         <DatePicker
           inline
-          dateFormat={'YYYY/MM/DD'}
-          selected={startDate}
-          onChange={this.handleChange}
-          highlightDates = { highlightedDates }
+          dateFormat={ 'YYYY/MM/DD' }
+          selected={ startDate }
+          onChange={ this.handleChange }
+          highlightDates={ highlightedDates }
         />
       </React.Fragment>
     )
