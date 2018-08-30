@@ -129,12 +129,11 @@ export default function BookingForm(props) {
             Tyvärr, inga lediga bokningar på dagens datum.
           </p>
         }
+
+        {!bookingShouldBeDisabled &&
+          <button className="button" type="submit">Boka</button>
+        }
       </form>
-
-      {!bookingShouldBeDisabled &&
-        <button className="button" type="submit">Boka</button>
-      }
-
     </React.Fragment>
   );
 }
