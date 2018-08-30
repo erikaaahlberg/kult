@@ -10,6 +10,7 @@ import Image from "./Image";
 
 export default function BookingForm(props) {
   const {
+    // bookingShouldBeDisabled,
     createNewBooking,
     updateBooking,
     updateDate,
@@ -17,6 +18,8 @@ export default function BookingForm(props) {
     availableSessions,
     fullyBookedDates,
   } = props;
+
+  // TODO: Split up.
 
   return (
     <React.Fragment>
@@ -80,6 +83,8 @@ export default function BookingForm(props) {
               </div>
             </div>
           </div>
+
+          
           <div>
             <div>
               <label className="bookingLabel" htmlFor="create_name">Namn</label>
