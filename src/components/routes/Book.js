@@ -218,8 +218,6 @@ export default class Book extends Component{
 
     return(
       <div className="wrapper">
-        <h1 className="smallHeader">BOKA BORD</h1>
-
         <Modal
           showRegularModal={ showRegularModal }
           modalState={ showModal }
@@ -228,15 +226,22 @@ export default class Book extends Component{
           clearPage={ this.clearPage }
         />
 
-        <BookingForm
-          availableSessions={ availableSessions }
-          fullyBookedDates={ fullyBookedDates }
-          findSessionsForSelectedDate={ this.findSessionsForSelectedDate }
-          updateBooking={ this.updateBooking }
-          updateDate={ this.updateDate }
-          createNewBooking={ this.createNewBooking }
-        />
+        <div className="bookingWrapper">
+          <div className="bookingBackground"> </div>
 
+          <div className="bookingContent">
+            <h1 className="smallHeader">BOKA BORD</h1>
+            <BookingForm
+              availableSessions={ availableSessions }
+              fullyBookedDates={ fullyBookedDates }
+              findSessionsForSelectedDate={ this.findSessionsForSelectedDate }
+              updateBooking={ this.updateBooking }
+              updateDate={ this.updateDate }
+              createNewBooking={ this.createNewBooking }
+            />
+          </div>
+
+        </div>
       </div>
     )
   }

@@ -20,8 +20,8 @@ export default function BookingForm(props){
 
   return(
     <React.Fragment>
-      <form className="bookingForm">
-        <div className="bookingWrapper">
+      <form className="bookingFormWrapper">
+        <div className="bookingForm">
         <div>
           <div className="container">
             <Image
