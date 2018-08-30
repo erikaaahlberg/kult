@@ -13,7 +13,7 @@ export default class Book extends Component{
   state = {
     fullyBookedSessions: [],
     fullyBookedDates: [],
-    availableSessions: ["18:00", "21:00"],
+    availableSessions: ['-'],
     booking: {
       date: moment().format("YYYY/MM/DD"),
       guests: 1, // Needs this as intial default value.

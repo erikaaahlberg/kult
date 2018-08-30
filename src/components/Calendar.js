@@ -42,12 +42,9 @@ export default class Calendar extends Component{
     console.log(fullyBookedDates);
     /* Check if today is fullybooked, then next day has to be selected in date picker */
     const isFullyBooked = checkForDuplicateValues(fullyBookedDates, formatDateString(startDate));
-    console.log(isFullyBooked);
     if (isFullyBooked === true) {
       selectedDate = startDate.add('1', 'days');
     }
-    console.log(`startdate: ${startDate}`)
-    console.log(`selected: ${selectedDate}`);
         
     return(
       <React.Fragment>
@@ -55,7 +52,7 @@ export default class Calendar extends Component{
           locale="sv"
           minDate={moment()}
           dateFormat={'YYYY/MM/DD'}
-          selected={selectedDate}
+          selected={startDate}
           onChange={this.handleChange}
           excludeDates={fullyBookedDates}
         />
