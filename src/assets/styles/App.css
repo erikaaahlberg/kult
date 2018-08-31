@@ -9,7 +9,8 @@
   background-size: auto .5rem;
 }
 
-.smallHeader {
+.smallHeader,
+.tinyHeader {
   margin: 0;
   font-family: 'Circular-Black', sans-serif;
   font-size: 3rem;
@@ -17,6 +18,13 @@
   letter-spacing: .5rem;
   background: url(../images/stroke-zigzag-black.svg) bottom repeat-x;
   background-size: auto .5rem;
+}
+
+.tinyHeader {
+  margin: 0 0 5px 0;
+  font-size: 2rem;
+  letter-spacing: .2rem;
+  background: none;
 }
 
 p {

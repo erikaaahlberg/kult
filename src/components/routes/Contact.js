@@ -7,9 +7,15 @@ export default function Contact() {
       <div className="contentWrapper">
         <div className="contactBackground" />
         <div className="rightContent">
-          <h1 className="smallHeader">KONTAKT</h1>
+          <h1 className="tinyHeader">KONTAKT</h1>
           <p>
-            Kontakta oss gärna!
+            GRISKULTSGATAN 59, 113 23 STOCKHOLM
+          </p>
+          <p>
+            + 46(0)8 949113
+          </p>
+          <p>
+            Kontakta oss gärna nedan!
           </p>
           <div className="contactUsWrapper">
             <label className="contactLabel" htmlFor="name">Namn*</label>
