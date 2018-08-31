@@ -1,31 +1,22 @@
 .modal {
-  position: absolute;
-  margin: 0 auto;
-  text-align: center;
-  top: 20vh;
-  right: 10vw;
-  left: 10vw;
+  margin: 0 2em;
   padding: 4em;
-  background-color: white;
+  text-align: center;
+  background-color: #fff;
   border-radius: 4px;
 }
 
-.modal>p{
+.modal > p {
   line-height: 1.9em;
 }
 
 .modalOverlay {
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  width: 100vw;
+  height: 100vh;
   background-color: rgba(0,0,0, 0.5);
-}
-
-@media screen and (min-width: 900px) {
-  .modal {
-    right: 40vh;
-    left: 40vh;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

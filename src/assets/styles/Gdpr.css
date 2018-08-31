@@ -10,13 +10,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   -webkit-animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
           animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 .gdprVisible > p {
-  width: 70vw;
-  line-height: 1.2rem;
+  margin: 5px 0;
+  padding: 0 50px;
+  max-width: 120ch;
+  font-size: .6rem;
+  line-height: 1rem;
+  color: #fff;
+}
+
+.gdprVisible > p > a {
   color: #fff;
 }
 
