@@ -1,51 +1,27 @@
 import React from "react";
+import ContactForm from "../form/ContactForm";
 import "../../assets/styles/Contact.css";
 
 export default function Contact() {
   return (
     <div className="mainWrapper">
-      <h1 className="smallHeader">KONTAKT</h1>
-      <p>
-        Kontakta oss gärna!
-      </p>
-      <div className="contactUsWrapper">
-        <label htmlFor="name">Namn*</label>
-        <br />
-        <input
-          type="text"
-          placeholder="Namn"
-          id="contactName"
-        />
-        <div className="phoneEmail">
-          <div className="phone">
-            <label htmlFor="name">Telefon*</label>
-            <br />
-            <input
-              type="text"
-              placeholder="Telefon"
-              id="contactPhone"
-            />
-          </div>
-          <div className="email">
-            <label htmlFor="name">Email*</label>
-            <br />
-            <input
-              type="text"
-              placeholder="Email"
-              id="contactEmail"
-            />
-          </div>
-        </div>
-        <div className="contactMessage">
-          <label htmlFor="name">Meddelande*</label>
-          <br />
-          <textarea
-            placeholder="Meddelande"
-            id="contactMessage"
-          />
+      <div className="contentWrapper">
+        <div className="contactBackground" />
+        <div className="rightContent">
+          <h1 className="tinyHeader">KONTAKT</h1>
+          <p>
+            GRISKULTSGATAN 59, 113 23 STOCKHOLM
+          </p>
+          <p>
+            + 46(0)8 949113
+          </p>
+          <p>
+            Kontakta oss gärna nedan!
+          </p>
+          <ContactForm />
+          <button className="button" type="submit">SKICKA</button>
         </div>
       </div>
-      <button className="button" type="submit">SKICKA</button>
     </div>
   );
 }

@@ -20,9 +20,9 @@ export default function BookingForm(props) {
 
   return (
     <React.Fragment>
-      <form onSubmit={ createNewBooking } className="bookingFormWrapper">
+      <form onSubmit={createNewBooking} className="bookingFormWrapper">
         <div className="bookingForm">
-        <div>
+          <div>
           <div className="container">
             <Image
               className="icons"
@@ -41,8 +41,8 @@ export default function BookingForm(props) {
             </div>
           </div>
 
-          {!bookingShouldBeDisabled &&
-            <div className="container">
+          {!bookingShouldBeDisabled
+            && <div className="container">
               <Image
                 className="icons"
                 src={ClockIcon}
@@ -61,13 +61,12 @@ export default function BookingForm(props) {
               </div>
             </div>
           }
-          <div>
-          </div>
-            {!bookingShouldBeDisabled &&
-              <div className="container">
+          <div />
+          {!bookingShouldBeDisabled
+              && <div className="container">
                 <Image
                   className="icons"
-                  src={ UserIcon }
+                  src={UserIcon}
                   alt="User"
                 />
                 <div>
@@ -75,7 +74,7 @@ export default function BookingForm(props) {
                     Antal personer
                   </label>
                   <br />
-                  <select className="bookingSelect" name="create_guests" onChange={ updateBooking }>
+                  <select className="bookingSelect" name="create_guests" onChange={updateBooking}>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -84,16 +83,16 @@ export default function BookingForm(props) {
                 </div>
               </div>
             }
-          </div>
+        </div>
           <div>
-            {!bookingShouldBeDisabled &&
-              <React.Fragment>
+            {!bookingShouldBeDisabled
+              && <React.Fragment>
                 <div>
                   <label className="bookingLabel" htmlFor="create_name">Namn</label>
                   <br />
                   <input
                     placeholder="Kult Svensson"
-                    onChange={ updateBooking }
+                    onChange={updateBooking}
                     name="create_name"
                     id="create_name"
                     required
@@ -104,7 +103,7 @@ export default function BookingForm(props) {
                   <br />
                   <input
                     placeholder="kult@gmail.com"
-                    onChange={ updateBooking }
+                    onChange={updateBooking}
                     name="create_email"
                     id="create_email"
                     required
@@ -115,7 +114,7 @@ export default function BookingForm(props) {
                   <br />
                   <input
                     placeholder="+46 761234567"
-                    onChange={ updateBooking }
+                    onChange={updateBooking}
                     name="create_phone"
                     id="create_phone"
                     required
@@ -126,14 +125,14 @@ export default function BookingForm(props) {
           </div>
         </div>
 
-        {bookingShouldBeDisabled &&
-          <p>
+        {bookingShouldBeDisabled
+          && <p>
             Tyvärr, inga lediga bokningar på dagens datum.
           </p>
         }
 
-        {!bookingShouldBeDisabled &&
-          <button className="button" type="submit">Boka</button>
+        {!bookingShouldBeDisabled
+          && <button className="button" type="submit">Boka</button>
         }
       </form>
     </React.Fragment>
