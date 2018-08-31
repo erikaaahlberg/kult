@@ -4,7 +4,7 @@ import { removeFromArray, formatDateString } from "../GlobalFunctions/Helpers";
 import { fetchBookingsByCount } from "../GlobalFunctions/Fetch";
 import { filterFullyBookedSessions, checkForDuplicateValues, filterDuplicateDates } from "../GlobalFunctions/Filter";
 import "../../assets/styles/Booking.css";
-import BookingForm from "../form/BookingForm";
+import BookingForm from "../Form/BookingForm";
 import Modal from "../Modal";
 
 export default class Book extends Component {
