@@ -35,7 +35,7 @@ export default class Book extends Component {
   sortBookings = () => {
     fetchBookingsByCount()
       .then((fetchedBookings) => {
-        /* First filter fully booked sessions, to be excluded in session selector. 
+        /* First filter fully booked sessions, to be excluded in session selector.
         If any, then filter fully booked dates to be excluded in datepicker */
         const fullyBookedSessions = filterFullyBookedSessions(fetchedBookings);
 
@@ -54,7 +54,7 @@ export default class Book extends Component {
         }
       })
       .then(() => {
-        this.findSessionsForSelectedDate()
+        this.findSessionsForSelectedDate();
       })
       .then(() => {
         this.checkIfTodayIsFullyBooked();
@@ -91,19 +91,19 @@ export default class Book extends Component {
               ...this.state.booking,
               date: selectedDate,
               session: availableSessions,
-            }
+            },
           });
           return;
         }
       }
     }
 
-     // No fully booked sessions on selected date, both sessions are available! Yay!
-     this.setState({ availableSessions: defaultSessions });
+    // No fully booked sessions on selected date, both sessions are available! Yay!
+    this.setState({ availableSessions: defaultSessions });
   }
 
   checkIfTodayIsFullyBooked = (selectedDate) => {
-    let todaysDate = formatDateString(moment());
+    const todaysDate = formatDateString(moment());
     let todayIsFullyBooked = false;
 
     if (!selectedDate) {
@@ -114,12 +114,12 @@ export default class Book extends Component {
       todayIsFullyBooked = this.todayIsFullyBooked(this.state.fullyBookedDates, todaysDate);
     }
 
-    this.setState({ todayIsFullyBooked })
+    this.setState({ todayIsFullyBooked });
   }
 
   todayIsFullyBooked = (fullyBookedDates, todaysDate) => {
     const isFullyBooked = checkForDuplicateValues(fullyBookedDates, todaysDate);
-    for (let i = 0 ; i < isFullyBooked.length; i++) {
+    for (let i = 0; i < isFullyBooked.length; i++) {
       if (isFullyBooked[i] === true) {
         return true;
       }
@@ -255,19 +255,19 @@ export default class Book extends Component {
         />
 
         <div className="contentWrapper">
-          <div className="bookingBackground"> </div>
+          <div className="bookingBackground" />
 
           <div className="rightContent">
             <h1 className="smallHeader">BOKA BORD</h1>
 
             <BookingForm
-              bookingShouldBeDisabled={ todayIsFullyBooked }
-              availableSessions={ availableSessions }
-              fullyBookedDates={ fullyBookedDates }
-              findSessionsForSelectedDate={ this.findSessionsForSelectedDate }
-              updateBooking={ this.updateBooking }
-              updateDate={ this.updateDate }
-              createNewBooking={ this.createNewBooking }
+              bookingShouldBeDisabled={todayIsFullyBooked}
+              availableSessions={availableSessions}
+              fullyBookedDates={fullyBookedDates}
+              findSessionsForSelectedDate={this.findSessionsForSelectedDate}
+              updateBooking={this.updateBooking}
+              updateDate={this.updateDate}
+              createNewBooking={this.createNewBooking}
             />
 
           </div>
