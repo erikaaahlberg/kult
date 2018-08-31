@@ -40,24 +40,27 @@ export default function BookingForm(props) {
               />
             </div>
           </div>
-          <div className="container">
-            <Image
-              className="icons"
-              src={ClockIcon}
-              alt="Clock"
-            />
-            <div>
-              <label className="bookingLabel" htmlFor="create_session">
-                Sittning
-              </label>
-              <br />
-              <Selector
-                name="create_session"
-                availableSessions={availableSessions}
-                updateBooking={updateBooking}
+
+          {!bookingShouldBeDisabled &&
+            <div className="container">
+              <Image
+                className="icons"
+                src={ClockIcon}
+                alt="Clock"
               />
+              <div>
+                <label className="bookingLabel" htmlFor="create_session">
+                  Sittning
+                </label>
+                <br />
+                <Selector
+                  name="create_session"
+                  availableSessions={availableSessions}
+                  updateBooking={updateBooking}
+                />
+              </div>
             </div>
-          </div>
+          }
           <div>
           </div>
             {!bookingShouldBeDisabled &&
@@ -82,7 +85,6 @@ export default function BookingForm(props) {
               </div>
             }
           </div>
-
           <div>
             {!bookingShouldBeDisabled &&
               <React.Fragment>
