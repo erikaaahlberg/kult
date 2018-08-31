@@ -1,30 +1,24 @@
-#homeHeader {
+#homeHeader,
+.smallHeader {
   margin: 0;
   font-family: 'Circular-Black', sans-serif;
   font-size: 5rem;
   color: #25252f;
   letter-spacing: .5rem;
-  text-align: center;
   background: url(../images/stroke-zigzag-black.svg) bottom repeat-x;
   background-size: auto .5rem;
 }
 
-.smallHeader,
-.tinyHeader {
-  margin: 0;
-  font-family: 'Circular-Black', sans-serif;
+.smallHeader {
   font-size: 3rem;
-  color: #25252f;
-  letter-spacing: .5rem;
-  background: url(../images/stroke-zigzag-black.svg) bottom repeat-x;
-  background-size: auto .5rem;
 }
 
 .tinyHeader {
   margin: 0 0 5px 0;
+  font-family: 'Circular-Black', sans-serif;
   font-size: 2rem;
   letter-spacing: .2rem;
-  background: none;
+  color: #25252f;
 }
 
 p {
