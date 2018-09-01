@@ -1,11 +1,12 @@
 import React from "react";
+import MainWrapper from "../MainWrapper";
 import Header from "../Header";
 import ContactForm from "../form/ContactForm";
 import "../../assets/styles/Contact.css";
 
 export default function Contact() {
   return (
-    <div className="mainWrapper">
+    <MainWrapper>
       <div className="contentWrapper">
         <div className="contactBackground" />
         <div className="rightContent">
@@ -23,6 +24,6 @@ export default function Contact() {
           <button className="button" type="submit">SKICKA</button>
         </div>
       </div>
-    </div>
+    </MainWrapper>
   );
 }

@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import MainWrapper from "../MainWrapper";
 import Header from "../Header";
 import "../../assets/styles/Menu.css";
 
 export default function Menu() {
   return (
-    <div className="mainWrapper">
+    <MainWrapper>
       <div className="contentWrapper">
         <div className="menuBackground" />
         <div className="rightContent">
@@ -23,6 +24,6 @@ export default function Menu() {
           <p>&nbsp;+46 123 45 67</p>
         </div>
       </div>
-    </div>
+    </MainWrapper>
   );
 }

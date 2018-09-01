@@ -5,6 +5,7 @@ import { fetchBookingsByCount } from "../GlobalFunctions/Fetch";
 import { filterFullyBookedSessions, checkForDuplicateValues, filterDuplicateDates } from "../GlobalFunctions/Filter";
 import "../../assets/styles/Booking.css";
 import BookingForm from "../form/BookingForm";
+import MainWrapper from "../MainWrapper";
 import Header from "../Header";
 import Modal from "../Modal";
 
@@ -246,7 +247,7 @@ export default class Book extends Component {
     const { showModal, showRegularModal, message } = this.state.modal;
 
     return (
-      <div className="mainWrapper">
+      <MainWrapper>
         <Modal
           showRegularModal={showRegularModal}
           modalState={showModal}
@@ -273,7 +274,7 @@ export default class Book extends Component {
 
           </div>
         </div>
-      </div>
+      </MainWrapper>
     );
   }
 }
