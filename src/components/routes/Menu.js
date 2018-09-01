@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Header from "../Header";
 import "../../assets/styles/Menu.css";
 
 export default function Menu() {
@@ -8,7 +9,7 @@ export default function Menu() {
       <div className="contentWrapper">
         <div className="menuBackground" />
         <div className="rightContent">
-          <h1 className="tinyHeader">MENY N°7</h1>
+          <Header className="tinyHeader" title="MENY N°7" />
           <p>&nbsp;BLEAK ROE - LICHEN - HORSERADISH</p>
           <p>RAINBOW TROUT - DILL FLOWER - KOHLRABI</p>
           <p>MACKEREL - FOIE GRAS - CHANTERELLE</p>

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import moment from "moment";
 import "../../assets/styles/Admin.css";
 import Calendar from "../Calendar";
+import Header from "../Header";
 import { fetchBookingsByCount } from "../GlobalFunctions/Fetch";
 import { filterFullyBookedDates, filterBookedDates } from "../GlobalFunctions/Filter";
 import SingleBooking from "../SingleBooking";
@@ -313,7 +314,7 @@ export default class Admin extends Component {
     return (
       <React.Fragment>
         <div className="adminWrapper">
-          <h1 className="adminHeader">Administratör</h1>
+          <Header className="adminHeader" title="Administratör" />
 
           <Modal
             showRegularModal={showRegularModal}

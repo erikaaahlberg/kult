@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "../../assets/styles/Gdpr.css";
+import Header from "../Header";
 import Image from "../Image";
 import CloseIcon from "../../assets/images/close.svg";
 
@@ -18,7 +19,7 @@ export default class Home extends Component {
     return (
       <React.Fragment>
         <div className="homeWrapper">
-          <h1 id="homeHeader">KULT</h1>
+          <Header id="homeHeader" title="KULT" />
           <p>Ha så kult på restaurangen!</p>
         </div>
         <div className={this.state.gdpr}>

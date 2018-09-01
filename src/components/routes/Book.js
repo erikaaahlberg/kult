@@ -5,6 +5,7 @@ import { fetchBookingsByCount } from "../GlobalFunctions/Fetch";
 import { filterFullyBookedSessions, checkForDuplicateValues, filterDuplicateDates } from "../GlobalFunctions/Filter";
 import "../../assets/styles/Booking.css";
 import BookingForm from "../form/BookingForm";
+import Header from "../Header";
 import Modal from "../Modal";
 
 export default class Book extends Component {
@@ -258,7 +259,7 @@ export default class Book extends Component {
           <div className="bookingBackground" />
 
           <div className="rightContent">
-            <h1 className="smallHeader">BOKA BORD</h1>
+            <Header className="smallHeader" title="BOKA BORD" />
 
             <BookingForm
               bookingShouldBeDisabled={todayIsFullyBooked}
