@@ -6,6 +6,7 @@ import { filterFullyBookedSessions, checkForDuplicateValues, filterDuplicateDate
 import "../../assets/styles/Booking.css";
 import BookingForm from "../form/BookingForm";
 import MainWrapper from "../MainWrapper";
+import MainContent from "../MainContent";
 import Header from "../Header";
 import Modal from "../Modal";
 
@@ -256,24 +257,20 @@ export default class Book extends Component {
           clearPage={this.clearPage}
         />
 
-        <div className="contentWrapper">
-          <div className="bookingBackground" />
+        <MainContent background="bookingBackground">
+          <Header className="smallHeader" title="BOKA BORD" />
 
-          <div className="rightContent">
-            <Header className="smallHeader" title="BOKA BORD" />
+          <BookingForm
+            bookingShouldBeDisabled={todayIsFullyBooked}
+            availableSessions={availableSessions}
+            fullyBookedDates={fullyBookedDates}
+            findSessionsForSelectedDate={this.findSessionsForSelectedDate}
+            updateBooking={this.updateBooking}
+            updateDate={this.updateDate}
+            createNewBooking={this.createNewBooking}
+          />
 
-            <BookingForm
-              bookingShouldBeDisabled={todayIsFullyBooked}
-              availableSessions={availableSessions}
-              fullyBookedDates={fullyBookedDates}
-              findSessionsForSelectedDate={this.findSessionsForSelectedDate}
-              updateBooking={this.updateBooking}
-              updateDate={this.updateDate}
-              createNewBooking={this.createNewBooking}
-            />
-
-          </div>
-        </div>
+        </MainContent>
       </MainWrapper>
     );
   }
