@@ -32,7 +32,7 @@ export default class Navbar extends Component {
     const { toggleHamburger } = this.state;
     const { toggleMenu } = this;
     return (
-      <React.Fragment>
+      <nav>
         <Hamburger className={toggleHamburger} handleChange={toggleMenu} />
         <ul id="navigation" className={this.state.toggleMenu}>
           <li>
@@ -51,7 +51,7 @@ export default class Navbar extends Component {
             <Link to="/admin" onClick={toggleMenu}>Admin</Link>
           </li>
         </ul>
-      </React.Fragment>
+      </nav>
     );
   }
 }

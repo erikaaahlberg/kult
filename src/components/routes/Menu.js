@@ -1,14 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import MainWrapper from "../MainWrapper";
-import MainContent from "../MainContent";
 import Header from "../Header";
 import "../../assets/styles/Menu.css";
 
 export default function Menu() {
   return (
-    <MainWrapper>
-      <MainContent background="menuBackground">
+    <main>
+      <MainWrapper background="menuBackground">
         <Header className="tinyHeader" title="MENY N°7" />
         <p>&nbsp;BLEAK ROE - LICHEN - HORSERADISH</p>
         <p>RAINBOW TROUT - DILL FLOWER - KOHLRABI</p>
@@ -21,7 +20,7 @@ export default function Menu() {
           <button type="button" className="button">BOKA BORD</button>
         </Link>
         <p id="phone">&nbsp;+ 46(0)8 94 91 13</p>
-      </MainContent>
-    </MainWrapper>
+      </MainWrapper>
+    </main>
   );
 }

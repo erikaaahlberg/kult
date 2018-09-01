@@ -313,33 +313,35 @@ export default class Admin extends Component {
   render() {
     const { showModal, showRegularModal, message } = this.state.modal;
     return (
-      <MainWrapper>
-        <Header className="adminHeader" title="Administratör" />
+      <main>
+        <div className="homeWrapper">
+          <Header className="adminHeader" title="Administratör" />
 
-        <Modal
-          showRegularModal={showRegularModal}
-          modalState={showModal}
-          message={message}
-          closeModal={this.closeModal}
-          clearPage={this.clearPage}
-        />
+          <Modal
+            showRegularModal={showRegularModal}
+            modalState={showModal}
+            message={message}
+            closeModal={this.closeModal}
+            clearPage={this.clearPage}
+          />
 
-        <Calendar
-          showAdminCalendar
-          updateDate={this.updateDate}
-          fetchSelectedDate={this.fetchSelectedDate}
-          bookedDates={this.state.bookedDates}
-          fullyBookedDates={this.state.fullyBookedDates}
-        />
-        <div className="boxContainer">
-          <div className="boxYellow" />
-          <p>= Bokningar</p>
-          <div className="boxRed" />
-          <p>= Fullbokat</p>
+          <Calendar
+            showAdminCalendar
+            updateDate={this.updateDate}
+            fetchSelectedDate={this.fetchSelectedDate}
+            bookedDates={this.state.bookedDates}
+            fullyBookedDates={this.state.fullyBookedDates}
+          />
+          <div className="boxContainer">
+            <div className="boxYellow" />
+            <p>= Bokningar</p>
+            <div className="boxRed" />
+            <p>= Fullbokat</p>
+          </div>
+          {this.renderHeadings()}
+          {this.renderBookings()}
         </div>
-        {this.renderHeadings()}
-        {this.renderBookings()}
-      </MainWrapper>
+      </main>
     );
   }
 }

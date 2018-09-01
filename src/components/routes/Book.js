@@ -6,7 +6,6 @@ import { filterFullyBookedSessions, checkForDuplicateValues, filterDuplicateDate
 import "../../assets/styles/Booking.css";
 import BookingForm from "../form/BookingForm";
 import MainWrapper from "../MainWrapper";
-import MainContent from "../MainContent";
 import Header from "../Header";
 import Modal from "../Modal";
 
@@ -248,16 +247,16 @@ export default class Book extends Component {
     const { showModal, showRegularModal, message } = this.state.modal;
 
     return (
-      <MainWrapper>
-        <Modal
-          showRegularModal={showRegularModal}
-          modalState={showModal}
-          message={message}
-          closeModal={this.closeModal}
-          clearPage={this.clearPage}
-        />
+      <main>
+        <MainWrapper background="bookingBackground">
+          <Modal
+            showRegularModal={showRegularModal}
+            modalState={showModal}
+            message={message}
+            closeModal={this.closeModal}
+            clearPage={this.clearPage}
+          />
 
-        <MainContent background="bookingBackground">
           <Header className="smallHeader" title="BOKA BORD" />
 
           <BookingForm
@@ -269,9 +268,8 @@ export default class Book extends Component {
             updateDate={this.updateDate}
             createNewBooking={this.createNewBooking}
           />
-
-        </MainContent>
-      </MainWrapper>
+        </MainWrapper>
+      </main>
     );
   }
 }
