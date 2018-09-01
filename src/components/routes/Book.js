@@ -5,6 +5,8 @@ import { fetchBookingsByCount } from "../GlobalFunctions/Fetch";
 import { filterFullyBookedSessions, checkForDuplicateValues, filterDuplicateDates } from "../GlobalFunctions/Filter";
 import "../../assets/styles/Booking.css";
 import BookingForm from "../form/BookingForm";
+import MainWrapper from "../MainWrapper";
+import Header from "../Header";
 import Modal from "../Modal";
 
 export default class Book extends Component {
@@ -245,34 +247,29 @@ export default class Book extends Component {
     const { showModal, showRegularModal, message } = this.state.modal;
 
     return (
-      <div className="mainWrapper">
-        <Modal
-          showRegularModal={showRegularModal}
-          modalState={showModal}
-          message={message}
-          closeModal={this.closeModal}
-          clearPage={this.clearPage}
-        />
+      <main>
+        <MainWrapper background="bookingBackground">
+          <Modal
+            showRegularModal={showRegularModal}
+            modalState={showModal}
+            message={message}
+            closeModal={this.closeModal}
+            clearPage={this.clearPage}
+          />
 
-        <div className="contentWrapper">
-          <div className="bookingBackground" />
+          <Header className="smallHeader" title="BOKA BORD" />
 
-          <div className="rightContent">
-            <h1 className="smallHeader">BOKA BORD</h1>
-
-            <BookingForm
-              bookingShouldBeDisabled={todayIsFullyBooked}
-              availableSessions={availableSessions}
-              fullyBookedDates={fullyBookedDates}
-              findSessionsForSelectedDate={this.findSessionsForSelectedDate}
-              updateBooking={this.updateBooking}
-              updateDate={this.updateDate}
-              createNewBooking={this.createNewBooking}
-            />
-
-          </div>
-        </div>
-      </div>
+          <BookingForm
+            bookingShouldBeDisabled={todayIsFullyBooked}
+            availableSessions={availableSessions}
+            fullyBookedDates={fullyBookedDates}
+            findSessionsForSelectedDate={this.findSessionsForSelectedDate}
+            updateBooking={this.updateBooking}
+            updateDate={this.updateDate}
+            createNewBooking={this.createNewBooking}
+          />
+        </MainWrapper>
+      </main>
     );
   }
 }
