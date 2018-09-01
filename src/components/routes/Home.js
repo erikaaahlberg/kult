@@ -1,5 +1,4 @@
 import React from "react";
-import MainWrapper from "../MainWrapper";
 import Header from "../Header";
 import Gdpr from "../Gdpr";
 

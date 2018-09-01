@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import moment from "moment";
 import "../../assets/styles/Admin.css";
 import Calendar from "../Calendar";
-import MainWrapper from "../MainWrapper";
 import Header from "../Header";
 import { fetchBookingsByCount } from "../GlobalFunctions/Fetch";
 import { filterFullyBookedDates, filterBookedDates } from "../GlobalFunctions/Filter";
@@ -314,8 +313,8 @@ export default class Admin extends Component {
     const { showModal, showRegularModal, message } = this.state.modal;
     return (
       <main>
-        <div className="homeWrapper">
-          <Header className="adminHeader" title="Administratör" />
+        <div className="adminWrapper">
+          <Header className="adminHeader" title="Aministratör" />
 
           <Modal
             showRegularModal={showRegularModal}
