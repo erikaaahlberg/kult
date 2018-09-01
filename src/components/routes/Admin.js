@@ -3,6 +3,7 @@ import moment from "moment";
 import "../../assets/styles/Admin.css";
 import Calendar from "../Calendar";
 import Header from "../Header";
+import ColorBoxes from "../ColorBoxes";
 import { fetchBookingsByCount } from "../GlobalFunctions/Fetch";
 import { filterFullyBookedDates, filterBookedDates } from "../GlobalFunctions/Filter";
 import SingleBooking from "../SingleBooking";
@@ -331,12 +332,7 @@ export default class Admin extends Component {
             bookedDates={this.state.bookedDates}
             fullyBookedDates={this.state.fullyBookedDates}
           />
-          <div className="boxContainer">
-            <div className="boxYellow" />
-            <p>= Bokningar</p>
-            <div className="boxRed" />
-            <p>= Fullbokat</p>
-          </div>
+          <ColorBoxes />
           {this.renderHeadings()}
           {this.renderBookings()}
         </div>
