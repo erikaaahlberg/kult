@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import DatePicker from "react-datepicker";
 import moment from "moment";
-import { formatDateString, transformDatesToMoment } from "./services/helpers";
+import { formatDateString, transformDatesToMoment } from "../services/helpers";
 import "moment/locale/sv";
 import "react-datepicker/dist/react-datepicker.css";
 import "../assets/styles/Datepicker.css";
