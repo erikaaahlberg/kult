@@ -83,7 +83,7 @@ export default function BookingForm(props) {
                 </div>
               </div>
             }
-        </div>
+          </div>
           <div>
             {!bookingShouldBeDisabled
               && <React.Fragment>

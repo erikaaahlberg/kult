@@ -22,7 +22,7 @@ app.get('/api/bookings', (req, res) => {
   connection.query(queryString, (err, rows, fields) => {
     if (err) {
       console.log('Failed to get all bookings: ' + err);
-      res.sendStatus(500) // Show user internal server error
+      res.sendStatus(500) // Show internal server error
       res.end();
       return;
     }
@@ -41,7 +41,7 @@ app.get('/api/bookings/date/:date', (req, res) => {
   connection.query(queryString, [date], (err, rows, fields) => {
     if (err) {
       console.log('Failed to query for booking selected date: ' + err);
-      res.sendStatus(500) // Show user internal server error
+      res.sendStatus(500)
       res.end();
       return;
     }
@@ -67,7 +67,7 @@ app.get('/api/count', (req, res) => {
   connection.query(queryString, (err, rows, fields) => {
     if (err) {
       console.log('Failed to get all bookings ' + err);
-      res.sendStatus(500) // Show user internal server error
+      res.sendStatus(500)
       res.end();
       return;
     }

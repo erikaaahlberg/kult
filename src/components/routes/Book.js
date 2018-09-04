@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import moment from "moment";
-import { removeFromArray, formatDateString } from "../GlobalFunctions/Helpers";
-import { fetchBookingsByCount } from "../GlobalFunctions/Fetch";
-import { filterFullyBookedSessions, checkForDuplicateValues, filterDuplicateDates } from "../GlobalFunctions/Filter";
+import { removeFromArray, formatDateString } from "../../services/helpers";
+import { fetchDatesAndSessions } from "../../services/recurringFetch";
+import { filterFullyBookedSessions, checkForDuplicateValues, filterDuplicateDates } from "../../services/filters";
 import "../../assets/styles/Booking.css";
 import BookingForm from "../form/BookingForm";
 import MainWrapper from "../MainWrapper";
@@ -35,7 +35,7 @@ export default class Book extends Component {
   }
 
   sortBookings = () => {
-    fetchBookingsByCount()
+    fetchDatesAndSessions()
       .then((fetchedBookings) => {
         /* First filter fully booked sessions, to be excluded in session selector.
         If any, then filter fully booked dates to be excluded in datepicker */

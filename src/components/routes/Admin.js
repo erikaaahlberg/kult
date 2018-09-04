@@ -4,8 +4,8 @@ import "../../assets/styles/Admin.css";
 import Calendar from "../Calendar";
 import Header from "../Header";
 import ColorBoxes from "../ColorBoxes";
-import { fetchBookingsByCount } from "../GlobalFunctions/Fetch";
-import { filterFullyBookedDates, filterBookedDates } from "../GlobalFunctions/Filter";
+import { fetchDatesAndSessions } from "../../services/recurringFetch";
+import { filterFullyBookedDates, filterBookedDates } from "../../services/filters";
 import SingleBooking from "../SingleBooking";
 import SingleEditableBooking from "../SingleEditableBooking";
 import Modal from "../Modal";
@@ -40,7 +40,7 @@ export default class Admin extends Component {
   }
 
   sortBookings = () => {
-    fetchBookingsByCount()
+    fetchDatesAndSessions()
       .then((fetchedBookings) => {
         /* First filter fully booked sessions, if any, then filter fully booked dates. All to be excluded in datepicker */
         if (!fetchedBookings || fetchedBookings.length === 0) {
@@ -48,10 +48,8 @@ export default class Admin extends Component {
         }
         /* Filter dates with bookings to be highlighted in datepicker */
         const bookedDates = filterBookedDates(fetchedBookings);
-        // console.log(bookedDates);
 
         if (bookedDates && bookedDates.lenght !== 0) {
-          // console.log(`bokade: ${bookedDates}`);
           this.setState({ bookedDates });
         }
         const fullyBookedDates = filterFullyBookedDates(fetchedBookings);
