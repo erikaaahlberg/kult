@@ -5,18 +5,20 @@ import { fetchBookingsByCount } from "../GlobalFunctions/Fetch";
 import { filterFullyBookedSessions, checkForDuplicateValues, filterDuplicateDates } from "../GlobalFunctions/Filter";
 import "../../assets/styles/Booking.css";
 import BookingForm from "../form/BookingForm";
+import MainWrapper from "../MainWrapper";
+import Header from "../Header";
 import Modal from "../Modal";
 
 export default class Book extends Component {
   state = {
     fullyBookedSessions: [],
     fullyBookedDates: [],
-    availableSessions: ["-"],
+    availableSessions: ["18:00", "21:00"],
     todayIsFullyBooked: false,
     booking: {
       date: moment().format("YYYY/MM/DD"),
       guests: 1, // Needs this as intial default value.
-      session: "18:00", // Same here.
+      session: "18:00", // Same.
       name: null,
       email: null,
       phone: null,
@@ -30,13 +32,12 @@ export default class Book extends Component {
 
   componentDidMount() {
     this.sortBookings();
-    this.findSessionsForSelectedDate();
   }
 
   sortBookings = () => {
     fetchBookingsByCount()
       .then((fetchedBookings) => {
-        /* First filter fully booked sessions, to be excluded in session selector. 
+        /* First filter fully booked sessions, to be excluded in session selector.
         If any, then filter fully booked dates to be excluded in datepicker */
         const fullyBookedSessions = filterFullyBookedSessions(fetchedBookings);
 
@@ -53,6 +54,9 @@ export default class Book extends Component {
             this.setState({ fullyBookedDates });
           }
         }
+      })
+      .then(() => {
+        this.findSessionsForSelectedDate();
       })
       .then(() => {
         this.checkIfTodayIsFullyBooked();
@@ -82,36 +86,47 @@ export default class Book extends Component {
         if (selectedDate === fullyBookedSessions[i].date) {
           const sessionToRemove = fullyBookedSessions[i].session;
           const availableSessions = removeFromArray(defaultSessions, sessionToRemove);
-          this.setState({ availableSessions });
+
+          this.setState({
+            availableSessions,
+            booking: {
+              ...this.state.booking,
+              date: selectedDate,
+              session: availableSessions,
+            },
+          });
           return;
         }
-
-        // No fully booked sessions on selected date, both sessions are available!
-        this.setState({ availableSessions: defaultSessions });
       }
     }
+
+    // No fully booked sessions on selected date, both sessions are available! Yay!
+    this.setState({ availableSessions: defaultSessions });
   }
 
   checkIfTodayIsFullyBooked = (selectedDate) => {
-    let todaysDate = formatDateString(moment());
+    const todaysDate = formatDateString(moment());
     let todayIsFullyBooked = false;
 
     if (!selectedDate) {
       selectedDate = todaysDate;
     }
+
     if (todaysDate === selectedDate) {
       todayIsFullyBooked = this.todayIsFullyBooked(this.state.fullyBookedDates, todaysDate);
     }
-    this.setState({ todayIsFullyBooked })
+
+    this.setState({ todayIsFullyBooked });
   }
 
   todayIsFullyBooked = (fullyBookedDates, todaysDate) => {
     const isFullyBooked = checkForDuplicateValues(fullyBookedDates, todaysDate);
-    if (isFullyBooked[0] === true) {
-      return true;
-    } else {
-      return false;
+    for (let i = 0; i < isFullyBooked.length; i++) {
+      if (isFullyBooked[i] === true) {
+        return true;
+      }
     }
+    return false;
   }
 
   createNewBooking = (event) => {
@@ -232,34 +247,29 @@ export default class Book extends Component {
     const { showModal, showRegularModal, message } = this.state.modal;
 
     return (
-      <div className="mainWrapper">
-        <Modal
-          showRegularModal={showRegularModal}
-          modalState={showModal}
-          message={message}
-          closeModal={this.closeModal}
-          clearPage={this.clearPage}
-        />
+      <main>
+        <MainWrapper background="bookingBackground">
+          <Modal
+            showRegularModal={showRegularModal}
+            modalState={showModal}
+            message={message}
+            closeModal={this.closeModal}
+            clearPage={this.clearPage}
+          />
 
-        <div className="contentWrapper">
-          <div className="bookingBackground"> </div>
+          <Header className="smallHeader" title="BOKA BORD" />
 
-          <div className="rightContent">
-            <h1 className="smallHeader">BOKA BORD</h1>
-
-            <BookingForm
-              bookingShouldBeDisabled={ todayIsFullyBooked }
-              availableSessions={ availableSessions }
-              fullyBookedDates={ fullyBookedDates }
-              findSessionsForSelectedDate={ this.findSessionsForSelectedDate }
-              updateBooking={ this.updateBooking }
-              updateDate={ this.updateDate }
-              createNewBooking={ this.createNewBooking }
-            />
-
-          </div>
-        </div>
-      </div>
+          <BookingForm
+            bookingShouldBeDisabled={todayIsFullyBooked}
+            availableSessions={availableSessions}
+            fullyBookedDates={fullyBookedDates}
+            findSessionsForSelectedDate={this.findSessionsForSelectedDate}
+            updateBooking={this.updateBooking}
+            updateDate={this.updateDate}
+            createNewBooking={this.createNewBooking}
+          />
+        </MainWrapper>
+      </main>
     );
   }
 }

@@ -1,51 +1,20 @@
 import React from "react";
+import MainWrapper from "../MainWrapper";
+import Header from "../Header";
+import ContactForm from "../form/ContactForm";
 import "../../assets/styles/Contact.css";
 
 export default function Contact() {
   return (
-    <div className="mainWrapper">
-      <h1 className="smallHeader">KONTAKT</h1>
-      <p>
-        Kontakta oss gärna!
-      </p>
-      <div className="contactUsWrapper">
-        <label htmlFor="name">Namn*</label>
-        <br />
-        <input
-          type="text"
-          placeholder="Namn"
-          id="contactName"
-        />
-        <div className="phoneEmail">
-          <div className="phone">
-            <label htmlFor="name">Telefon*</label>
-            <br />
-            <input
-              type="text"
-              placeholder="Telefon"
-              id="contactPhone"
-            />
-          </div>
-          <div className="email">
-            <label htmlFor="name">Email*</label>
-            <br />
-            <input
-              type="text"
-              placeholder="Email"
-              id="contactEmail"
-            />
-          </div>
-        </div>
-        <div className="contactMessage">
-          <label htmlFor="name">Meddelande*</label>
-          <br />
-          <textarea
-            placeholder="Meddelande"
-            id="contactMessage"
-          />
-        </div>
-      </div>
-      <button className="button" type="submit">SKICKA</button>
-    </div>
+    <main>
+      <MainWrapper background="contactBackground">
+        <Header className="tinyHeader" title="KONTAKT" />
+        <p>GRISKULTSGATAN 59, 113 23 STOCKHOLM</p>
+        <p>+46(0)8 94 91 13</p>
+        <p>Kontakta oss gärna nedan!</p>
+        <ContactForm />
+        <button className="button" type="submit">SKICKA</button>
+      </MainWrapper>
+    </main>
   );
 }
